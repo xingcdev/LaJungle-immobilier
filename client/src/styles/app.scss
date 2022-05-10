@@ -1,0 +1,35 @@
+@use 'base';
+@use 'variables' as v;
+@use 'theme';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500;700&display=swap');
+
+.App {
+	background: v.$color-background;
+}
+
+button {
+	background: none;
+	padding: 0;
+	border: 0;
+	font-size: 1rem;
+	color: v.$font-color;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+input {
+	color: v.$color-neutral-gray-dark;
+	border-radius: v.$border-radius;
+}
+
+.btn--primary {
+	background: v.$color-primary;
+	width: 100%;
+	border-radius: 20px;
+	padding: 0.7rem;
+	color: white;
+
+	&:hover {
+		background: v.$color-primary-hover;
+	}
+}

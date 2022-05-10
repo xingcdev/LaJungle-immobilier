@@ -1,0 +1,20 @@
+@use '@styles/variables' as v;
+
+.login-page {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+
+	.login-page__logo-section {
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: center;
+		align-items: center;
+
+		.login-page__title {
+			margin: v.$spacing-4 0;
+			font-weight: v.$font-weight-bold;
+		}
+	}
+}
