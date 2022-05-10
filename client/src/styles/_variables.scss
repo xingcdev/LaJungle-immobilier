@@ -29,15 +29,15 @@ $color-error: hsl(0, 87%, 67%);
 
 // END color palette
 
-$color-separator: hsla(0, 0%, 75%, 0.25);
-$color-background: #2c3e45;
-$color-background-dark: #101619;
+$color-separator: #282f37;
+$color-background: #1a2421;
+$color-surface: #1c1c1c;
 
 //==============================================================================
 // Typography
 //==============================================================================
 $font-size-body: 18px;
-$font-color: white;
+$font-color: rgba(255, 255, 255, 0.87);
 $font-family: 'Open sans' sans-serif;
 $font-weight-normal: 500;
 $font-weight-bold: 700;
