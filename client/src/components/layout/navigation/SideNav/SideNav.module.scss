@@ -1,0 +1,33 @@
+@use '@styles/variables' as v;
+
+.side_nav {
+	max-width: 20%;
+	height: 100%;
+	background: v.$color-background-dark;
+	padding: v.$spacing-padding;
+
+	.profile {
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: center;
+		align-items: center;
+
+		.photo {
+			margin: 0 0 v.$spacing-3 0;
+
+			img {
+				border-radius: 50%;
+			}
+		}
+
+		.name {
+			font-size: v.$font-size-6;
+		}
+	}
+
+	.navigation_section {
+		.nav_title {
+			font-size: v.$font-size-4;
+		}
+	}
+}
