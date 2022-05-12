@@ -1,7 +1,7 @@
 @use '@styles/variables' as v;
 
 .side_nav {
-	max-width: 20%;
+	width: 240px;
 	height: 100%;
 	background: v.$color-surface;
 	padding: v.$spacing-padding;
@@ -13,7 +13,7 @@
 		align-items: center;
 
 		.photo {
-			margin: 0 0 v.$spacing-3 0;
+			margin: 0 0 v.$spacing-2 0;
 
 			img {
 				border-radius: 50%;
@@ -21,13 +21,8 @@
 		}
 
 		.name {
-			font-size: v.$font-size-6;
-		}
-	}
-
-	.navigation_section {
-		.nav_title {
-			font-size: v.$font-size-4;
+			font-size: v.$font-size-base;
+			font-weight: v.$font-weight-bold;
 		}
 	}
 }

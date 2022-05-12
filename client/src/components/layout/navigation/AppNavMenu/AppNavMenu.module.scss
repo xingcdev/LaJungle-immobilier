@@ -1,0 +1,41 @@
+@use '@styles/variables' as v;
+
+.nav_title {
+	font-weight: v.$font-weight-bold;
+	margin: 0 0 v.$spacing-4 0;
+}
+
+.app_nav_menu {
+	.nav_item {
+		margin: 0 0 v.$spacing-3;
+
+		&:last-child {
+			margin: 0;
+		}
+	}
+
+	a {
+		display: flex;
+		align-items: center;
+		color: v.$font-color;
+		font-size: v.$font-size-base;
+		padding: v.$spacing-1;
+	}
+
+	.icon {
+		display: inline-block;
+		margin: 0 v.$spacing-3 0 0;
+		width: 26px;
+		height: 26px;
+		color: v.$color-neutral-gray-light;
+	}
+
+	.is_active {
+		background: v.$color-primary;
+		border-radius: v.$border-radius;
+
+		.icon {
+			color: v.$font-color;
+		}
+	}
+}
