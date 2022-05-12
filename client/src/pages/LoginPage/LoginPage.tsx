@@ -1,7 +1,7 @@
-import './Login.styles.scss';
+import './LoginPage.styles.scss';
 import Logo from '@assets/logo.svg';
 
-function Login() {
+function LoginPage() {
 	return (
 		<section className="login-page">
 			<section className="login-page__content">
@@ -23,4 +23,4 @@ function Login() {
 	);
 }
 
-export default Login;
+export default LoginPage;
