@@ -60,11 +60,13 @@ Choix de la palette de couleur
 ### 3. Transformer ces composants sous forme d'une hiérarchie
 
 - App
-  - Sidebar
-    - UserProfile
-    - AppNavMenu
-      - NavLink
-      - NavLink
+  - Dashboard
+    - Sidebar
+      - UserProfile
+      - AppNavMenu
+        - NavLink
+        - NavLink
+    - Outlet
   - LoginPage
   - 404
   - HomePage
