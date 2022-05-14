@@ -1,10 +1,10 @@
 import '@styles/main.scss';
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage/HomePage';
-import SalesPage from './pages/SalesPage/SalesPage';
-import LoginPage from './pages/LoginPage/LoginPage';
-import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-import Dashboard from '@layout/Dashboard/Dashboard';
+import HomePage from '@/views/index/HomePage/HomePage';
+import SalesPage from '@/views/sales/SalesPage/SalesPage';
+import LoginPage from '@/views/login/LoginPage/LoginPage';
+import NotFoundPage from '@/views/404/NotFoundPage/NotFoundPage';
+import { Dashboard } from '@components/layout';
 
 function App() {
 	return (

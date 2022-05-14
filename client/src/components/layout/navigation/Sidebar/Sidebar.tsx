@@ -1,5 +1,5 @@
 import styles from './Sidebar.module.scss';
-import AppNavMenu from '@layout/navigation/AppNavMenu/AppNavMenu';
+import { AppNavMenu } from '@components/layout';
 
 function UserProfile() {
 	return (
