@@ -1,0 +1,17 @@
+@use '@styles/variables' as v;
+
+.dataChip {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+	background: transparent;
+	border: v.$border;
+	padding: v.$spacing-1 v.$spacing-2;
+
+
+	.text {
+		margin: 0 0 0 v.$spacing-1;
+		font-weight: v.$font-weight-bold;
+	}
+}

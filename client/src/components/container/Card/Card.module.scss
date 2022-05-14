@@ -1,0 +1,14 @@
+@use '@styles/variables' as v;
+
+.card {
+	padding: v.$spacing-padding;
+	background: black;
+	border-radius: v.$border-radius;
+	transform: scale(1);
+	transition: transform 0.3s ease;
+
+	&:hover {
+		transform: scale(1.1);
+		transition: transform 0.3s ease;
+	}
+}

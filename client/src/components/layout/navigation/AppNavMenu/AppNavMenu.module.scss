@@ -17,7 +17,7 @@
 	a {
 		display: flex;
 		align-items: center;
-		color: v.$font-color;
+		color: v.$font-color-primary;
 		font-size: v.$font-size-base;
 		padding: v.$spacing-1;
 	}
@@ -33,9 +33,10 @@
 	.is_active {
 		background: v.$color-primary;
 		border-radius: v.$border-radius;
+		color: v.$font-color-primary;
 
 		.icon {
-			color: v.$font-color;
+			color: v.$font-color-primary;
 		}
 	}
 }

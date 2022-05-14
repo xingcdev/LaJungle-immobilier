@@ -1,0 +1,6 @@
+@use '@styles/variables' as v;
+
+.header {
+	width: 100%;
+	padding: v.$spacing-padding;
+}

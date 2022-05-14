@@ -1,8 +1,9 @@
+import styles from './AppHeader.module.scss'
 import Logo from '../Logo/Logo';
 
 function AppHeader() {
 	return (
-		<header>
+		<header className={styles.header}>
 			<Logo />
 		</header>
 	);
