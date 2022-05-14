@@ -1,0 +1,15 @@
+@use 'variables' as *;
+
+// Desktop first workflow
+
+@mixin on-mobile {
+	@media screen and (max-width: #{$breakpoint-mobile}) {
+		@content;
+	}
+}
+
+@mixin on-tablet {
+	@media screen and (max-width: #{$breakpoint-mobile}) {
+		@content;
+	}
+}

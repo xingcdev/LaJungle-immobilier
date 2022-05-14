@@ -1,0 +1,37 @@
+@use '@styles/variables' as v;
+@use '@styles/mixins' as *;
+
+.notFoundPage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+
+	.errorCode {
+		line-height: 1;
+
+		span {
+			font-size: 10rem;
+		}
+
+		.logo {
+			display: inline-block;
+			margin: 0 0.3rem 0 0.3rem;
+		}
+	}
+
+	.message {
+		font-size: v.$font-size-4;
+		margin: 0 0 v.$spacing-margin 0;
+	}
+
+	.back {
+		font-size: v.$font-size-5;
+	}
+
+	@include on-mobile {
+		& {
+			padding: v.$spacing-padding;
+		}
+	}
+}
