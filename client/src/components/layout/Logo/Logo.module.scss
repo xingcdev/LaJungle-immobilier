@@ -1,0 +1,19 @@
+@use '@styles/variables' as v;
+
+.logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	line-height: 0.5;
+
+	img {
+		display: inline-block;
+		margin: 0 0.4rem 0 0;
+	}
+
+	.brand {
+		font-size: v.$font-size-4;
+		font-weight: 700;
+		color: white;
+	}
+}
