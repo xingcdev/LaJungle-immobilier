@@ -1,4 +1,4 @@
-import styles from './AppHeader.module.scss'
+import styles from './AppHeader.module.scss';
 import Logo from '../Logo/Logo';
 
 function AppHeader() {

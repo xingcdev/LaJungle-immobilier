@@ -1,7 +1,19 @@
 @use '@styles/variables' as v;
 
 .dashboard {
-	display: flex;
+	display: grid;
+	grid-template-columns: 240px 1fr;
+	grid-template-rows: 80px 1fr;
+	grid-template-areas:
+		'sidebar header'
+		'sidebar page';
 	height: 100%;
-}
 
+	aside {
+		grid-area: sidebar;
+	}
+
+	.content {
+		grid-area: page;
+	}
+}

@@ -1,0 +1,22 @@
+@use '@styles/variables' as v;
+
+.profile {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 v.$spacing-margin 0;
+
+    .photo {
+        margin: 0 0 v.$spacing-2 0;
+
+        img {
+            border-radius: 50%;
+        }
+    }
+
+    .name {
+        font-size: v.$font-size-base;
+        font-weight: v.$font-weight-bold;
+    }
+}

@@ -1,6 +1,7 @@
 @use '@styles/variables' as v;
 
 .header {
+	grid-area: header;
 	width: 100%;
 	padding: v.$spacing-padding;
 }

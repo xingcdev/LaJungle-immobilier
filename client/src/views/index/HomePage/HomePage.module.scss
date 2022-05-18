@@ -1,9 +1,6 @@
 @use '@styles/variables' as v;
 
 .page {
-	main {
-		// Need extra space for scale on hover card
-		padding: v.$spacing-padding * 2;
-
-	}
+	// Need extra space for scale on hover card
+	padding: v.$spacing-padding * 2;
 }

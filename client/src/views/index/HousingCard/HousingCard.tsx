@@ -6,6 +6,7 @@ import { Card } from '@components/container';
 import { DataChip } from '@components/display';
 
 interface HousingCardProps {
+	housingId: number;
 	photo?: string;
 	price: number;
 	address: string;
@@ -18,8 +19,8 @@ interface HousingCardProps {
 
 function HousingCard(props: HousingCardProps) {
 	return (
-		<Card style={{ padding: 0 }}>
-			<Link to="housings/1">
+		<Card style={{ padding: 0, maxWidth: '300px' }}>
+			<Link to={`housings/${props.housingId}`}>
 				<section className={styles.preview}>
 					<section className={styles.photo}>
 						<img src={props.photo} alt="housing" width="100%" height={160} />
@@ -42,7 +43,7 @@ function HousingCard(props: HousingCardProps) {
 					<li className={styles.surface}>
 						<DataChip
 							icon={<RiRulerLine size={20} />}
-							text={String(props.surface) + " m²"}
+							text={String(props.surface) + ' m²'}
 						/>
 					</li>
 					<li className={styles.rooms}>
