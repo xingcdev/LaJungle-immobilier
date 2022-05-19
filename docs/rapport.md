@@ -81,3 +81,15 @@ Choix de la palette de couleur
 ## Process de développement Backend
 
 TODO
+
+## Structure des fichiers frontend
+
+Tout le code source est situé dans le répertoire `src/`. Sa structure est la suivante :
+
+- `assets` - fichiers statiques comme les images, logo, vidéos, etc.
+
+- `components` - des components globals et réutilisables partout dans l'application
+
+- `styles` - les fichiers de styles en `.scss`
+
+- `views` - une vue est une page de l'application. Ce répertoire contient toutes les vues de l'application et ainsi les components utilisés dans une vue spécifique. Par exemple le component `HousingCard` est spécifique à la route `/index` qui est la page d'accueil.
