@@ -1,15 +1,18 @@
 @use '@styles/variables' as v;
 
 .content {
-	// position: relative;
 	display: flex;
 	align-items: flex-start;
-	padding: v.$spacing-padding;
+	padding: v.$spacing-padding v.$spacing-6 v.$spacing-padding v.$spacing-padding;
 
 	.housingContent {
-		// max-width: 500px;
-		// font-size: v.$font-size-4;
 		margin: 0 v.$spacing-6 0 0;
+
+		.price,
+		.type,
+		.condition {
+			color: v.$font-color-secondary;
+		}
 
 		.address {
 			line-height: 0.8;
@@ -26,11 +29,10 @@
 			font-weight: v.$font-weight-bold;
 		}
 
-		.descriptionTitle,
-		.visitTitle {
+		.descriptionTitle {
 			font-size: v.$font-size-4;
 			font-weight: v.$font-weight-bold;
-			margin: v.$spacing-margin 0 v.$spacing-1 0;
+			margin: v.$spacing-margin 0 v.$spacing-2 0;
 		}
 	}
 }

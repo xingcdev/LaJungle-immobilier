@@ -1,9 +1,11 @@
 import styles from './HousingPage.module.scss';
 import OwnerProfile from '../OwnerProfile/OwnerProfile';
+import VisitList from '../VisitList/VisitList';
 
 export default function HousingPage() {
 	const housingPhoto =
 		'https://images.unsplash.com/photo-1460317442991-0ec209397118?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170';
+
 	return (
 		<section className={''}>
 			<section className={styles.hero}>
@@ -20,6 +22,7 @@ export default function HousingPage() {
 							Prix : <span className={styles.priceValue}>10 000</span>
 							<span className={styles.priceDevise}> €</span>
 						</p>
+						{}
 						<p className={styles.type}>
 							Type: <span className={styles.typeValue}>appartement</span>
 						</p>
@@ -103,22 +106,10 @@ export default function HousingPage() {
 							expedita, placeat porro commodi. Cupiditate, fuga voluptas.
 						</p>
 					</section>
-					<ul className={styles.visit}>
-						<h2 className={styles.visitTitle}>Visites</h2>
-						<li>
-							<span className={styles.date}>Sunday 10th may </span>
-							<span className={styles.time}>10h - 11h</span>
-						</li>
-					</ul>
+					<VisitList visits={{}} />
 				</section>
 
-				<OwnerProfile
-					style={{
-						flex: '1 0 25%',
-						position: 'sticky',
-						top: '20px',
-					}}
-				/>
+				<OwnerProfile />
 			</section>
 		</section>
 	);

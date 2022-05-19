@@ -1,0 +1,19 @@
+@use '@styles/variables' as v;
+
+.ownerTitle {
+	font-size: v.$font-size-4;
+    font-weight: v.$font-weight-bold;
+	margin: 0 0 v.$spacing-2 0;
+}
+
+.photo {
+	margin: 0 0 v.$spacing-2 0;
+
+	img {
+		border-radius: 50%;
+	}
+}
+
+.email {
+    color: v.$font-color-secondary
+}

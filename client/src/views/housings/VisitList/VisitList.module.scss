@@ -1,0 +1,17 @@
+@use '@styles/variables' as v;
+
+.visitTitle {
+	font-size: v.$font-size-4;
+	font-weight: v.$font-weight-bold;
+	margin: v.$spacing-margin 0 v.$spacing-2 0;
+}
+
+.visitItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: v.$border;
+	padding: v.$spacing-3;
+	margin: 0 0 v.$spacing-3 0;
+	max-width: 500px;
+}

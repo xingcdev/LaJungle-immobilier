@@ -2,13 +2,14 @@
 
 .card {
 	padding: v.$spacing-padding;
-	background: black;
+	background: v.$color-surface;
 	border-radius: v.$border-radius;
+	border: v.$border;
 	transform: scale(1);
 	transition: transform 0.3s ease;
+}
 
-	&:hover {
-		transform: scale(1.1);
-		transition: transform 0.3s ease;
-	}
+.hasHover:hover {
+	transform: scale(1.1);
+	transition: transform 0.3s ease;
 }

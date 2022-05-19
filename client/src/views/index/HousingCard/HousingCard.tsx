@@ -19,7 +19,7 @@ interface HousingCardProps {
 
 function HousingCard(props: HousingCardProps) {
 	return (
-		<Card style={{ padding: 0, maxWidth: '300px' }}>
+		<Card hasHoverEffect style={{ padding: 0, maxWidth: 300, border: "none" }}>
 			<Link to={`housings/${props.housingId}`}>
 				<section className={styles.preview}>
 					<section className={styles.photo}>
