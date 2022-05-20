@@ -15,5 +15,6 @@
 }
 
 .email {
-    color: v.$font-color-secondary
+    color: v.$color-primary;
+	font-weight: v.$font-weight-bold;
 }

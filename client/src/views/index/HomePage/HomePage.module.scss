@@ -3,4 +3,9 @@
 .page {
 	// Need extra space for scale on hover card
 	padding: v.$spacing-padding * 2;
+
+	.pageTitle {
+		font-size: v.$font-size-3;
+		margin: 0 0 v.$spacing-margin 0;
+	}
 }

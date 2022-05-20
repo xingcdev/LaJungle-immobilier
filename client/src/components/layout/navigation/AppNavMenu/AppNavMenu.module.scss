@@ -9,6 +9,10 @@
 	.nav_item {
 		margin: 0 0 v.$spacing-3;
 
+		&:hover {
+			background: v.$color-background;
+		}
+
 		&:last-child {
 			margin: 0;
 		}
@@ -17,7 +21,7 @@
 	a {
 		display: flex;
 		align-items: center;
-		color: v.$font-color-primary;
+		color: v.$font-color-secondary;
 		font-size: v.$font-size-base;
 		padding: v.$spacing-1;
 	}

@@ -4,6 +4,7 @@ import { IoBedOutline, IoCarOutline } from 'react-icons/io5';
 import styles from './HousingCard.module.scss';
 import { Card } from '@components/container';
 import { DataChip } from '@components/display';
+import InfoChip from '../../housings/InfoChip/InfoChip'
 
 interface HousingCardProps {
 	housingId: number;
@@ -38,27 +39,8 @@ function HousingCard(props: HousingCardProps) {
 						<span className={styles.city}>{props.city}</span>
 					</p>
 				</section>
-
-				<ul className={styles.info}>
-					<li className={styles.surface}>
-						<DataChip
-							icon={<RiRulerLine size={20} />}
-							text={String(props.surface) + ' m²'}
-						/>
-					</li>
-					<li className={styles.rooms}>
-						<DataChip
-							icon={<IoBedOutline size={20} />}
-							text={String(props.rooms)}
-						/>
-					</li>
-					<li className={styles.cars}>
-						<DataChip
-							icon={<IoCarOutline size={20} />}
-							text={String(props.cars)}
-						/>
-					</li>
-				</ul>
+				
+				<InfoChip surface={props.surface} rooms={props.rooms} cars={props.cars} />
 			</section>
 		</Card>
 	);
