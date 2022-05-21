@@ -1,0 +1,20 @@
+{
+    "express": {
+        "PORT": "5000"
+    },
+    "mysql": {
+        "HOST": "localhost",
+        "USER": "root",
+        "PASSWORD": ""
+    },
+    "front": {
+        "URL": "http://localhost:3000"
+    },
+    "api": {
+        "URL": "http://localhost:5000"
+    },
+    "encryption_key": {
+        "SESSION": "",
+        "DATABASE": ""
+    }
+}
