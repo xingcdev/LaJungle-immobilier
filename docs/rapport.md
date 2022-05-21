@@ -84,7 +84,7 @@ Choix de la palette de couleur
 
 **Modèle relationnel**
 
-[Modèle relationnel](./images/modele%20relationnel.png)
+![Modèle relationnel](./images/modele%20relationnel.png)
 
 **Choix du modèle relationnel**
 - On considère qu'un logement possède 0 ou plusieurs garages, et qu'un garage est possédé par 1 ou plusieurs logements. Pour un souci de clarté, on a ajouté un attribut "Adresse" à la table garage.
