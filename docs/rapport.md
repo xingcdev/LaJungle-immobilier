@@ -31,7 +31,9 @@ Antoine DESPRÉS - développement Backend
 
 **Backend**
 
-TODO
+- Looping (logiciel permettant la création du modèle relationnel)
+- MySQL (SGBD servant à la création de tables, requêtes, et du stockage de la base de données)
+- Express (API)
 
 ## Process de développement Frontend
 
@@ -80,7 +82,18 @@ Choix de la palette de couleur
 
 ## Process de développement Backend
 
-TODO
+**Modèle relationnel**
+
+[Modèle relationnel](./images/modele%20relationnel.png)
+
+**Choix du modèle relationnel**
+- On considère qu'un logement possède 0 ou plusieurs garages, et qu'un garage est possédé par 1 ou plusieurs logements. Pour un souci de clarté, on a ajouté un attribut "Adresse" à la table garage.
+-  Une visite concerne 1 logement, et un logement peut être visité plusieurs fois.
+- Un client peur effectuer plusieurs visites, et une visite est faite par un seul client.
+- Un client peut procéder à 0 ou plusieurs transactions, et une transaction ne concerne qu'un client.
+Une transaction implique un seul logement à la fois, et un logement est impliqué dans 0 ou plusieurs transactions.
+
+Nous avons ajouté une table utilisateur avec les attributs "NomUtilisateur" et "MotDePasse", qui permet à une personne de créer son compte et son mot de passe afin d'accéder au site. 
 
 ## Structure des fichiers frontend
 
