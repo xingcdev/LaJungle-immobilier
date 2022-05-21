@@ -1,4 +1,3 @@
-import styles from './Housings.module.scss';
 import HousingCard from '../HousingCard/HousingCard';
 
 interface HousingsProps {

@@ -1,20 +1,24 @@
 @use '@styles/variables' as v;
 
-.login-page {
+.page {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
 
-	.login-page__logo-section {
+	.pageContent {
+		max-width: 450px;
+	}
+
+	.logoSection {
 		display: flex;
 		flex-flow: column nowrap;
 		justify-content: center;
 		align-items: center;
+		margin: 0 0 v.$spacing-margin 0;
+	}
 
-		.login-page__title {
-			margin: v.$spacing-4 0;
-			font-weight: v.$font-weight-bold;
-		}
+	.title {
+		font-size: v.$font-size-3;
 	}
 }

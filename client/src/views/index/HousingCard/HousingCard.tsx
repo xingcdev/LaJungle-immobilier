@@ -1,10 +1,7 @@
 import { Link } from 'react-router-dom';
-import { RiRulerLine } from 'react-icons/ri';
-import { IoBedOutline, IoCarOutline } from 'react-icons/io5';
 import styles from './HousingCard.module.scss';
 import { Card } from '@components/container';
-import { DataChip } from '@components/display';
-import InfoChip from '../../housings/InfoChip/InfoChip'
+import InfoChip from '../../housings/InfoChip/InfoChip';
 
 interface HousingCardProps {
 	housingId: number;
@@ -20,7 +17,7 @@ interface HousingCardProps {
 
 function HousingCard(props: HousingCardProps) {
 	return (
-		<Card hasHoverEffect style={{ padding: 0, maxWidth: 300, border: "none" }}>
+		<Card hasHoverEffect style={{ padding: 0, maxWidth: 300, border: 'none' }}>
 			<Link to={`housings/${props.housingId}`}>
 				<section className={styles.preview}>
 					<section className={styles.photo}>
@@ -39,8 +36,12 @@ function HousingCard(props: HousingCardProps) {
 						<span className={styles.city}>{props.city}</span>
 					</p>
 				</section>
-				
-				<InfoChip surface={props.surface} rooms={props.rooms} cars={props.cars} />
+
+				<InfoChip
+					surface={props.surface}
+					rooms={props.rooms}
+					cars={props.cars}
+				/>
 			</section>
 		</Card>
 	);

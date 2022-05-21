@@ -1,23 +1,19 @@
-import './LoginPage.styles.scss';
+import styles from './LoginPage.module.scss';
 import Logo from '@assets/logo.svg';
+import LoginForm from '../LoginForm/LoginForm';
 
 function LoginPage() {
 	return (
-		<section className="login-page">
-			<section className="login-page__content">
-				<section className="login-page__logo-section">
+		<section className={styles.page}>
+			<section className={styles.pageContent}>
+				<section className={styles.logoSection}>
 					<section className="logo">
-						<img src={Logo} alt="Logo" width={150} height={150} />
+						<img src={Logo} alt="Logo" width={120} height={120} />
 					</section>
-					<h3 className="login-page__title">Se connecter</h3>
+					<h1 className={styles.title}>Connecter à votre compte LaJungle</h1>
 				</section>
 
-				<div className="login-form">
-					<form>
-						<input type="text" name="name" />
-						<input type="text" name="name2" />
-					</form>
-				</div>
+				<LoginForm />
 			</section>
 		</section>
 	);
