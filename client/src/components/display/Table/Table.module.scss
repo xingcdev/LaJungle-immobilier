@@ -1,0 +1,21 @@
+@use '@styles/variables' as v;
+
+.table {
+	// Table andd oolumn widths are set by the widths of 'table' and first row cells. Each column will have same size
+	table-layout: fixed;
+	width: 100%;
+	border: v.$border;
+	// Collapse th and td borders
+	border-collapse: collapse;
+
+	th,
+	td {
+		padding: v.$spacing-3;
+		border: v.$border;
+	}
+
+	th {
+		background: v.$color-primary;
+		text-align: left;
+	}
+}

@@ -22,7 +22,7 @@ function Sidebar() {
 
 				<li className={styles.nav_item}>
 					<NavLink
-						to="/sales"
+						to="/transactions"
 						className={({ isActive }) =>
 							isActive ? styles.is_active : undefined
 						}

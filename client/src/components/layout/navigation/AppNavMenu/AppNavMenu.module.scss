@@ -8,6 +8,7 @@
 	}
 	.nav_item {
 		margin: 0 0 v.$spacing-3;
+		border-radius: 5px;
 
 		&:hover {
 			background: v.$color-background;
@@ -36,8 +37,8 @@
 
 	.is_active {
 		background: v.$color-primary;
-		border-radius: v.$border-radius;
 		color: v.$font-color-primary;
+		border-radius: 5px;
 
 		.icon {
 			color: v.$font-color-primary;
