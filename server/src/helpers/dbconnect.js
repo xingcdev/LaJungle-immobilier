@@ -53,7 +53,7 @@ async function laJungleDb(connection) {
 async function createLogementTable(connection) {
     return new Promise((resolve, reject) => {
         connection.query(
-            `CREATE TABLE IF NOT EXISTS Logement(
+            `CREATE TABLE IF NOT EXISTS lajungle.Logement(
                 IdLogement INT NOT NULL AUTO_INCREMENT,
                 Adresse VARCHAR(50),
                 NomProprietaire VARCHAR(50),
@@ -86,8 +86,8 @@ async function createLogementTable(connection) {
 async function createGarageTable(connection) {
     return new Promise((resolve, reject) => {
         connection.query(
-            `CREATE TABLE IF NOT EXISTS Logement(
-                IdLogement INT NOT NULL AUTO_INCREMENT,
+            `CREATE TABLE IF NOT EXISTS lajungle.Garage(
+                IdGarage INT NOT NULL AUTO_INCREMENT,
                 Adresse VARCHAR(50),
                 NomProprietaire VARCHAR(50),
                 TypeLogement ENUM('appartement', 'maison'),
@@ -97,7 +97,7 @@ async function createGarageTable(connection) {
                 PrixMiseEnVente float(10,2),
                 DateDisponibilite DATE,
                 Ville VARCHAR(50),
-                PRIMARY KEY(IdLogement)
+                PRIMARY KEY(IdGarage)
              ); `,
 
             (error) => {
@@ -118,7 +118,7 @@ async function createGarageTable(connection) {
 async function createClientTable(connection) {
     return new Promise((resolve, reject) => {
         connection.query(
-            `CREATE TABLE IF NOT EXISTS Client(
+            `CREATE TABLE IF NOT EXISTS lajungle.Client(
                 IdClient INT NOT NULL AUTO_INCREMENT,
                 NomClient VARCHAR(50),
                 PRIMARY KEY(IdClient)
@@ -142,7 +142,7 @@ async function createClientTable(connection) {
 async function createVisiteTable(connection) {
     return new Promise((resolve, reject) => {
         connection.query(
-            `CREATE TABLE IF NOT EXISTS Visite(
+            `CREATE TABLE IF NOT EXISTS lajungle.Visite(
                 IdVisite INT NOT NULL AUTO_INCREMENT,
                 DateVisite DATE,
                 IdLogement INT NOT NULL,
@@ -170,7 +170,7 @@ async function createVisiteTable(connection) {
 async function createTransactionTable(connection) {
     return new Promise((resolve, reject) => {
         connection.query(
-            `CREATE TABLE IF NOT EXISTS Transaction(
+            `CREATE TABLE IF NOT EXISTS lajungle.Transaction(
                 IdTransaction INT NOT NULL AUTO_INCREMENT,
                 PrixVente float(10,2),
                 PourcentageCommission DECIMAL(3,2) NOT NULL CHECK ('PourcentageCommission'>=3 AND 'PourcentageCommission' <=5),
@@ -199,7 +199,7 @@ async function createTransactionTable(connection) {
 async function createPossederTable(connection) {
     return new Promise((resolve, reject) => {
         connection.query(
-            `CREATE TABLE IF NOT EXISTS Posséder(
+            `CREATE TABLE IF NOT EXISTS lajungle.Posséder(
                 IdLogement INT NOT NULL AUTO_INCREMENT,
                 IdGarage INT,
                 PRIMARY KEY(IdLogement, IdGarage),

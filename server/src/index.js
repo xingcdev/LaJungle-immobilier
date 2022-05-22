@@ -1,3 +1,5 @@
+require("./strategy/microsoft");
+
 const express = require("express");
 const app = express();
 const config = require("./config.json");
@@ -18,12 +20,13 @@ app.use(
 
 app.use(
     session({
+        secret: "TODO",
         cookie: {
             maxAge: 60000 * 60 * 24,
         },
         resave: false,
         saveUninitialized: false,
-        name: "jwt-auth",
+        name: "msft-auth",
     })
 );
 

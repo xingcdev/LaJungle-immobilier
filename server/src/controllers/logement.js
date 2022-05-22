@@ -1,6 +1,6 @@
 const db = require("../models/logementDAO.js");
 
-async function getlLogement(request, response) {
+async function getLogement(request, response) {
     let ID = request.query.id || request.logement?.id;
 
     if (ID === null) {
@@ -18,6 +18,8 @@ async function getlLogement(request, response) {
     if (logement === undefined) {
         response.status(404).json({ msg: "Logement non trouvé" });
     }
+
+    logement = logement[0]
 
     let Logement = {
         IdLogement: ID,

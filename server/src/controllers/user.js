@@ -1,24 +1,24 @@
 const db = require("../models/userDAO.js");
 
-async function getUser(request, response) {
+async function getUser(req, res) {
 
 
-    let ID = request.query.id || request.user?.id;
+    let ID = req.query.id || req.user?.id;
 
     if (ID === null) {
-        response.status(404).json({ msg: "ID ne peut être null" });
+        res.status(404).json({ msg: "ID ne peut être null" });
         return;
     }
 
     let user = await db.getUser(ID);
 
     if (user === null) {
-        response.status(404).json({ msg: "Utilisateur non trouvé" });
+        res.status(404).json({ msg: "Utilisateur non trouvé" });
         return;
     }
 
     if (user === undefined) {
-        response.status(404).json({ msg: "Utilisateur non trouvé" });
+        res.status(404).json({ msg: "Utilisateur non trouvé" });
     }
 
     let User = {
@@ -26,7 +26,7 @@ async function getUser(request, response) {
         username: user.NomUtilisateur        
     };
 
-    response.json(User);
+    res.json(User);
 }
 
 module.exports = {

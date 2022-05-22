@@ -1,11 +1,24 @@
 const config = require("../config.json");
-
+const getUser = require("../models/userDAO.js");
+const db = require("../models/userDAO.js");
 async function getAuth(req, res) {
     res.json({ user: req.user });
 }
 
-async function jwtRedirect(req, res) {
+async function microsoftRedirect(req, res) {
     res.redirect(`${config.front.URL}/`); // Dashboard page
+}
+
+async function login(req, res) {
+    try {
+        const { username, password } = req.body;
+        db.getUser(username);
+    } catch(e) {
+        res.status(401).send({
+			error: e.message,
+		});
+    }
+    
 }
 
 async function logout(req, res) {
@@ -23,7 +36,8 @@ async function state(req, res) {
 
 module.exports = {
     getAuth,
-    jwtRedirect,
+    microsoftRedirect,
+    login,
     logout,
     state
 };
