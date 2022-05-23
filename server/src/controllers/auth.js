@@ -11,8 +11,11 @@ async function microsoftRedirect(req, res) {
 
 async function login(req, res) {
     try {
-        const { username, password } = req.body;
-        db.getUser(username);
+        const { username, password } = req.query;
+        let dbuser = db.getUser(username);
+        if(dbuser.MotDePasse === password) {
+            res.status(200).json({ msg: "OK" });
+        }
     } catch(e) {
         res.status(401).send({
 			error: e.message,

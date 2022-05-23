@@ -5,6 +5,7 @@ const config = require("../config.json");
 const { isAuthorized } = require("../middlewares/auth.js");
 
 router.get("/microsoft", passport.authenticate("microsoft"));
+router.get("/local", passport.authenticate('local'));
 
 router.get(
     "/microsoft/redirect",
