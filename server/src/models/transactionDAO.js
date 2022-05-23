@@ -56,23 +56,29 @@ async function createTransaction(prixVente, pourcentageCommission, idLogement, i
 
 
 async function updateTransaction(prixVente, pourcentageCommission, IdLogement, IdClient, IdTransaction) {
+    let parametres = new Array();
     let requete = "UPDATE Transaction SET";
     if(req.query.prixVente !== null) {
         requete += " prixVente=?"
+        parametres.push(prixVente)
     }
     if(req.query.pourcentageCommission !== null) {
         requete += " pourcentageCommission=?"
+        parametres.push(pourcentageCommission)
      }
     if(req.query.IdLogement !== null) {
         requete += " IdLogement=?"
+        parametres.push(IdLogement)
     }
     if(req.query.IdClient !== null) {
         requete += " IdClient=?"
+        parametres.push(IdClient)
     }
     requete+=" WHERE IdTransaction=?";
+    parametres.push(IdTransaction)
     database.getConnection((error, connection) =>{
         if(error) console.error("Database connection error on updateTransaction", error.message);
-    connection.query(sql, [prixVente, pourcentageCommission, IdLogement, IdClient, IdTransaction], (error) => {
+    connection.query(sql, parametres, (error) => {
         connection.release();
         if (error) {
             console.error(error.message);
