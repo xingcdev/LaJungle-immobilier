@@ -7,6 +7,7 @@ const config = require("../config.json");
 
 
 router.get('/get', logement.getLogement);
+router.get('/getAll', logement.getAllLogements);
 
 /*router.get("/update", logement.logout);
 
