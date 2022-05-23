@@ -32,7 +32,7 @@ async function getUser(username) {
 async function createUser(NomUtilisateur, MotDePasse) {
     
     return new Promise((resolve, reject) => {
-        let sql = "INSERT INTO Utilisateur (NomUtilisateur, MotDePasse) VALUES (?);";
+        let sql = "INSERT INTO Utilisateur (NomUtilisateur, MotDePasse) VALUES (?, ?);";
         database.getConnection((error, connection) => {
             if(error){
                 console.error("Database connection error on createGarage");
