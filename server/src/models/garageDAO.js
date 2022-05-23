@@ -64,6 +64,56 @@ async function deleteGarage(id) {
 });
 }
 
+async function createTransaction(prixVente, pourcentageCommission, idLogement, idClient) {
+
+    return new Promise((resolve, reject) => {
+        let sql =
+            "INSERT INTO Transaction (PrixVente, PourcentageCommission, IdLogement, IDClient) values (?,?,?,?);";
+        database.getConnection((error, connection) => {
+            if (error) throw error;
+            connection.query(
+                sql,
+                [prixVente, pourcentageCommission, idLogement, idClient],
+                (error) => {
+                    if (error) {
+                        console.error(error.message);
+                        connection.release();
+                        reject(error);
+                    } else {
+                        console.log("Transaction ajoutée");
+                        connection.release();
+                        resolve();
+                    }
+                }
+            );
+        });
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
+
+async function updateGarage(Adresse, IdLogement, IdGarage) {
+    let requete = "UPDATE Garage SET";
+    if(req.query.Adresse !== null) {
+        requete += " Adresse=?"
+    }
+    if(req.query.IdLogement !== null) {
+        requete += " IdLogement=?"
+     }
+    requete+=" WHERE IdGarage=?";
+    database.getConnection((error, connection) =>{
+        if(error) console.error("Database connection error on updateGarage", error.message);
+    connection.query(sql, [Adresse, IdLogement, IdGarage], (error) => {
+        connection.release();
+        if (error) {
+            console.error(error.message);
+            return;
+        }
+    });
+});
+}
+
 async function getGarageFromLogement(idLogement) {
     let sql = "SELECT * FROM Logement WHERE IdLogement=?;";
     database.getConnection((error, connection) =>{
@@ -82,5 +132,6 @@ module.exports = {
     getGarage,
     createGarage,
     deleteGarage,
+    updateGarage,
     getGarageFromLogement
 }

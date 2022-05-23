@@ -1,5 +1,31 @@
 const database = require('../helpers/dbconnect.js');
 
+async function getTransaction(id) {
+    
+    return new Promise((resolve, reject) => {
+        let sql = "SELECT * FROM Visite WHERE IdTransaction=?;";
+        database.getConnection((error, connection) => {
+            if (error)
+                reject(error);
+            connection.query(sql, [id], (error, results) => {
+                connection.release();
+                if (error)
+                    console.error(error.message);
+                if (results === undefined) {
+                    resolve(null);
+                } else if (results.length > 0) {
+                    resolve(results);
+                } else {
+                    resolve(null);
+                }
+            });
+        });
+
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
 async function createTransaction(prixVente, pourcentageCommission, idLogement, idClient) {
 
     return new Promise((resolve, reject) => {
@@ -29,12 +55,24 @@ async function createTransaction(prixVente, pourcentageCommission, idLogement, i
 }
 
 
-async function updateTransaction(prixVente) {
-    
-    let sql = "UPDATE Transaction SET PrixVente=?;";
+async function updateTransaction(prixVente, pourcentageCommission, IdLogement, IdClient, IdTransaction) {
+    let requete = "UPDATE Transaction SET";
+    if(req.query.prixVente !== null) {
+        requete += " prixVente=?"
+    }
+    if(req.query.pourcentageCommission !== null) {
+        requete += " pourcentageCommission=?"
+     }
+    if(req.query.IdLogement !== null) {
+        requete += " IdLogement=?"
+    }
+    if(req.query.IdClient !== null) {
+        requete += " IdClient=?"
+    }
+    requete+=" WHERE IdTransaction=?";
     database.getConnection((error, connection) =>{
         if(error) console.error("Database connection error on updateTransaction", error.message);
-    connection.query(sql, [prixVente], (error) => {
+    connection.query(sql, [prixVente, pourcentageCommission, IdLogement, IdClient, IdTransaction], (error) => {
         connection.release();
         if (error) {
             console.error(error.message);
@@ -60,6 +98,7 @@ async function deleteTransaction(id) {
 }
 
 module.exports = {
+    getTransaction,
     createTransaction,
     updateTransaction,
     deleteTransaction

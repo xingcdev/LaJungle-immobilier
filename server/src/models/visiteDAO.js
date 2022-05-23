@@ -50,12 +50,24 @@ async function createVisite(DateVisite, IdLogement, IdClient) {
     });
 }
 
-async function updateVisite(DateVisite, IdLogement, IdClient) {
+async function updateVisite(DateVisite, IdLogement, IdClient, IdVisite) {
     
-    let sql = "UPDATE Transaction SET PrixVente=?, IdLogement=?, IdClient=?;";
+    let requete = "UPDATE Visite SET ";
+    if(req.query.DateVisite !== null) {
+        requete += " DateVisite=?"
+      }
+      
+      if(req.query.IdLogement !== null) {
+        requete += " IdLogement=?"
+      }
+
+      if(req.query.IdClient !==null) {
+          requete+="IdClient=?"
+      }
+      requete+=" WHERE IdVisite=?";
     database.getConnection((error, connection) =>{
         if(error) console.error("Database connection error on updateVisite", error.message);
-    connection.query(sql, [DateVisite, IdLogement, IdClient], (error) => {
+    connection.query(sql, [DateVisite, IdLogement, IdClient, IdVisite], (error) => {
         connection.release();
         if (error) {
             console.error(error.message);
@@ -84,5 +96,6 @@ async function deleteVisite(id) {
 module.exports = {
     getVisite,
     createVisite,
-    deleteVisite
+    deleteVisite,
+    updateVisite
 }
