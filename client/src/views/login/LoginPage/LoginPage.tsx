@@ -10,7 +10,7 @@ function LoginPage() {
 					<section className="logo">
 						<img src={Logo} alt="Logo" width={120} height={120} />
 					</section>
-					<h1 className={styles.title}>Connecter à votre compte LaJungle</h1>
+					<h1 className={styles.title}>Connectez-vous à votre compte LaJungle</h1>
 				</section>
 
 				<LoginForm />

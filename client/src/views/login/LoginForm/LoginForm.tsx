@@ -48,7 +48,7 @@ export default function LoginForm() {
 			<input type="text" name="username" placeholder="Nom utilisateur" />
 			<input type="password" name="password" placeholder="Mot de passe" />
 			{formValues.error && <InputError message={formValues.error} />}
-			<button type="submit">Connecter</button>
+			<button type="submit">Connexion</button>
 		</form>
 	);
 }
