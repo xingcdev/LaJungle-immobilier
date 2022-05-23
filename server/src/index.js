@@ -1,4 +1,4 @@
-require("./strategy/microsoft");
+require("./strategies/microsoft");
 
 const express = require("express");
 const app = express();
