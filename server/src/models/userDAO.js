@@ -27,9 +27,32 @@ async function getUser(username) {
     }).catch((error) => {
         console.error(error.message);
     });
+}
 
+async function createUser(NomUtilisateur, MotDePasse) {
+    
+    return new Promise((resolve, reject) => {
+        let sql = "INSERT INTO Utilisateur (NomUtilisateur, MotDePasse) VALUES (?);";
+        database.getConnection((error, connection) => {
+            if(error){
+                console.error("Database connection error on createGarage");
+                reject(error);
+            }
+            connection.query(sql, [NomUtilisateur, MotDePasse], (error) => {
+                connection.release();
+                if (error) {
+                    console.error(error.message);
+                    reject(error);
+                } else {
+                    resolve();
+                }
+            });
+        });
+
+    });
 }
 
 module.exports = {
-    getUser
+    getUser,
+    createUser
 }
