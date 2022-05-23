@@ -52,6 +52,33 @@ async function createUser(NomUtilisateur, MotDePasse) {
     });
 }
 
+
+async function createUser(NomUtilisateur, MotDePasse) { 
+    return new Promise((resolve, reject) => {
+        let sql = "INSERT INTO Utilisateur (NomUtilisateur, MotDePasse) VALUES (?);";
+        database.getConnection((error, connection) => {
+            if(error){
+                console.error("Database connection error on createUser");
+                reject(error);
+            }
+            connection.query(sql, [NomUtilisateur, MotDePasse], (error) => {
+                connection.release();
+                if (error) {
+                    console.error(error.message);
+                    reject(error);
+                } else {
+                    resolve();
+                }
+            });
+        });
+
+    });
+}
+
+//Modifier les informations de  l'utilisateur 
+
+
+
 module.exports = {
     getUser,
     createUser
