@@ -37,6 +37,40 @@ async function getLogement(request, response) {
     response.json(Logement);
 }
 
+
+async function getAllLogements(request, response) {
+    let logements = await db.getAllLogements();
+
+    if (logements === null) {
+        response.status(404).json({ msg: "Logements non trouvés" });
+        return;
+    }
+
+    if (logements === undefined) {
+        response.status(404).json({ msg: "Logements non trouvés" });
+    }
+
+    logementList = []
+
+    logements.forEach(element => {
+        let log = {
+        idLogement: element.IdLogement,
+        adresse: element.Adresse,
+        nomProprietaire: element.NomProprietaire,
+        typeLogement: element.TypeLogement,
+        nombrePieces: element.NombrePieces,
+        superficie: element.Superficie,
+        etatHabitation: element.EtatHabitation,
+        prixMiseEnVente: element.PrixMiseEnVente,
+        dateDisponibilite: element.DateDisponibilite,
+        ville: element.Ville
+        }
+        logementList.push(log);
+    });
+
+    response.json(logementList);
+}
+
 async function updateLogement(req, res) {
     let adresse = req.body.adresse;
     let nomProprietaire = req.body.nomProprietaire;
@@ -71,6 +105,7 @@ async function deleteLogement(req, res) {
 
 module.exports = {
     getLogement,
+    getAllLogements,
     updateLogement,
     deleteLogement
 };

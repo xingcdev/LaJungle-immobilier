@@ -7,7 +7,7 @@ Projet réalisé par ces étudiants Efrei en L3 APP LS1 :
 Laurie BRAL \
 CHEN Xing \
 Mélanie Dang \
-Antoine DESPRÉS \
+Antoine DESPRÉS
 
 13/05/2022
 
@@ -125,5 +125,18 @@ Tout le code source est situé dans le répertoire `src/`. Sa structure est la s
 - Un client peur effectuer plusieurs visites, et une visite est faite par un seul client.
 - Un client peut procéder à 0 ou plusieurs transactions, et une transaction ne concerne qu'un client.
   Une transaction implique un seul logement à la fois, et un logement est impliqué dans 0 ou plusieurs transactions.
+
+Nous avons ajouté une table utilisateur avec les attributs "NomUtilisateur" et "MotDePasse", qui permet à une personne de créer son compte et son mot de passe afin d'accéder au site.
+
+**Script SQL**
+Nous avons rédigé deux scripts SQL afin de construire une base de données en local et ainsi tester notre application.
+
+- Le script permettant d'ajouter les tables nécessaires : [Script de création des tables](/server/script_create_tables.sql.md)
+- Le script permettant d'insérer des données dans les tables : [Script d'insertion de valeurs](/server/script_insert_tables.sql)
+
+**Requête pour chaque table**
+
+- Pour chaque table, nous avons codé des fonctions asynchrones en js afin de répondre aux besoins de l'application. Chaque table contient au moins les fonctions get, create, delete.
+- Pour la fonction asynchrone update, qui permet de modifier les informations d'une ligne, nous avons utilisé un string dynamique qui prend seulement en compte les paramètres modifiés.
 
 Nous avons ajouté une table utilisateur avec les attributs "NomUtilisateur" et "MotDePasse", qui permet à une personne de créer son compte et son mot de passe afin d'accéder au site.

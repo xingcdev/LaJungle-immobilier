@@ -26,6 +26,33 @@ async function getLogement(id) {
     });
 }
 
+async function getAllLogements() {
+    
+    return new Promise((resolve, reject) => {
+        let sql = "SELECT * FROM Logement;";
+        database.getConnection((error, connection) => {
+            if (error)
+                reject(error);
+            connection.query(sql, [], (error, results) => {
+                console.log(results);
+                connection.release();
+                if (error)
+                    console.error(error.message);
+                if (results === undefined) {
+                    resolve(null);
+                } else if (results.length > 0) {
+                    resolve(results);
+                } else {
+                    resolve(null);
+                }
+            });
+        });
+
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
 
 async function createLogement(adresse, nomProprietaire, typeLogement, nombrePieces, superficie, etatHabitation, prixMiseEnVente, dateDisponibilite, ville) {
     
@@ -50,6 +77,8 @@ async function createLogement(adresse, nomProprietaire, typeLogement, nombrePiec
     });
 }
 
+
+
 async function deleteLogement(id) {
     
     let sql = "DELETE FROM Logement WHERE IdLogement=?;";
@@ -67,6 +96,7 @@ async function deleteLogement(id) {
 
 module.exports = {
     getLogement,
+    getAllLogements,
     createLogement,
     // updateLogement,
     deleteLogement

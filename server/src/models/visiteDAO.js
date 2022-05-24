@@ -1,8 +1,9 @@
 const database = require('../helpers/dbconnect.js');
 
-async function getGarage(id) {  
+async function getVisite(id) {
+    
     return new Promise((resolve, reject) => {
-        let sql = "SELECT * FROM Garage WHERE IdGarage=?;";
+        let sql = "SELECT * FROM Visite WHERE IdVisite=?;";
         database.getConnection((error, connection) => {
             if (error)
                 reject(error);
@@ -26,16 +27,16 @@ async function getGarage(id) {
 }
 
 
-async function createGarage(adresse, idLogement) {
+async function createVisite(DateVisite, IdLogement, IdClient) {
     
     return new Promise((resolve, reject) => {
-        let sql = "INSERT INTO Garage (Adresse, IdLogement) VALUES (?,?);";
+        let sql = "INSERT INTO Logement (DateVisite, IdLogement, IdClient) values (?,?,?);";
         database.getConnection((error, connection) => {
             if(error){
-                console.error("Database connection error on createGarage");
+                console.error("Database connection error on createVisite");
                 reject(error);
             }
-            connection.query(sql, [adresse, idLogement], (error) => {
+            connection.query(sql, [DateVisite, IdLogement, IdClient], (error) => {
                 connection.release();
                 if (error) {
                     console.error(error.message);
@@ -49,36 +50,28 @@ async function createGarage(adresse, idLogement) {
     });
 }
 
-async function deleteGarage(id) {
+async function updateVisite(DateVisite, IdLogement, IdClient, IdVisite) {
     
-    let sql = "DELETE FROM Garage WHERE IdGarage=?;";
-    database.getConnection((error, connection) =>{
-        if(error) console.error("Database connection error on deleteGarage", error.message);
-    connection.query(sql, [id], (error) => {
-        connection.release();
-        if (error) {
-            console.error(error.message);
-            return;
-        }
-    });
-});
-}
-
-async function updateGarage(Adresse, IdLogement, IdGarage) {
     let parametres = new Array();
-    let requete = "UPDATE Garage SET";
-    if(req.query.Adresse !== null) {
-        requete += " Adresse=?"
-        parametres.push(Adresse)
-    }
-    if(req.query.IdLogement !== null) {
+    let requete = "UPDATE Visite SET ";
+    if(req.query.DateVisite !== null) {
+        requete += " DateVisite=?"
+        parametres.push(DateVisite)
+      }
+      
+      if(req.query.IdLogement !== null) {
         requete += " IdLogement=?"
         parametres.push(IdLogement)
-     }
-    requete+=" WHERE IdGarage=?";
-    parametres.push(IdGarage)
+      }
+
+      if(req.query.IdClient !==null) {
+          requete+="IdClient=?"
+          parametres.push(IdClient)
+      }
+      requete+=" WHERE IdVisite=?";
+      parametres.push(IdVisite)
     database.getConnection((error, connection) =>{
-        if(error) console.error("Database connection error on updateGarage", error.message);
+        if(error) console.error("Database connection error on updateVisite", error.message);
     connection.query(requete,parametres, (error) => {
         connection.release();
         if (error) {
@@ -89,11 +82,25 @@ async function updateGarage(Adresse, IdLogement, IdGarage) {
 });
 }
 
-async function getGarageFromLogement(idLogement) {
-    let sql = "SELECT * FROM Logement WHERE IdLogement=?;";
+async function getAllVisitesForALogement(idLogement) {
+    let sql = "SELECT * FROM Visite WHERE IdLogement=?;";
     database.getConnection((error, connection) =>{
-        if(error) console.error("Database connection error on getGarageFromLogement", error.message);
+        if(error) console.error("Database connection error on deleteVisite", error.message);
     connection.query(sql, [idLogement], (error) => {
+        connection.release();
+        if (error) {
+            console.error(error.message);
+            return;
+        }
+    });
+});
+}
+async function deleteVisite(id) {
+    
+    let sql = "DELETE FROM Visite WHERE IdVisite=?;";
+    database.getConnection((error, connection) =>{
+        if(error) console.error("Database connection error on deleteVisite", error.message);
+    connection.query(sql, [id], (error) => {
         connection.release();
         if (error) {
             console.error(error.message);
@@ -104,9 +111,9 @@ async function getGarageFromLogement(idLogement) {
 }
 
 module.exports = {
-    getGarage,
-    createGarage,
-    deleteGarage,
-    updateGarage,
-    getGarageFromLogement
+    getVisite,
+    createVisite,
+    deleteVisite,
+    updateVisite,
+    getAllVisitesForALogement
 }

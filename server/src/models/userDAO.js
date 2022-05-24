@@ -27,9 +27,62 @@ async function getUser(username) {
     }).catch((error) => {
         console.error(error.message);
     });
+}
 
+async function createUser(NomUtilisateur, MotDePasse) {
+    
+    return new Promise((resolve, reject) => {
+        let sql = "INSERT INTO Utilisateur (NomUtilisateur, MotDePasse) VALUES (?, ?);";
+        database.getConnection((error, connection) => {
+            if(error){
+                console.error("Database connection error on createGarage");
+                reject(error);
+            }
+            connection.query(sql, [NomUtilisateur, MotDePasse], (error) => {
+                connection.release();
+                if (error) {
+                    console.error(error.message);
+                    reject(error);
+                } else {
+                    resolve();
+                }
+            });
+        });
+
+    });
+}
+//Modifier les informations de  l'utilisateur 
+
+async function updateUser(nom, MotDePasse) {
+    
+    let parametres = new Array();
+    let requete = "UPDATE User SET ";
+    if(req.query.NomUtilisateur !== null) {
+        requete += " NomUtilisateur=?"
+        parametres.push(nom)
+      }
+      
+      if(req.query.MotDePasse !== null) {
+        requete += " MotDePasse=?"
+        parametres.push(MotDePasse)
+      }
+      requete+=" WHERE NomUtilisateur=nom";
+      parametres.push(NomUtilisateur)
+      let unique = [...new Set(parametres)];
+    database.getConnection((error, connection) =>{
+        if(error) console.error("Database connection error on updateUser", error.message);
+    connection.query(requete,unique, (error) => {
+        connection.release();
+        if (error) {
+            console.error(error.message);
+            return;
+        }
+    });
+});
 }
 
 module.exports = {
-    getUser
+    getUser,
+    createUser,
+    updateUser
 }
