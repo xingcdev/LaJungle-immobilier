@@ -103,9 +103,37 @@ async function deleteTransaction(id) {
 });
 }
 
+async function getAllTransactions() {
+    
+    return new Promise((resolve, reject) => {
+        let sql = "SELECT * FROM Transaction;";
+        database.getConnection((error, connection) => {
+            if (error)
+                reject(error);
+            connection.query(sql, [], (error, results) => {
+                console.log(results);
+                connection.release();
+                if (error)
+                    console.error(error.message);
+                if (results === undefined) {
+                    resolve(null);
+                } else if (results.length > 0) {
+                    resolve(results);
+                } else {
+                    resolve(null);
+                }
+            });
+        });
+
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
 module.exports = {
     getTransaction,
     createTransaction,
     updateTransaction,
-    deleteTransaction
+    deleteTransaction,
+    getAllTransactions
 }

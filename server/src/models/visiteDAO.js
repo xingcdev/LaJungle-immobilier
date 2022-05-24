@@ -82,6 +82,19 @@ async function updateVisite(DateVisite, IdLogement, IdClient, IdVisite) {
 });
 }
 
+async function getAllVisitesForALogement(idLogement) {
+    let sql = "SELECT * FROM Visite WHERE IdLogement=?;";
+    database.getConnection((error, connection) =>{
+        if(error) console.error("Database connection error on deleteVisite", error.message);
+    connection.query(sql, [idLogement], (error) => {
+        connection.release();
+        if (error) {
+            console.error(error.message);
+            return;
+        }
+    });
+});
+}
 async function deleteVisite(id) {
     
     let sql = "DELETE FROM Visite WHERE IdVisite=?;";
@@ -101,5 +114,6 @@ module.exports = {
     getVisite,
     createVisite,
     deleteVisite,
-    updateVisite
+    updateVisite,
+    getAllVisitesForALogement
 }
