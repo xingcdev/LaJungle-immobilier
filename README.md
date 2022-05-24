@@ -27,14 +27,3 @@ npm start
 ```
 
 Ouvrir http://localhost:3000/ pour la voir dsans le navigateur.
-
-## Fonctionnalités
-
-**Frontend**
-
-- [ ] une page d'erreur 404
-- [ ] La liste de logements dans l'odre de prix croissant
-- [ ] Chercher un logement particulier ave une adresse postale
-- [ ] Une page détail de chaque logement
-- [ ] La liste de transactions
-- [ ] La liste de visites
