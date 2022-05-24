@@ -79,7 +79,7 @@ async function updateGarage(Adresse, IdLogement, IdGarage) {
     parametres.push(IdGarage)
     database.getConnection((error, connection) =>{
         if(error) console.error("Database connection error on updateGarage", error.message);
-    connection.query(sql,parametres, (error) => {
+    connection.query(requete,parametres, (error) => {
         connection.release();
         if (error) {
             console.error(error.message);

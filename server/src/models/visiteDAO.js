@@ -72,7 +72,7 @@ async function updateVisite(DateVisite, IdLogement, IdClient, IdVisite) {
       parametres.push(IdVisite)
     database.getConnection((error, connection) =>{
         if(error) console.error("Database connection error on updateVisite", error.message);
-    connection.query(sql,parametres, (error) => {
+    connection.query(requete,parametres, (error) => {
         connection.release();
         if (error) {
             console.error(error.message);

@@ -78,7 +78,7 @@ async function updateTransaction(prixVente, pourcentageCommission, IdLogement, I
     parametres.push(IdTransaction)
     database.getConnection((error, connection) =>{
         if(error) console.error("Database connection error on updateTransaction", error.message);
-    connection.query(sql, parametres, (error) => {
+    connection.query(requete, parametres, (error) => {
         connection.release();
         if (error) {
             console.error(error.message);
