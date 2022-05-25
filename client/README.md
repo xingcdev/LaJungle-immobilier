@@ -6,3 +6,4 @@
 - [ ] Une page détail de chaque logement
 - [ ] La liste de transactions
 - [ ] La liste de visites
+- [ ] La liste de garage
