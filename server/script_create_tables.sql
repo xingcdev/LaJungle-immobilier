@@ -1,5 +1,5 @@
-DROP SCHEMA IF EXISTS 'LaJungle';
-CREATE SCHEMA 'LaJungle';
+DROP SCHEMA IF EXISTS 'lajungle';
+CREATE SCHEMA 'lajungle';
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -8,13 +8,15 @@ DROP TABLE IF EXISTS Logement;
 CREATE TABLE Logement(
    IdLogement INT NOT NULL AUTO_INCREMENT,
    Adresse VARCHAR(50),
+   DescriptionLogement TEXT,
    NomProprietaire VARCHAR(50),
-   TypeLogement ENUM('appartement', 'maison'),
+   TypeLogement ENUM('Appartement', 'Maison'),
    NombrePieces INT,
    Superficie DECIMAL(7,2),
-   EtatHabitation ENUM('neuf','bon','tres bon','mauvais'),
+   EtatHabitation ENUM('Neuf','Bon','Très bon','Mauvais'),
    PrixMiseEnVente float(10,2),
    DateDisponibilite DATE,
+   CodePostal VARCHAR(5),
    Ville VARCHAR(50),
    PRIMARY KEY(IdLogement)
 );
@@ -37,7 +39,7 @@ CREATE TABLE Client(
 DROP TABLE IF EXISTS Visite;
 CREATE TABLE Visite(
    IdVisite INT NOT NULL AUTO_INCREMENT,
-   DateVisite DATE,
+   DateHeureVisite DATETIME,
    IdLogement INT NOT NULL,
    IdClient INT NOT NULL,
    PRIMARY KEY(IdVisite),
