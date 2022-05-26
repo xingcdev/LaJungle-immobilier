@@ -40,11 +40,11 @@ async function getLogement(request, response) {
 async function getAllLogements(request, response) {
   try {
     let logements = await db.getAllLogements();
+
     if (logements) {
       response.send(
         // Change properties from PascalCase to camelCase
         logements.map((element) => ({
-          ...element,
           idLogement: element.IdLogement,
           adresse: element.Adresse,
           nombrePieces: element.NombrePieces,
