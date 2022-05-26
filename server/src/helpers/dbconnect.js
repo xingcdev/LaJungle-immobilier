@@ -180,7 +180,7 @@ async function createTransactionTable(connection) {
 async function createPossederTable(connection) {
   return new Promise((resolve, reject) => {
     connection.query(
-      `CREATE TABLE IF NOT EXISTS lajungle.Posséder(
+      `CREATE TABLE IF NOT EXISTS lajungle.Posseder(
                 IdLogement INT NOT NULL,
                 IdGarage INT NOT NULL,
                 PRIMARY KEY(IdLogement, IdGarage),
