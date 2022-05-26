@@ -91,6 +91,94 @@ async function createLogement(
   });
 }
 
+async function updateLogement(
+  id,
+  adresse,
+  descriptionLogement,
+  nomProprietaire,
+  typeLogement,
+  nombrePieces,
+  superficie,
+  etatHabitation,
+  prixMiseEnVente,
+  dateDisponibilite,
+  codePostal,
+  ville
+) {
+  let sql = 'UPDATE Logement SET ';
+  let parametres = new Array();
+
+  if (adresse) {
+    sql += 'Adresse = ? ';
+    parametres.push(adresse);
+  }
+
+  if (descriptionLogement) {
+    sql += 'DescriptionLogement = ? ';
+    parametres.push(descriptionLogement);
+  }
+
+  if (nomProprietaire) {
+    sql += 'NomProprietaire = ? ';
+    parametres.push(nomProprietaire);
+  }
+
+  if (typeLogement) {
+    sql += 'TypeLogement = ? ';
+    parametres.push(typeLogement);
+  }
+
+  if (nombrePieces) {
+    sql += 'NombrePieces = ? ';
+    parametres.push(nombrePieces);
+  }
+
+  if (superficie) {
+    sql += 'Superficie = ? ';
+    parametres.push(superficie);
+  }
+
+  if (etatHabitation) {
+    sql += 'EtatHabitation = ? ';
+  }
+
+  if (prixMiseEnVente) {
+    sql += 'PrixMiseEnVente = ? ';
+    parametres.push(prixMiseEnVente);
+  }
+
+  if (dateDisponibilite) {
+    sql += 'DateDisponibilite = ? ';
+    parametres.push(dateDisponibilite);
+  }
+
+  if (codePostal) {
+    sql += 'CodePostal=? ';
+    parametres.push(codePostal);
+  }
+
+  if (ville) {
+    sql += 'Ville = ? ';
+    parametres.push(ville);
+  }
+
+  sql += 'WHERE IdLogement = ?;';
+  database.getConnection((error, connection) => {
+    if (error)
+      console.error(
+        'Database connection error on updateLogement',
+        error.message
+      );
+    connection.query(sql, [id], (error) => {
+      connection.release();
+      if (error) {
+        console.error(error.message);
+        return;
+      }
+    });
+  });
+}
+
 async function deleteLogement(id) {
   let sql = 'DELETE FROM Logement WHERE IdLogement=?;';
   database.getConnection((error, connection) => {
@@ -113,6 +201,6 @@ module.exports = {
   getLogement,
   getAllLogements,
   createLogement,
-  // updateLogement,
+  updateLogement,
   deleteLogement,
 };
