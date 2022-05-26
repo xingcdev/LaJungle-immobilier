@@ -25,7 +25,7 @@ async function getLogement(id) {
 async function getAllLogements() {
   return new Promise((resolve, reject) => {
     let sql =
-      'SELECT IdLogement, Adresse, NombrePieces, Superficie, PrixMiseEnVente, CodePostal, Ville, (SELECT COUNT(IdLogement) FROM Posséder WHERE IdLogement = Logement.IdLogement) AS NbGarages FROM Logement;';
+      'SELECT IdLogement, Adresse, NombrePieces, Superficie, PrixMiseEnVente, CodePostal, Ville, (SELECT COUNT(IdLogement) FROM Posseder WHERE IdLogement = Logement.IdLogement) AS NbGarages FROM Logement;';
     database.getConnection((error, connection) => {
       if (error) reject(error);
       connection.query(sql, [], (error, results) => {
