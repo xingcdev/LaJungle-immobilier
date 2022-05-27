@@ -88,11 +88,13 @@ async function createLogement(
         }
       );
     });
+  }).catch((error) => {
+    console.log(error);
   });
 }
 
 async function updateLogement(
-  id,
+  idLogement,
   adresse,
   descriptionLogement,
   nomProprietaire,
@@ -105,95 +107,106 @@ async function updateLogement(
   codePostal,
   ville
 ) {
-  let sql = 'UPDATE Logement SET ';
-  let parametres = new Array();
+  return new Promise((resolve, reject) => {
+    let sql = 'UPDATE Logement SET ';
+    let parametres = new Array();
 
-  if (adresse) {
-    sql += 'Adresse = ? ';
-    parametres.push(adresse);
-  }
+    if (adresse) {
+      sql += 'Adresse = ? ';
+      parametres.push(adresse);
+    }
 
-  if (descriptionLogement) {
-    sql += 'DescriptionLogement = ? ';
-    parametres.push(descriptionLogement);
-  }
+    if (descriptionLogement) {
+      sql += 'DescriptionLogement = ? ';
+      parametres.push(descriptionLogement);
+    }
 
-  if (nomProprietaire) {
-    sql += 'NomProprietaire = ? ';
-    parametres.push(nomProprietaire);
-  }
+    if (nomProprietaire) {
+      sql += 'NomProprietaire = ? ';
+      parametres.push(nomProprietaire);
+    }
 
-  if (typeLogement) {
-    sql += 'TypeLogement = ? ';
-    parametres.push(typeLogement);
-  }
+    if (typeLogement) {
+      sql += 'TypeLogement = ? ';
+      parametres.push(typeLogement);
+    }
 
-  if (nombrePieces) {
-    sql += 'NombrePieces = ? ';
-    parametres.push(nombrePieces);
-  }
+    if (nombrePieces) {
+      sql += 'NombrePieces = ? ';
+      parametres.push(nombrePieces);
+    }
 
-  if (superficie) {
-    sql += 'Superficie = ? ';
-    parametres.push(superficie);
-  }
+    if (superficie) {
+      sql += 'Superficie = ? ';
+      parametres.push(superficie);
+    }
 
-  if (etatHabitation) {
-    sql += 'EtatHabitation = ? ';
-  }
+    if (etatHabitation) {
+      sql += 'EtatHabitation = ? ';
+    }
 
-  if (prixMiseEnVente) {
-    sql += 'PrixMiseEnVente = ? ';
-    parametres.push(prixMiseEnVente);
-  }
+    if (prixMiseEnVente) {
+      sql += 'PrixMiseEnVente = ? ';
+      parametres.push(prixMiseEnVente);
+    }
 
-  if (dateDisponibilite) {
-    sql += 'DateDisponibilite = ? ';
-    parametres.push(dateDisponibilite);
-  }
+    if (dateDisponibilite) {
+      sql += 'DateDisponibilite = ? ';
+      parametres.push(dateDisponibilite);
+    }
 
-  if (codePostal) {
-    sql += 'CodePostal=? ';
-    parametres.push(codePostal);
-  }
+    if (codePostal) {
+      sql += 'CodePostal=? ';
+      parametres.push(codePostal);
+    }
 
-  if (ville) {
-    sql += 'Ville = ? ';
-    parametres.push(ville);
-  }
+    if (ville) {
+      sql += 'Ville = ? ';
+      parametres.push(ville);
+    }
 
-  sql += 'WHERE IdLogement = ?;';
-  database.getConnection((error, connection) => {
-    if (error)
-      console.error(
-        'Database connection error on updateLogement',
-        error.message
-      );
-    connection.query(sql, [id], (error) => {
-      connection.release();
-      if (error) {
-        console.error(error.message);
-        return;
-      }
+    sql += 'WHERE IdLogement = ?;';
+    parametres.push(idLogement);
+    database.getConnection((error, connection) => {
+      if (error)
+        console.error(
+          'Database connection error on updateLogement',
+          error.message
+        );
+      connection.query(sql, parametres, (error, results) => {
+        connection.release();
+        if (error) {
+          console.error(error);
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
     });
   });
 }
 
-async function deleteLogement(id) {
-  let sql = 'DELETE FROM Logement WHERE IdLogement=?;';
-  database.getConnection((error, connection) => {
-    if (error)
-      console.error(
-        'Database connection error on deleteLogement',
-        error.message
-      );
-    connection.query(sql, [id], (error) => {
-      connection.release();
-      if (error) {
-        console.error(error.message);
-        return;
-      }
+async function deleteLogement(idLogement) {
+  return new Promise((resolve, reject) => {
+    let sql = 'DELETE FROM Logement WHERE IdLogement=?;';
+    database.getConnection((error, connection) => {
+      if (error)
+        console.error(
+          'Database connection error on deleteLogement',
+          error.message
+        );
+      connection.query(sql, [idLogement], (error, results) => {
+        connection.release();
+        if (error) {
+          console.error(error.message);
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
     });
+  }).catch((error) => {
+    console.log(error);
   });
 }
 
