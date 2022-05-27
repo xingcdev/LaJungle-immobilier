@@ -1,17 +1,9 @@
-const router = require("express").Router();
-const logement = require("../controllers/logement.js");
-const config = require("../config.json");
-//const { isAuthorized } = require("../middlewares/auth.js");
-
-
-
+const router = require('express').Router();
+const logement = require('../controllers/logement.js');
 
 router.get('/get', logement.getLogement);
 router.get('/getAll', logement.getAllLogements);
-
-/*router.get("/update", logement.logout);
-
-router.get("/remove", logement.state);*/
-
+router.get('/update', logement.updateLogement);
+router.get('/remove', logement.deleteLogement);
 
 module.exports = router;
