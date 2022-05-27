@@ -155,7 +155,7 @@ async function createTransactionTable(connection) {
       `CREATE TABLE IF NOT EXISTS lajungle.Transaction(
                 IdTransaction INT NOT NULL AUTO_INCREMENT,
                 PrixVente float(10,2),
-                PourcentageCommission DECIMAL(3,2) NOT NULL CHECK ('PourcentageCommission'>=3 AND 'PourcentageCommission' <=5),
+                PourcentageCommission DECIMAL(3,2) NOT NULL CHECK (PourcentageCommission>=3 AND PourcentageCommission <=5),
                 IdLogement INT NOT NULL,
                 IdClient INT NOT NULL,
                 PRIMARY KEY(IdTransaction),
