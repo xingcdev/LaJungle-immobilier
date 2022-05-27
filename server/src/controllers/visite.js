@@ -9,7 +9,7 @@ async function getVisite(request, response) {
   }
 
   let visite = await db.getVisite(ID);
-
+  console.log(visite);
   if (visite === null) {
     response.status(404).json({ msg: 'Visite non trouvée' });
     return;
@@ -21,14 +21,18 @@ async function getVisite(request, response) {
 
   visite = visite[0];
 
-  let Visite = {
-    IdVisite: ID,
-    DateVisite: visite.DateVisite,
-    IdLogement: visite.IdLogement,
-    IdClient: visite.IdClient,
-  };
+  response.send(
+    visite.map((element) => ({
+      idVisite: element.IdVisite,
+      dateVisite: element.DateVisite,
+      idLogement: element.IdLogement,
+      idClient: element.IdClient,
+    }))
+  );
 
-  response.json(Visite);
+  let Visite = {};
+
+  response.status(200).send(Visite);
 }
 
 async function getAllVisitesForALogement(request, response) {
@@ -41,12 +45,14 @@ async function getAllVisitesForALogement(request, response) {
 
   try {
     let visites = await db.getAllVisitesForALogement(ID);
+    console.log(visites);
     if (visites) {
       response.send(
         visites.map((element) => ({
-          dateHeureVisite: element.dateHeureVisite,
-          idLogement: element.idLogement,
-          idClient: element.idClient,
+          idVisite: element.IdVisite,
+          dateHeureVisite: element.DateHeureVisite,
+          idLogement: element.IdLogement,
+          idClient: element.IdClient,
         }))
       );
     } else {
@@ -58,18 +64,22 @@ async function getAllVisitesForALogement(request, response) {
 }
 
 async function createVisite(request, response) {
-  let visite = request.body;
+  console.log(request);
+  let visite = request.query;
   db.createVisite(visite.dateHeureVisite, visite.idLogement, visite.idClient);
 
   response.status(200).send({ msg: 'OK' });
 }
 
 async function updateVisite(req, res) {
-  let DateVisite = req.body.DateVisite;
-  let IdLogement = req.body.IdLogement;
-  let IdClient = req.body.IdClient;
+  let visite = req.query;
 
-  await db.updateVisite(req.visite.id, DateVisite, IdLogement, IdClient);
+  await db.updateVisite(
+    visite.dateHeureVisite,
+    visite.idLogement,
+    visite.idClient,
+    visite.idVisite
+  );
 
   res.status(200).send({ msg: 'OK' });
 }

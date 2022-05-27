@@ -40,13 +40,13 @@ async function createVisite(DateHeureVisite, IdLogement, IdClient) {
       connection.query(
         sql,
         [DateHeureVisite, IdLogement, IdClient],
-        (error) => {
+        (error, results) => {
           connection.release();
           if (error) {
             console.error(error.message);
             reject(error);
           } else {
-            resolve();
+            resolve(results);
           }
         }
       );
@@ -54,53 +54,75 @@ async function createVisite(DateHeureVisite, IdLogement, IdClient) {
   });
 }
 
-async function updateVisite(DateHeureVisite, IdLogement, IdClient, IdVisite) {
-  let parametres = new Array();
-  let requete = 'UPDATE Visite SET ';
-  if (req.query.DateVisite !== null) {
-    requete += 'DateVisite=? ';
-    parametres.push(DateHeureVisite);
-  }
+async function updateVisite(dateHeureVisite, idLogement, idClient, idVisite) {
+  return new Promise((resolve, reject) => {
+    let parametres = new Array();
+    let requete = 'UPDATE Visite SET ';
+    if (dateHeureVisite !== null) {
+      requete += 'DateHeureVisite=?, ';
+      parametres.push(dateHeureVisite);
+    }
 
-  if (req.query.IdLogement !== null) {
-    requete += 'IdLogement=? ';
-    parametres.push(IdLogement);
-  }
+    if (idLogement !== null) {
+      requete += 'IdLogement=?, ';
+      parametres.push(idLogement);
+    }
 
-  if (req.query.IdClient !== null) {
-    requete += 'IdClient=? ';
-    parametres.push(IdClient);
-  }
-  requete += 'WHERE IdVisite=?';
-  parametres.push(IdVisite);
-  database.getConnection((error, connection) => {
-    if (error)
-      console.error('Database connection error on updateVisite', error.message);
-    connection.query(requete, parametres, (error) => {
-      connection.release();
+    if (idClient !== null) {
+      requete += 'IdClient=? ';
+      parametres.push(idClient);
+    }
+    requete += 'WHERE IdVisite=?';
+    parametres.push(idVisite);
+
+    database.getConnection((error, connection) => {
       if (error) {
-        console.error(error.message);
-        return;
+        console.error(
+          'Database connection error on updateVisite',
+          error.message
+        );
+        reject(error);
       }
+      connection.query(requete, parametres, (error, results) => {
+        connection.release();
+        if (error) {
+          console.error(error.message);
+        }
+        if (results === undefined) {
+          resolve(null);
+        } else if (results.length > 0) {
+          resolve(results);
+        } else {
+          resolve(null);
+        }
+      });
     });
+  }).catch((error) => {
+    console.log(error);
   });
 }
 
 async function getAllVisitesForALogement(idLogement) {
-  let sql = 'SELECT * FROM Visite WHERE IdLogement=?;';
-  database.getConnection((error, connection) => {
-    if (error)
-      console.error(
-        'Database connection error on getAllVisitesForALogement',
-        error.message
-      );
-    connection.query(sql, [idLogement], (error) => {
-      connection.release();
-      if (error) {
-        console.error(error.message);
-        return;
-      }
+  return new Promise((resolve, reject) => {
+    let sql = 'SELECT * FROM Visite WHERE IdLogement=?;';
+    database.getConnection((error, connection) => {
+      if (error)
+        console.error(
+          'Database connection error on getAllVisitesForALogement',
+          error.message
+        );
+      connection.query(sql, [idLogement], (error, results) => {
+        connection.release();
+        if (error) {
+          console.error(error.message);
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
     });
+  }).catch((error) => {
+    console.log(error);
   });
 }
 async function deleteVisite(id) {
