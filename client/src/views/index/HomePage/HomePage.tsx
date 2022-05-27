@@ -3,7 +3,7 @@ import Housings from '../Housings/Housings';
 import { useEffect, useState } from 'react';
 
 function HomePage() {
-	const [housingsData, sethousingsData] = useState({});
+	const [housingsData, setHousingsData] = useState({});
 
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -13,8 +13,8 @@ function HomePage() {
 				if (response.ok) return response.json();
 				throw response;
 			})
-			.then((data) => {
-				sethousingsData(data);
+			.then((json) => {
+				setHousingsData(json.data);
 			})
 			.catch((error) => console.log(error))
 			.finally(() => setIsLoading(false));
