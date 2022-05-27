@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- Insertion dans la table Client
 TRUNCATE TABLE Client;
 INSERT INTO Client (NomClient) VALUE
@@ -56,3 +58,5 @@ INSERT INTO Posseder(IdLogement, IdGarage) VALUES
 ;
 
 TRUNCATE TABLE Utilisateur;
+
+SET FOREIGN_KEY_CHECKS = 1;
