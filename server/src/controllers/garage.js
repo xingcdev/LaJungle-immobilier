@@ -8,7 +8,6 @@ async function getGarage(request, response) {
     return;
   }
   let garage = await db.getGarage(idGarage);
-  console.log(garage);
   if (garage === null) {
     response.status(404).json({ msg: 'Garage non trouvé' });
     return;

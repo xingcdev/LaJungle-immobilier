@@ -9,7 +9,6 @@ async function getVisite(request, response) {
   }
 
   let visite = await db.getVisite(ID);
-  console.log(visite);
   if (visite === null) {
     response.status(404).json({ msg: 'Visite non trouvée' });
     return;
@@ -64,7 +63,6 @@ async function getAllVisitesForALogement(request, response) {
 }
 
 async function createVisite(request, response) {
-  console.log(request);
   let visite = request.query;
   db.createVisite(visite.dateHeureVisite, visite.idLogement, visite.idClient);
 
