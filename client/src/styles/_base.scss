@@ -50,7 +50,8 @@ svg {
 }
 
 /*
-  7. Remove built-in form typography styles
+  7. Make form widgets inheriting fonts from their parent
+  Do this make forms' appearance consistent with the rest of your content
 */
 input,
 button,
