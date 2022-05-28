@@ -82,17 +82,17 @@ async function deleteGarage(idGarage) {
 
 async function updateGarage(idGarage, adresse) {
   let parametres = new Array();
-  let requete = 'UPDATE Garage SET ';
+  let sql = 'UPDATE Garage SET ';
   if (adresse) {
-    requete += 'Adresse=? ';
+    sql += 'Adresse=? ';
     parametres.push(adresse);
   }
-  requete += ' WHERE IdGarage=?';
+  sql += 'WHERE IdGarage=?;';
   parametres.push(idGarage);
   database.getConnection((error, connection) => {
     if (error)
       console.error('Database connection error on updateGarage', error.message);
-    connection.query(requete, parametres, (error) => {
+    connection.query(sql, parametres, (error) => {
       connection.release();
       if (error) {
         console.error(error.message);

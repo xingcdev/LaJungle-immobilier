@@ -10,12 +10,12 @@ async function getVisite(request, response) {
 
   let visite = await db.getVisite(ID);
   if (visite === null) {
-    response.status(404).json({ msg: 'Visite non trouvée' });
+    response.status(404).json({ data: null, error: 'Visite non trouvée' });
     return;
   }
 
   if (visite === undefined) {
-    response.status(404).json({ msg: 'Visite non trouvée' });
+    response.status(404).json({ data: null, error: 'Visite non trouvée' });
   }
 
   visite = visite[0];

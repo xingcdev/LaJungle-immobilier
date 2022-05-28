@@ -57,22 +57,28 @@ async function createVisite(DateHeureVisite, IdLogement, IdClient) {
 async function updateVisite(dateHeureVisite, idLogement, idClient, idVisite) {
   return new Promise((resolve, reject) => {
     let parametres = new Array();
-    let requete = 'UPDATE Visite SET ';
+    let sql = 'UPDATE Visite SET ';
     if (dateHeureVisite !== null) {
-      requete += 'DateHeureVisite=?, ';
+      sql += 'DateHeureVisite=?,';
       parametres.push(dateHeureVisite);
     }
 
     if (idLogement !== null) {
-      requete += 'IdLogement=?, ';
+      sql += ' IdLogement=?, ';
       parametres.push(idLogement);
     }
 
     if (idClient !== null) {
-      requete += 'IdClient=? ';
+      sql += ' IdClient=? ';
       parametres.push(idClient);
     }
-    requete += 'WHERE IdVisite=?';
+
+    if (sql.charAt(sql.length - 1) == ',') {
+      // enlever virgule restante avant le WHERE
+      sql = sql.slice(0, -1);
+    }
+
+    sql += ' WHERE IdVisite=?';
     parametres.push(idVisite);
 
     database.getConnection((error, connection) => {
@@ -83,7 +89,7 @@ async function updateVisite(dateHeureVisite, idLogement, idClient, idVisite) {
         );
         reject(error);
       }
-      connection.query(requete, parametres, (error, results) => {
+      connection.query(sql, parametres, (error, results) => {
         connection.release();
         if (error) {
           console.error(error.message);

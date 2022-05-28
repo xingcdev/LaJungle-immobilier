@@ -112,60 +112,67 @@ async function updateLogement(
     let parametres = new Array();
 
     if (adresse) {
-      sql += 'Adresse = ? ';
+      sql += 'Adresse = ?,';
       parametres.push(adresse);
     }
 
     if (description) {
-      sql += 'DescriptionLogement = ? ';
+      sql += ' DescriptionLogement = ?,';
       parametres.push(description);
     }
 
     if (nomProprietaire) {
-      sql += 'NomProprietaire = ? ';
+      sql += ' NomProprietaire = ?,';
       parametres.push(nomProprietaire);
     }
 
     if (typeLogement) {
-      sql += 'TypeLogement = ? ';
+      sql += ' TypeLogement = ?,';
       parametres.push(typeLogement);
     }
 
     if (nombrePieces) {
-      sql += 'NombrePieces = ? ';
+      sql += ' NombrePieces = ?,';
       parametres.push(nombrePieces);
     }
 
     if (superficie) {
-      sql += 'Superficie = ? ';
+      sql += ' Superficie = ?,';
       parametres.push(superficie);
     }
 
     if (etatHabitation) {
-      sql += 'EtatHabitation = ? ';
+      sql += ' EtatHabitation = ?,';
+      parametres.push(etatHabitation);
     }
 
     if (prixMiseEnVente) {
-      sql += 'PrixMiseEnVente = ? ';
+      sql += ' PrixMiseEnVente = ?,';
       parametres.push(prixMiseEnVente);
     }
 
     if (dateDisponibilite) {
-      sql += 'DateDisponibilite = ? ';
+      sql += ' DateDisponibilite = ?,';
       parametres.push(dateDisponibilite);
     }
 
     if (codePostal) {
-      sql += 'CodePostal=? ';
+      sql += ' CodePostal=?,';
       parametres.push(codePostal);
     }
 
     if (ville) {
-      sql += 'Ville = ? ';
+      sql += ' Ville = ?';
       parametres.push(ville);
     }
 
-    sql += 'WHERE IdLogement = ?;';
+    if (sql.charAt(sql.length - 1) == ',') {
+      // enlever virgule restante avant le WHERE
+      sql = sql.slice(0, -1);
+    }
+
+    sql += ' WHERE IdLogement = ?;';
+
     parametres.push(idLogement);
     database.getConnection((error, connection) => {
       if (error)
@@ -186,7 +193,7 @@ async function updateLogement(
   });
 }
 
-async function deleteLogement(idLogement) {
+async function deleteLogement(id) {
   return new Promise((resolve, reject) => {
     let sql = 'DELETE FROM Logement WHERE IdLogement=?;';
     database.getConnection((error, connection) => {
@@ -195,7 +202,7 @@ async function deleteLogement(idLogement) {
           'Database connection error on deleteLogement',
           error.message
         );
-      connection.query(sql, [idLogement], (error, results) => {
+      connection.query(sql, [id], (error, results) => {
         connection.release();
         if (error) {
           console.error(error.message);
