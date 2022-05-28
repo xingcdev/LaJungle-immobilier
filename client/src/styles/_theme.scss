@@ -86,4 +86,44 @@ form {
 		border: $border;
 		border-radius: $border-radius;
 	}
+
+	input:focus,
+	textarea:focus {
+		outline: none;
+		border: 1px $color-primary solid;
+	}
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	gap: 1rem;
+
+	.col-1 {
+		grid-column: span 1 / span 1;
+	}
+
+	.col-2 {
+		grid-column: span 2 / span 2;
+	}
+
+	.col-3 {
+		grid-column: span 3 / span 3;
+	}
+
+	.col-4 {
+		grid-column: span 4 / span 4;
+	}
+
+	.col-5 {
+		grid-column: span 5 / span 5;
+	}
+
+	.col-6 {
+		grid-column: span 6 / span 6;
+	}
+
+	.col-full {
+		grid-column: 1 / -1;
+	}
 }

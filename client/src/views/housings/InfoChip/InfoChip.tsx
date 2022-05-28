@@ -8,7 +8,7 @@ interface InfoChipProps {
 	style?: CSSProperties;
 	surface: number;
 	rooms: number;
-	cars: number;
+	garage: number;
 }
 
 export default function InfoChip(props: InfoChipProps) {
@@ -26,8 +26,11 @@ export default function InfoChip(props: InfoChipProps) {
 					text={String(props.rooms)}
 				/>
 			</li>
-			<li className={styles.cars}>
-				<DataChip icon={<IoCarOutline size={20} />} text={String(props.cars)} />
+			<li className={styles.garage}>
+				<DataChip
+					icon={<IoCarOutline size={20} />}
+					text={String(props.garage)}
+				/>
 			</li>
 		</ul>
 	);

@@ -1,0 +1,6 @@
+@use '@styles/variables' as v;
+
+.loading {
+	text-align: center;
+	font-size: v.$font-size-5;
+}
