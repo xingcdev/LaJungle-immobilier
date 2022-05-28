@@ -4,19 +4,19 @@ async function getTransaction(request, response) {
   let ID = request.query.id || request.transaction?.id;
 
   if (ID === null) {
-    response.status(404).json({ msg: 'ID cannot be null' });
+    response.status(404).json({ data: null, error: 'ID cannot be null' });
     return;
   }
 
   let transaction = await db.getTransaction(ID);
 
   if (transaction === null) {
-    response.status(404).json({ msg: 'Transaction non trouvée' });
+    response.status(404).json({ data: null, error: 'Transaction non trouvée' });
     return;
   }
 
   if (transaction === undefined) {
-    response.status(404).json({ msg: 'Transaction non trouvée' });
+    response.status(404).json({ data: null, error: 'Transaction non trouvée' });
   }
 
   transaction = transaction[0];
@@ -29,7 +29,7 @@ async function getTransaction(request, response) {
     idClient: transaction.IdClient,
   };
 
-  response.json(Transaction);
+  response.status(200).send({ Transaction, error: null });
 }
 
 async function getAllTransactions(request, response) {
@@ -37,20 +37,23 @@ async function getAllTransactions(request, response) {
     let transactions = await db.getAllTransactions();
 
     if (transactions) {
-      response.status(200).send(
-        transactions.map((element) => ({
+      response.status(200).send({
+        data: transactions.map((element) => ({
           idTransaction: element.IdTransaction,
           prixVente: element.PrixVente,
           pourcentageCommission: element.PourcentageCommission,
           idLogement: element.IdLogement,
           idClient: element.idClient,
-        }))
-      );
+        })),
+        error: null,
+      });
     } else {
-      response.status(200).send({ msg: 'Transactions non trouvées' });
+      response
+        .status(200)
+        .send({ data: null, error: 'Transactions non trouvées' });
     }
   } catch (error) {
-    res.send({ error });
+    res.status(500).send({ data: null, error: error.message });
   }
 }
 
@@ -69,12 +72,12 @@ async function updateTransaction(req, res) {
     IdLogement,
     IdClient
   );
-  res.status(200).json({ msg: 'OK' });
+  res.status(200).send({ data: req.query, error: null });
 }
 
 async function deleteTransaction(req, res) {
-  await db.deleteTransaction(req.transaction.id);
-  res.json({ message: 'Transaction supprimée' });
+  await db.deleteTransaction(req.query.id);
+  res.status(200).send({ error: null });
 }
 
 module.exports = {

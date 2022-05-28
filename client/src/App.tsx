@@ -2,6 +2,7 @@ import '@styles/main.scss';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from '@/views/index/HomePage/HomePage';
 import TransactionsPage from '@/views/transactions/TransactionsPage/TransactionsPage';
+import VisitsPage from '@/views/visits/VisitsPage/VisitsPage';
 import LoginPage from '@/views/login/LoginPage/LoginPage';
 import NotFoundPage from '@/views/404/NotFoundPage/NotFoundPage';
 import { Dashboard } from '@components/layout';
@@ -23,6 +24,7 @@ function App() {
 					<Route index element={<HomePage />}></Route>
 					<Route path="housings/:id" element={<HousingPage />}></Route>
 					<Route path="transactions" element={<TransactionsPage />}></Route>
+					<Route path="visits" element={<VisitsPage />}></Route>
 				</Route>
 
 				<Route path="/login" element={<LoginPage />}></Route>

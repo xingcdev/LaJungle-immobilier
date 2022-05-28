@@ -1,5 +1,7 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- Insertion dans la table Client
-TRUNCATE TABLE Client;
+-- TRUNCATE TABLE Client;
 INSERT INTO Client (NomClient) VALUE
 ('Antoine Després'),
 ('Xing Chen'),
@@ -7,7 +9,7 @@ INSERT INTO Client (NomClient) VALUE
 ('Mélanie Dang')
 ;
 
-TRUNCATE TABLE Garage;
+-- TRUNCATE TABLE Garage;
 -- Insertion dans la table garage
 INSERT INTO Garage (Adresse) VALUE
 ('106 Rue des 2 Boules'),
@@ -16,7 +18,7 @@ INSERT INTO Garage (Adresse) VALUE
 ('8 Rue des femmes Fraîches')
 ;
 
-TRUNCATE TABLE Logement;
+-- TRUNCATE TABLE Logement;
 -- Insertion dans la table logement
 INSERT INTO Logement (Adresse, DescriptionLogement, NomProprietaire, TypeLogement, NombrePieces, Superficie, EtatHabitation, PrixMiseEnVente, DateDisponibilite, CodePostal, Ville) VALUES
 ('9 Rue du Chat qui Pêche', 'Charmant appartement dans une ruelle parisienne', 'Charles Potté', 'Appartement', 
@@ -29,7 +31,7 @@ INSERT INTO Logement (Adresse, DescriptionLogement, NomProprietaire, TypeLogemen
 6, 250, 'Bon', 2500000, '2022-06-24', '75001', 'Paris')
 ;
 
-TRUNCATE TABLE Transaction;
+-- TRUNCATE TABLE Transaction;
 -- Insertion dans la table transaction
 INSERT INTO Transaction (PrixVente, PourcentageCommission, IdClient, IdLogement) VALUES
 (135.000, 4.2,1,3),
@@ -38,7 +40,7 @@ INSERT INTO Transaction (PrixVente, PourcentageCommission, IdClient, IdLogement)
 (135.000, 3.8,4,2)
 ;
 
-TRUNCATE TABLE Visite;
+-- TRUNCATE TABLE Visite;
 -- Insertion dans la table visite
 INSERT INTO Visite (IdLogement, DateHeureVisite, IdClient) VALUES
 (1,'2022-11-29 14:15:00',4),
@@ -47,7 +49,7 @@ INSERT INTO Visite (IdLogement, DateHeureVisite, IdClient) VALUES
 (4,'2022-05-29 09:30:00',3)
 ;
 
-TRUNCATE TABLE Posseder;
+-- TRUNCATE TABLE Posseder;
 INSERT INTO Posseder(IdLogement, IdGarage) VALUES
 (1,2),
 (2,3),
@@ -55,4 +57,6 @@ INSERT INTO Posseder(IdLogement, IdGarage) VALUES
 (4,1)
 ;
 
-TRUNCATE TABLE Utilisateur;
+-- TRUNCATE TABLE Utilisateur;
+
+SET FOREIGN_KEY_CHECKS = 1;

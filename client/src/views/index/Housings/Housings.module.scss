@@ -5,3 +5,8 @@
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	gap: v.$spacing-margin;
 }
+
+.emptyMessage {
+	text-align: center;
+	font-size: v.$font-size-5;
+}

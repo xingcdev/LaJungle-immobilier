@@ -1,0 +1,15 @@
+@use '@styles/variables' as v;
+
+.page {
+	padding: v.$spacing-padding;
+
+	.pageTitle {
+		font-size: v.$font-size-3;
+		margin: 0 0 v.$spacing-margin 0;
+	}
+
+	.form {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+	}
+}
