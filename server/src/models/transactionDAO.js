@@ -77,11 +77,11 @@ async function getAllTransactions() {
 }
 
 async function updateTransaction(
+  idTransaction,
   prixVente,
   pourcentageCommission,
   idLogement,
-  idClient,
-  idTransaction
+  idClient
 ) {
   return new Promise((resolve, reject) => {
     let parametres = new Array();

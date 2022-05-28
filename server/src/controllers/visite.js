@@ -84,7 +84,11 @@ async function getAllVisitesForALogement(req, res) {
 
 async function createVisite(req, res) {
   let visite = req.query;
-  db.createVisite(visite.dateHeureVisite, visite.idLogement, visite.idClient);
+  await db.createVisite(
+    visite.dateHeureVisite,
+    visite.idLogement,
+    visite.idClient
+  );
 
   res.status(200).send({ data: req.query, error: null });
 }

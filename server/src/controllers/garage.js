@@ -59,7 +59,7 @@ async function updateGarage(req, res) {
   }
 
   try {
-    db.updateGarage(req.body.id, req.body.adresse);
+    await db.updateGarage(req.body.id, req.body.adresse);
 
     res.status(200).send({ data: req.body, error: null });
   } catch (error) {

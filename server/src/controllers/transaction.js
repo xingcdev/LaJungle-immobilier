@@ -62,7 +62,7 @@ async function updateTransaction(req, res) {
   }
 
   try {
-    db.updateTransaction(
+    await db.updateTransaction(
       req.body.id,
       req.body.prixVente,
       req.body.pourcentageCommission,

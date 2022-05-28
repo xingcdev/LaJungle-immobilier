@@ -74,7 +74,7 @@ async function updateLogement(req, res) {
   }
 
   try {
-    db.updateLogement(
+    await db.updateLogement(
       req.body.id,
       req.body.adresse,
       req.body.description,
