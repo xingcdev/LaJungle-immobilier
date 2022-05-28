@@ -3,7 +3,7 @@ import HousingCard from '../HousingCard/HousingCard';
 import { Loading } from '@components/feedback';
 
 interface HousingsProps {
-	housings: any;
+	housings: any | null;
 	isLoading: boolean;
 }
 

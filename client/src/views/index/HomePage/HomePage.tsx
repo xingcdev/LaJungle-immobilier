@@ -1,29 +1,16 @@
 import styles from './HomePage.module.scss';
 import Housings from '../Housings/Housings';
-import { useEffect, useState } from 'react';
+import { useFetchGet } from '@hooks/fetching';
 
 function HomePage() {
-	const [housingsData, setHousingsData] = useState({});
-
-	const [isLoading, setIsLoading] = useState(true);
-
-	useEffect(() => {
-		fetch(`${process.env.REACT_APP_API_URL}/logement/getAll`)
-			.then((response) => {
-				if (response.ok) return response.json();
-				throw response;
-			})
-			.then((json) => {
-				setHousingsData(json.data);
-			})
-			.catch((error) => console.log(error))
-			.finally(() => setIsLoading(false));
-	}, []);
+	const { data, isLoading, error } = useFetchGet(
+		`${process.env.REACT_APP_API_URL}/logement/getAll`
+	);
 
 	return (
 		<section className={styles.page}>
 			<h1 className={styles.pageTitle}>Logements disponibles</h1>
-			<Housings isLoading={isLoading} housings={housingsData} />
+			<Housings isLoading={isLoading} housings={data} />
 		</section>
 	);
 }
