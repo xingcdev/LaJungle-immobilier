@@ -1,22 +1,18 @@
 const db = require('../models/transactionDAO.js');
 
-async function getTransaction(request, response) {
-  let ID = request.query.id || request.transaction?.id;
+async function getTransaction(req, res) {
+  let id = req.query.id;
 
-  if (ID === null) {
-    response.status(404).json({ data: null, error: 'ID cannot be null' });
+  if (!id) {
+    res.status(400).json({ data: null, error: 'id non défini' });
     return;
   }
 
-  let transaction = await db.getTransaction(ID);
+  let transaction = await db.getTransaction(id);
 
-  if (transaction === null) {
-    response.status(404).json({ data: null, error: 'Transaction non trouvée' });
+  if (!transaction) {
+    res.status(404).json({ data: null, error: 'Transaction non trouvée' });
     return;
-  }
-
-  if (transaction === undefined) {
-    response.status(404).json({ data: null, error: 'Transaction non trouvée' });
   }
 
   transaction = transaction[0];
@@ -29,15 +25,16 @@ async function getTransaction(request, response) {
     idClient: transaction.IdClient,
   };
 
-  response.status(200).send({ Transaction, error: null });
+  res.status(200).send({ data: Transaction, error: null });
 }
 
-async function getAllTransactions(request, response) {
+async function getAllTransactions(req, res) {
   try {
     let transactions = await db.getAllTransactions();
 
     if (transactions) {
-      response.status(200).send({
+      res.status(200).send({
+        // PascalCase vers camelCase
         data: transactions.map((element) => ({
           idTransaction: element.IdTransaction,
           prixVente: element.PrixVente,
@@ -48,9 +45,7 @@ async function getAllTransactions(request, response) {
         error: null,
       });
     } else {
-      response
-        .status(200)
-        .send({ data: null, error: 'Transactions non trouvées' });
+      res.status(200).send({ data: null, error: 'Transactions non trouvées' });
     }
   } catch (error) {
     res.status(500).send({ data: null, error: error.message });
@@ -58,26 +53,24 @@ async function getAllTransactions(request, response) {
 }
 
 async function updateTransaction(req, res) {
-  let IdTransaction = req.body.idTransaction;
-  let PrixVente = req.body.prixVente;
-  let PourcentageCommission = req.body.pourcentageCommission;
-  let IdLogement = req.body.idLogement;
-  let IdClient = req.body.idClient;
+  if (!req.body.id) {
+    res.status(400).json({ data: null, error: 'id non défini' });
+    return;
+  }
 
   db.updateTransaction(
-    req.transaction.id,
-    IdTransaction,
-    PrixVente,
-    PourcentageCommission,
-    IdLogement,
-    IdClient
+    req.body.id,
+    req.body.prixVente,
+    req.body.pourcentageCommission,
+    req.body.idLogement,
+    req.body.idClient
   );
-  res.status(200).send({ data: req.query, error: null });
+  res.status(200).send({ data: req.body, error: null });
 }
 
 async function deleteTransaction(req, res) {
   await db.deleteTransaction(req.query.id);
-  res.status(200).send({ error: null });
+  res.status(200).send({ data: req.body, error: null });
 }
 
 module.exports = {

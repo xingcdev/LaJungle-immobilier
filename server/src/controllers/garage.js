@@ -1,68 +1,69 @@
 const db = require('../models/garageDAO.js');
 
-async function getGarage(request, response) {
-  let idGarage = request.query.id;
+async function getGarage(req, res) {
+  let id = req.query.id;
 
-  if (idGarage === null) {
-    response.status(404).json({ msg: 'ID cannot be null' });
+  if (id === null) {
+    res.status(400).json({ data: null, error: 'id non défini' });
     return;
   }
-  let garage = await db.getGarage(idGarage);
+  let garage = await db.getGarage(id);
   if (garage === null) {
-    response.status(404).json({ msg: 'Garage non trouvé' });
+    res.status(404).json({ data: null, error: 'Garage non trouvé' });
     return;
   }
 
   if (garage === undefined) {
-    response.status(404).json({ msg: 'Garage non trouvé' });
+    res.status(404).json({ data: null, error: 'Garage non trouvé' });
   }
 
-  response.status(200).send({
+  res.status(200).send({
     data: garage.map((element) => ({
       idGarage: element.IdGarage,
       adresse: element.Adresse,
       idLogement: element.IdLogement,
     }))[0],
-    error: 'OK',
+    error: null,
   });
 }
 
-async function getAllGarages(request, response) {
-  let idGarage = request.query.idGarage;
-
-  if (idGarage === null) {
-    response.status(404).json({ msg: 'ID cannot be null' });
-    return;
-  }
+async function getAllGarages(req, res) {
   let garages = await db.getAllGarages();
-  if (garages === null) {
-    response.status(404).json({ msg: 'Garage non trouvé' });
+
+  if (!garages) {
+    res.status(404).json({ data: null, error: 'Garage non trouvé' });
     return;
   }
 
-  if (garages === undefined) {
-    response.status(404).json({ msg: 'Garage non trouvé' });
-  }
-
-  response.status(200).send({
+  res.status(200).send({
     data: garages.map((element) => ({
       idGarage: element.IdGarage,
       adresse: element.Adresse,
       idLogement: element.IdLogement,
     })),
-    error: 'OK',
+    error: null,
   });
 }
 
 async function updateGarage(req, res) {
-  db.updateGarage(req.query.idGarage, req.query.adresse);
+  if (!req.body.id) {
+    res.status(400).send({ data: req.body, error: 'id ne peut être null' });
+    return;
+  }
 
-  res.status(200).send({ data: req.query, error: 'OK' });
+  db.updateGarage(req.body.id, req.body.adresse);
+
+  res.status(200).send({ data: req.body, error: null });
 }
 
 async function deleteGarage(req, res) {
-  await db.deleteGarage(req.garage.id);
-  res.status(200).send({ message: 'Garage supprimé' });
+  if (!req.body.id) {
+    res.status(400).send({ data: req.body, error: 'id ne peut être null' });
+    return;
+  }
+
+  await db.deleteGarage(req.body.id);
+  res.status(200).send({ data: req.body, error: null });
 }
 
 module.exports = {

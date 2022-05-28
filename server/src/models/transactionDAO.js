@@ -57,61 +57,84 @@ async function createTransaction(
 async function updateTransaction(
   prixVente,
   pourcentageCommission,
-  IdLogement,
-  IdClient,
-  IdTransaction
+  idLogement,
+  idClient,
+  idTransaction
 ) {
-  let parametres = new Array();
-  let requete = 'UPDATE Transaction SET';
-  if (req.query.prixVente !== null) {
-    requete += ' prixVente=?';
-    parametres.push(prixVente);
-  }
-  if (req.query.pourcentageCommission !== null) {
-    requete += ' pourcentageCommission=?';
-    parametres.push(pourcentageCommission);
-  }
-  if (req.query.IdLogement !== null) {
-    requete += ' IdLogement=?';
-    parametres.push(IdLogement);
-  }
-  if (req.query.IdClient !== null) {
-    requete += ' IdClient=?';
-    parametres.push(IdClient);
-  }
-  requete += ' WHERE IdTransaction=?';
-  parametres.push(IdTransaction);
-  database.getConnection((error, connection) => {
-    if (error)
-      console.error(
-        'Database connection error on updateTransaction',
-        error.message
-      );
-    connection.query(requete, parametres, (error) => {
-      connection.release();
-      if (error) {
-        console.error(error.message);
-        return;
-      }
+  return new Promise((resolve, reject) => {
+    let parametres = new Array();
+    let sql = 'UPDATE Transaction SET ';
+
+    if (prixVente) {
+      sql += 'PrixVente=?,';
+      parametres.push(prixVente);
+    }
+
+    if (pourcentageCommission) {
+      sql += ' PourcentageCommission=?,';
+      parametres.push(pourcentageCommission);
+    }
+
+    if (idLogement) {
+      sql += ' IdLogement=?,';
+      parametres.push(idLogement);
+    }
+
+    if (idClient) {
+      sql += ' IdClient=?';
+      parametres.push(idClient);
+    }
+
+    if (sql.charAt(sql.length - 1) == ',') {
+      // enlever virgule restante avant le WHERE
+      sql = sql.slice(0, -1);
+    }
+
+    sql += ' WHERE IdTransaction=?';
+
+    parametres.push(idTransaction);
+    database.getConnection((error, connection) => {
+      if (error)
+        console.error(
+          'Database connection error on updateTransaction',
+          error.message
+        );
+      connection.query(sql, parametres, (error, results) => {
+        connection.release();
+        if (error) {
+          console.error(error.message);
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
     });
+  }).catch((error) => {
+    console.log(error);
   });
 }
 
 async function deleteTransaction(id) {
-  let sql = 'DELETE FROM Transaction WHERE IdTransaction=?;';
-  database.getConnection((error, connection) => {
-    if (error)
-      console.error(
-        'Database connection error on deleteTransaction',
-        error.message
-      );
-    connection.query(sql, [id], (error) => {
-      connection.release();
-      if (error) {
-        console.error(error.message);
-        return;
-      }
+  return new Promise((resolve, reject) => {
+    let sql = 'DELETE FROM Transaction WHERE IdTransaction=?;';
+    database.getConnection((error, connection) => {
+      if (error)
+        console.error(
+          'Database connection error on deleteTransaction',
+          error.message
+        );
+      connection.query(sql, [id], (error) => {
+        connection.release();
+        if (error) {
+          console.error(error.message);
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
     });
+  }).catch((error) => {
+    console.log(error);
   });
 }
 

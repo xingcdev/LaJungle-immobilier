@@ -1,25 +1,21 @@
 const db = require('../models/logementDAO.js');
 
-async function getLogement(request, response) {
-  let ID = request.query.id || request.logement?.id;
+async function getLogement(req, res) {
+  let id = req.query.id;
 
-  if (ID === null) {
-    response.status(404).json({ msg: 'ID cannot be null' });
+  if (!id) {
+    res.status(404).json({ data: null, error: 'id non défini' });
     return;
   }
 
-  let logement = await db.getLogement(ID);
+  let logement = await db.getLogement(id);
 
-  if (logement === null) {
-    response.status(404).json({ error: 'Logement non trouvé' });
+  if (!logement) {
+    res.status(404).json({ data: null, error: 'Logement non trouvé' });
     return;
   }
 
-  if (logement === undefined) {
-    response.status(404).json({ error: 'Logement non trouvé' });
-  }
-
-  response.status(200).send({
+  res.status(200).send({
     data: logement.map((element) => ({
       idLogement: element.IdLogement,
       adresse: element.Adresse,
@@ -34,12 +30,12 @@ async function getLogement(request, response) {
   });
 }
 
-async function getAllLogements(request, response) {
+async function getAllLogements(req, res) {
   try {
     let logements = await db.getAllLogements();
 
     if (logements) {
-      response.status(200).send({
+      res.status(200).send({
         // PascalCase vers camelCase
         data: logements.map((element) => ({
           idLogement: element.IdLogement,
@@ -51,50 +47,43 @@ async function getAllLogements(request, response) {
           ville: element.Ville,
           nbGarages: element.NbGarages,
         })),
-        msg: 'OK',
         error: null,
       });
     } else {
-      response.status(200).send({ data: null, error: 'Logements non trouvés' });
+      res.status(200).send({ data: null, error: 'Logements non trouvés' });
     }
   } catch (error) {
-    console.log(error);
-    response.status(500).send({ data: null, error: error.message });
+    res.status(500).send({ data: null, error: error.message });
   }
 }
 
 async function updateLogement(req, res) {
-  let adresse = req.query.adresse;
-  let description = req.query.description;
-  let nomProprietaire = req.query.nomProprietaire;
-  let typeLogement = req.query.typeLogement;
-  let nombrePieces = req.query.nombrePieces;
-  let superficie = req.query.superficie;
-  let etatHabitation = req.query.etatHabitation;
-  let prixMiseEnVente = req.query.prixMiseEnVente;
-  let dateDisponibilite = req.query.dateDisponibilite;
-  let ville = req.query.ville;
+  if (!req.body.id) {
+    res.status(400).json({ data: null, error: 'id non défini' });
+    return;
+  }
 
   db.updateLogement(
-    req.query.id,
-    adresse,
-    description,
-    nomProprietaire,
-    typeLogement,
-    nombrePieces,
-    superficie,
-    etatHabitation,
-    prixMiseEnVente,
-    dateDisponibilite,
-    ville
+    req.body.id,
+    req.body.adresse,
+    req.body.description,
+    req.body.nomProprietaire,
+    req.body.typeLogement,
+    req.body.nombrePieces,
+    req.body.superficie,
+    req.body.etatHabitation,
+    req.body.prixMiseEnVente,
+    req.body.dateDisponibilite,
+    req.body.codePostal,
+    req.body.ville
   );
 
-  res.status(200).json({ msg: 'OK' });
+  res.status(200).json({ data: req.body, error: null });
 }
 
 async function deleteLogement(req, res) {
-  await db.deleteLogement(req.query.id);
-  res.status(200).send({ data: req.query, error: 'Logement supprimé' });
+  await db.deleteLogement(req.body.id);
+  res.status(200).send({ data: req.body, error: null });
 }
 
 module.exports = {
