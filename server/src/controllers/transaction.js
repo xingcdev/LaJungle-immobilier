@@ -1,17 +1,17 @@
 const db = require('../models/transactionDAO.js');
 
-async function getTransaction(request, response) {
-  let id = request.query.id;
+async function getTransaction(req, res) {
+  let id = req.query.id;
 
   if (!id) {
-    response.status(400).json({ data: null, error: 'id non défini' });
+    res.status(400).json({ data: null, error: 'id non défini' });
     return;
   }
 
   let transaction = await db.getTransaction(id);
 
   if (!transaction) {
-    response.status(404).json({ data: null, error: 'Transaction non trouvée' });
+    res.status(404).json({ data: null, error: 'Transaction non trouvée' });
     return;
   }
 
@@ -25,15 +25,15 @@ async function getTransaction(request, response) {
     idClient: transaction.IdClient,
   };
 
-  response.status(200).send({ data: Transaction, error: null });
+  res.status(200).send({ data: Transaction, error: null });
 }
 
-async function getAllTransactions(request, response) {
+async function getAllTransactions(req, res) {
   try {
     let transactions = await db.getAllTransactions();
 
     if (transactions) {
-      response.status(200).send({
+      res.status(200).send({
         // PascalCase vers camelCase
         data: transactions.map((element) => ({
           idTransaction: element.IdTransaction,
@@ -45,9 +45,7 @@ async function getAllTransactions(request, response) {
         error: null,
       });
     } else {
-      response
-        .status(200)
-        .send({ data: null, error: 'Transactions non trouvées' });
+      res.status(200).send({ data: null, error: 'Transactions non trouvées' });
     }
   } catch (error) {
     res.status(500).send({ data: null, error: error.message });
@@ -55,8 +53,8 @@ async function getAllTransactions(request, response) {
 }
 
 async function updateTransaction(req, res) {
-  if (!request.body.id) {
-    response.status(400).json({ data: null, error: 'id non défini' });
+  if (!req.body.id) {
+    res.status(400).json({ data: null, error: 'id non défini' });
     return;
   }
 
@@ -72,7 +70,7 @@ async function updateTransaction(req, res) {
 
 async function deleteTransaction(req, res) {
   await db.deleteTransaction(req.query.id);
-  res.status(200).send({ error: null });
+  res.status(200).send({ data: req.body, error: null });
 }
 
 module.exports = {

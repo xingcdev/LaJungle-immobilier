@@ -1,21 +1,21 @@
 const db = require('../models/logementDAO.js');
 
-async function getLogement(request, response) {
-  let id = request.query.id;
+async function getLogement(req, res) {
+  let id = req.query.id;
 
   if (!id) {
-    response.status(404).json({ data: null, error: 'id non défini' });
+    res.status(404).json({ data: null, error: 'id non défini' });
     return;
   }
 
   let logement = await db.getLogement(id);
 
   if (!logement) {
-    response.status(404).json({ error: 'Logement non trouvé' });
+    res.status(404).json({ data: null, error: 'Logement non trouvé' });
     return;
   }
 
-  response.status(200).send({
+  res.status(200).send({
     data: logement.map((element) => ({
       idLogement: element.IdLogement,
       adresse: element.Adresse,
@@ -30,12 +30,12 @@ async function getLogement(request, response) {
   });
 }
 
-async function getAllLogements(request, response) {
+async function getAllLogements(req, res) {
   try {
     let logements = await db.getAllLogements();
 
     if (logements) {
-      response.status(200).send({
+      res.status(200).send({
         // PascalCase vers camelCase
         data: logements.map((element) => ({
           idLogement: element.IdLogement,
@@ -50,16 +50,16 @@ async function getAllLogements(request, response) {
         error: null,
       });
     } else {
-      response.status(200).send({ data: null, error: 'Logements non trouvés' });
+      res.status(200).send({ data: null, error: 'Logements non trouvés' });
     }
   } catch (error) {
-    response.status(500).send({ data: null, error: error.message });
+    res.status(500).send({ data: null, error: error.message });
   }
 }
 
 async function updateLogement(req, res) {
   if (!req.body.id) {
-    response.status(400).json({ data: null, error: 'id non défini' });
+    res.status(400).json({ data: null, error: 'id non défini' });
     return;
   }
 

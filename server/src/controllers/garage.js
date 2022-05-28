@@ -1,23 +1,23 @@
 const db = require('../models/garageDAO.js');
 
-async function getGarage(request, response) {
-  let id = request.query.id;
+async function getGarage(req, res) {
+  let id = req.query.id;
 
   if (id === null) {
-    response.status(404).json({ error: 'id non défini' });
+    res.status(400).json({ data: null, error: 'id non défini' });
     return;
   }
   let garage = await db.getGarage(id);
   if (garage === null) {
-    response.status(404).json({ error: 'Garage non trouvé' });
+    res.status(404).json({ data: null, error: 'Garage non trouvé' });
     return;
   }
 
   if (garage === undefined) {
-    response.status(404).json({ error: 'Garage non trouvé' });
+    res.status(404).json({ data: null, error: 'Garage non trouvé' });
   }
 
-  response.status(200).send({
+  res.status(200).send({
     data: garage.map((element) => ({
       idGarage: element.IdGarage,
       adresse: element.Adresse,
@@ -27,15 +27,15 @@ async function getGarage(request, response) {
   });
 }
 
-async function getAllGarages(request, response) {
+async function getAllGarages(req, res) {
   let garages = await db.getAllGarages();
 
   if (!garages) {
-    response.status(404).json({ error: 'Garage non trouvé' });
+    res.status(404).json({ data: null, error: 'Garage non trouvé' });
     return;
   }
 
-  response.status(200).send({
+  res.status(200).send({
     data: garages.map((element) => ({
       idGarage: element.IdGarage,
       adresse: element.Adresse,
