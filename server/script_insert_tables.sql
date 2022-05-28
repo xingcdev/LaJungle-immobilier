@@ -27,7 +27,7 @@ INSERT INTO Logement (Adresse, DescriptionLogement, NomProprietaire, TypeLogemen
 4, 125.0, 'Très bon', 950.000, '2022-09-01', '46800', 'Montcuq'),
 ('50 Rue de la Roquette', 'Appartement à rénover du sol au plafond dans un quartier huppé', 'Franklin Tortue', 'Appartement', 
 1, 18.7, 'Mauvais', 250.500, '2023-01-01', '78000', 'Versailles'),
-('6O Rue de la Grande Truanderie', 'Grande maison en plein centre de Paris', 'Jack Truant', 'Maison', 
+('60 Rue de la Grande Truanderie', 'Grande maison en plein centre de Paris', 'Jack Truant', 'Maison', 
 6, 250, 'Bon', 2500000, '2022-06-24', '75001', 'Paris')
 ;
 
