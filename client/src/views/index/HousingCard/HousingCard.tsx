@@ -12,7 +12,7 @@ interface HousingCardProps {
 	city: string;
 	surface: number;
 	rooms: number;
-	garage: number;
+	garages: number;
 }
 
 function HousingCard(props: HousingCardProps) {
@@ -40,7 +40,7 @@ function HousingCard(props: HousingCardProps) {
 				<InfoChip
 					surface={props.surface}
 					rooms={props.rooms}
-					garage={props.garage}
+					garages={props.garages}
 				/>
 			</section>
 		</Card>

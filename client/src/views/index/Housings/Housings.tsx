@@ -27,7 +27,7 @@ function Housings(props: HousingsProps) {
 							city={housing.ville}
 							surface={housing.superficie}
 							rooms={housing.nombrePieces}
-							garage={housing.nbGarages}
+							garages={housing.nbGarages}
 						/>
 				  ))
 				: emptyMessage}
