@@ -96,7 +96,7 @@ async function createLogement(
 async function updateLogement(
   idLogement,
   adresse,
-  descriptionLogement,
+  description,
   nomProprietaire,
   typeLogement,
   nombrePieces,
@@ -116,9 +116,9 @@ async function updateLogement(
       parametres.push(adresse);
     }
 
-    if (descriptionLogement) {
+    if (description) {
       sql += 'DescriptionLogement = ? ';
-      parametres.push(descriptionLogement);
+      parametres.push(description);
     }
 
     if (nomProprietaire) {

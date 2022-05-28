@@ -159,8 +159,8 @@ async function createTransactionTable(connection) {
                 IdLogement INT NOT NULL,
                 IdClient INT NOT NULL,
                 PRIMARY KEY(IdTransaction),
-                FOREIGN KEY(IdLogement) REFERENCES Logement(IdLogement),
-                FOREIGN KEY(IdClient) REFERENCES Client(IdClient)
+                FOREIGN KEY(IdLogement) REFERENCES Logement(IdLogement) ON DELETE CASCADE,
+                FOREIGN KEY(IdClient) REFERENCES Client(IdClient) ON DELETE CASCADE
              ); `,
 
       (error) => {

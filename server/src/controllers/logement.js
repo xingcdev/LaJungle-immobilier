@@ -55,16 +55,17 @@ async function getAllLogements(request, response) {
         error: null,
       });
     } else {
-      response.status(200).send({ data: [], error: 'Logements non trouvés' });
+      response.status(200).send({ data: null, error: 'Logements non trouvés' });
     }
   } catch (error) {
     console.log(error);
-    response.status(500).send({ data: [], error: error.message });
+    response.status(500).send({ data: null, error: error.message });
   }
 }
 
 async function updateLogement(req, res) {
   let adresse = req.query.adresse;
+  let description = req.query.description;
   let nomProprietaire = req.query.nomProprietaire;
   let typeLogement = req.query.typeLogement;
   let nombrePieces = req.query.nombrePieces;
@@ -77,6 +78,7 @@ async function updateLogement(req, res) {
   db.updateLogement(
     req.query.id,
     adresse,
+    description,
     nomProprietaire,
     typeLogement,
     nombrePieces,
@@ -92,7 +94,7 @@ async function updateLogement(req, res) {
 
 async function deleteLogement(req, res) {
   await db.deleteLogement(req.query.id);
-  res.status(200).send({ data: [], error: 'Logement supprimé' });
+  res.status(200).send({ data: req.query, error: 'Logement supprimé' });
 }
 
 module.exports = {

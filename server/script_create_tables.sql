@@ -51,12 +51,12 @@ DROP TABLE IF EXISTS Transaction;
 CREATE TABLE Transaction(
    IdTransaction INT NOT NULL AUTO_INCREMENT,
    PrixVente float(10,2),
-   PourcentageCommission DECIMAL(3,2) NOT NULL CHECK (`PourcentageCommission`>=3 AND `PourcentageCommission` <=5),
+   PourcentageCommission DECIMAL(3,2) NOT NULL CHECK (PourcentageCommission>=3 AND PourcentageCommission <=5),
    IdLogement INT NOT NULL,
    IdClient INT NOT NULL,
    PRIMARY KEY(IdTransaction),
-   FOREIGN KEY(IdLogement) REFERENCES Logement(IdLogement),
-   FOREIGN KEY(IdClient) REFERENCES Client(IdClient)
+   FOREIGN KEY(IdLogement) REFERENCES Logement(IdLogement) ON DELETE CASCADE,
+   FOREIGN KEY(IdClient) REFERENCES Client(IdClient) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS Posseder;

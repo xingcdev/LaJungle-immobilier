@@ -1,7 +1,7 @@
 const db = require('../models/garageDAO.js');
 
 async function getGarage(request, response) {
-  let idGarage = request.query.idGarage;
+  let idGarage = request.query.id;
 
   if (idGarage === null) {
     response.status(404).json({ msg: 'ID cannot be null' });
