@@ -1,10 +1,11 @@
-import styles from './Filter.module.scss';
+import styles from './FilterForm.module.scss';
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Input } from '@/components/form';
+//import { useForm } from "react-hook-form";
 
 //import { Button } from 'react-native';
 
-export default function Filter(){
+export default function FilterForm(){
     function close(){
         console.log("Le filtre est fermé");
     }
@@ -28,9 +29,8 @@ export default function Filter(){
       <input type="number" id="nbrPiece" name="nbrPiece"/>
       <br/> <br/>
       
-      <label htmlFor="superficieHabitable">Superficie Habitable</label> 
-      <input type="number" id="superficieHabitable" name="superficieHabitable"/>
       <br/>
+      <Input label='superficieHabitable' type="number" name="surface"/>
       <p> L'Etat</p>
       <select>
         <option value="neuf">Neuf</option>
