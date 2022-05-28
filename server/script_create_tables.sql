@@ -61,11 +61,11 @@ CREATE TABLE Transaction(
 
 DROP TABLE IF EXISTS Posseder;
 CREATE TABLE Posseder(
-   IdLogement INT NOT NULL AUTO_INCREMENT,
-   IdGarage INT,
+   IdLogement INT NOT NULL,
+   IdGarage INT NOT NULL,
    PRIMARY KEY(IdLogement, IdGarage),
-   FOREIGN KEY(IdLogement) REFERENCES Logement(IdLogement),
-   FOREIGN KEY(IdGarage) REFERENCES Garage(IdGarage)
+   FOREIGN KEY(IdLogement) REFERENCES Logement(IdLogement) ON DELETE CASCADE,
+   FOREIGN KEY(IdGarage) REFERENCES Garage(IdGarage) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS Utilisateur;

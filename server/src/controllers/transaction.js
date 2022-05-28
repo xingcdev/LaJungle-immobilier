@@ -37,20 +37,23 @@ async function getAllTransactions(request, response) {
     let transactions = await db.getAllTransactions();
 
     if (transactions) {
-      response.status(200).send(
-        transactions.map((element) => ({
+      response.status(200).send({
+        data: transactions.map((element) => ({
           idTransaction: element.IdTransaction,
           prixVente: element.PrixVente,
           pourcentageCommission: element.PourcentageCommission,
           idLogement: element.IdLogement,
           idClient: element.idClient,
-        }))
-      );
+        })),
+        error: null,
+      });
     } else {
-      response.status(200).send({ msg: 'Transactions non trouvées' });
+      response
+        .status(200)
+        .send({ data: [], error: 'Transactions non trouvées' });
     }
   } catch (error) {
-    res.send({ error });
+    res.status(500).send({ data: [], error });
   }
 }
 
@@ -73,8 +76,8 @@ async function updateTransaction(req, res) {
 }
 
 async function deleteTransaction(req, res) {
-  await db.deleteTransaction(req.transaction.id);
-  res.json({ message: 'Transaction supprimée' });
+  await db.deleteTransaction(req.query.id);
+  res.json({ error: 'Transaction supprimée' });
 }
 
 module.exports = {

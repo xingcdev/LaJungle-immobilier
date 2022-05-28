@@ -11,30 +11,27 @@ async function getLogement(request, response) {
   let logement = await db.getLogement(ID);
 
   if (logement === null) {
-    response.status(404).json({ msg: 'Logement non trouvé' });
+    response.status(404).json({ error: 'Logement non trouvé' });
     return;
   }
 
   if (logement === undefined) {
-    response.status(404).json({ msg: 'Logement non trouvé' });
+    response.status(404).json({ error: 'Logement non trouvé' });
   }
 
-  logement = logement[0];
-
-  let Logement = {
-    IdLogement: ID,
-    adresse: logement.Adresse,
-    nomProprietaire: logement.NomProprietaire,
-    typeLogement: logement.TypeLogement,
-    nombrePieces: logement.NombrePieces,
-    superficie: logement.Superficie,
-    etatHabitation: logement.EtatHabitation,
-    prixMiseEnVente: logement.PrixMiseEnVente,
-    dateDisponibilite: logement.DateDisponibilite,
-    ville: logement.Ville,
-  };
-
-  response.json(Logement);
+  response.status(200).send({
+    data: logement.map((element) => ({
+      idLogement: element.IdLogement,
+      adresse: element.Adresse,
+      nombrePieces: element.NombrePieces,
+      superficie: element.Superficie,
+      prixMiseEnVente: element.PrixMiseEnVente,
+      codePostal: element.CodePostal,
+      ville: element.Ville,
+      nbGarages: element.NbGarages,
+    }))[0],
+    error: null,
+  });
 }
 
 async function getAllLogements(request, response) {
@@ -42,9 +39,9 @@ async function getAllLogements(request, response) {
     let logements = await db.getAllLogements();
 
     if (logements) {
-      response.send(
-        // Change properties from PascalCase to camelCase
-        logements.map((element) => ({
+      response.status(200).send({
+        // PascalCase vers camelCase
+        data: logements.map((element) => ({
           idLogement: element.IdLogement,
           adresse: element.Adresse,
           nombrePieces: element.NombrePieces,
@@ -53,29 +50,32 @@ async function getAllLogements(request, response) {
           codePostal: element.CodePostal,
           ville: element.Ville,
           nbGarages: element.NbGarages,
-        }))
-      );
+        })),
+        msg: 'OK',
+        error: null,
+      });
     } else {
-      response.status(200).send({ msg: 'Logements non trouvés' });
+      response.status(200).send({ data: [], error: 'Logements non trouvés' });
     }
   } catch (error) {
-    res.send({ error });
+    console.log(error);
+    response.status(500).send({ data: [], error: error.message });
   }
 }
 
 async function updateLogement(req, res) {
-  let adresse = req.body.adresse;
-  let nomProprietaire = req.body.nomProprietaire;
-  let typeLogement = req.body.typeLogement;
-  let nombrePieces = req.body.nombrePieces;
-  let superficie = req.body.superficie;
-  let etatHabitation = req.body.etatHabitation;
-  let prixMiseEnVente = req.body.prixMiseEnVente;
-  let dateDisponibilite = req.body.dateDisponibilite;
-  let ville = req.body.ville;
+  let adresse = req.query.adresse;
+  let nomProprietaire = req.query.nomProprietaire;
+  let typeLogement = req.query.typeLogement;
+  let nombrePieces = req.query.nombrePieces;
+  let superficie = req.query.superficie;
+  let etatHabitation = req.query.etatHabitation;
+  let prixMiseEnVente = req.query.prixMiseEnVente;
+  let dateDisponibilite = req.query.dateDisponibilite;
+  let ville = req.query.ville;
 
   db.updateLogement(
-    req.logement.id,
+    req.query.id,
     adresse,
     nomProprietaire,
     typeLogement,
@@ -91,8 +91,8 @@ async function updateLogement(req, res) {
 }
 
 async function deleteLogement(req, res) {
-  await db.deleteLogement(req.logement.id);
-  res.json({ message: 'Logement supprimé' });
+  await db.deleteLogement(req.query.id);
+  res.status(200).send({ data: [], error: 'Logement supprimé' });
 }
 
 module.exports = {

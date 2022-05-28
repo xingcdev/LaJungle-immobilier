@@ -184,8 +184,8 @@ async function createPossederTable(connection) {
                 IdLogement INT NOT NULL,
                 IdGarage INT NOT NULL,
                 PRIMARY KEY(IdLogement, IdGarage),
-                FOREIGN KEY(IdLogement) REFERENCES Logement(IdLogement),
-                FOREIGN KEY(IdGarage) REFERENCES Garage(IdGarage)
+                FOREIGN KEY(IdLogement) REFERENCES Logement(IdLogement) ON DELETE CASCADE,
+                FOREIGN KEY(IdGarage) REFERENCES Garage(IdGarage) ON DELETE CASCADE
              ); `,
 
       (error) => {
