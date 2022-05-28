@@ -38,7 +38,7 @@ async function getAllVisitesForALogement(request, response) {
   let ID = request.query.id || request.visite?.id;
 
   if (ID === null) {
-    response.status(404).json({ msg: 'ID ne peut être nul' });
+    response.status(404).json({ data: null, error: 'ID ne peut être nul' });
     return;
   }
 
@@ -55,7 +55,7 @@ async function getAllVisitesForALogement(request, response) {
         }))
       );
     } else {
-      response.status(200).send({ msg: 'Visites non trouvées' });
+      response.status(200).send({ error: 'Visites non trouvées' });
     }
   } catch (error) {
     res.send({ error });
@@ -66,7 +66,7 @@ async function createVisite(request, response) {
   let visite = request.query;
   db.createVisite(visite.dateHeureVisite, visite.idLogement, visite.idClient);
 
-  response.status(200).send({ msg: 'OK' });
+  response.status(200).send({ error: null });
 }
 
 async function updateVisite(req, res) {
@@ -79,7 +79,7 @@ async function updateVisite(req, res) {
     visite.idVisite
   );
 
-  res.status(200).send({ msg: 'OK' });
+  res.status(200).send({ data: req.query, error: null });
 }
 
 async function deleteVisite(req, res) {
