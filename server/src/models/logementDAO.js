@@ -4,7 +4,13 @@ async function getLogement(id) {
   return new Promise((resolve, reject) => {
     let sql = 'SELECT * FROM Logement WHERE IdLogement=?;';
     database.getConnection((error, connection) => {
-      if (error) reject(error);
+      if (error) {
+        console.error(
+          'Database connection error on getLogement',
+          error.message
+        );
+        reject(error);
+      }
       connection.query(sql, [id], (error, results) => {
         connection.release();
         if (error) console.error(error.message);
@@ -218,6 +224,7 @@ async function deleteLogement(id) {
 }
 
 module.exports = {
+  // createLogement,
   getLogement,
   getAllLogements,
   createLogement,

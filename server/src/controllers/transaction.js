@@ -8,24 +8,27 @@ async function getTransaction(req, res) {
     return;
   }
 
-  let transaction = await db.getTransaction(id);
+  try {
+    let transaction = await db.getTransaction(id);
 
-  if (!transaction) {
-    res.status(404).json({ data: null, error: 'Transaction non trouvée' });
-    return;
+    if (!transaction) {
+      res.status(404).send({ data: null, error: 'Transaction non trouvée' });
+      return;
+    }
+
+    res.status(200).send({
+      data: transaction.map((element) => ({
+        idTransaction: element.IdTransaction,
+        prixVente: element.PrixVente,
+        pourcentageCommission: element.PourcentageCommission,
+        idLogement: element.IdLogement,
+        idClient: element.IdClient,
+      }))[0],
+      error: null,
+    });
+  } catch (error) {
+    res.status(500).send({ data: null, error: error.message });
   }
-
-  transaction = transaction[0];
-
-  let Transaction = {
-    idTransaction: transaction.IdTransaction,
-    prixVente: transaction.PrixVente,
-    pourcentageCommission: transaction.PourcentageCommission,
-    idLogement: transaction.IdLogement,
-    idClient: transaction.IdClient,
-  };
-
-  res.status(200).send({ data: Transaction, error: null });
 }
 
 async function getAllTransactions(req, res) {
@@ -58,19 +61,31 @@ async function updateTransaction(req, res) {
     return;
   }
 
-  db.updateTransaction(
-    req.body.id,
-    req.body.prixVente,
-    req.body.pourcentageCommission,
-    req.body.idLogement,
-    req.body.idClient
-  );
-  res.status(200).send({ data: req.body, error: null });
+  try {
+    db.updateTransaction(
+      req.body.id,
+      req.body.prixVente,
+      req.body.pourcentageCommission,
+      req.body.idLogement,
+      req.body.idClient
+    );
+    res.status(200).send({ data: req.body, error: null });
+  } catch (error) {
+    res.status(500).send({ data: null, error: error.message });
+  }
 }
 
 async function deleteTransaction(req, res) {
-  await db.deleteTransaction(req.query.id);
-  res.status(200).send({ data: req.body, error: null });
+  if (!req.body.id) {
+    res.status(400).send({ data: null, error: 'id non défini' });
+  }
+
+  try {
+    await db.deleteTransaction(req.query.id);
+    res.status(200).send({ data: req.body, error: null });
+  } catch (error) {
+    res.status(500).send({ data: null, error: error.message });
+  }
 }
 
 module.exports = {

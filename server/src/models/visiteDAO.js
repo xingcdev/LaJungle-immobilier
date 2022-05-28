@@ -54,6 +54,54 @@ async function createVisite(DateHeureVisite, IdLogement, IdClient) {
   });
 }
 
+async function getAllVisites() {
+  return new Promise((resolve, reject) => {
+    let sql = 'SELECT * FROM Visite;';
+    database.getConnection((error, connection) => {
+      if (error)
+        console.error(
+          'Database connection error on getAllVisitesForALogement',
+          error.message
+        );
+      connection.query(sql, [], (error, results) => {
+        connection.release();
+        if (error) {
+          console.error(error.message);
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }).catch((error) => {
+    console.log(error);
+  });
+}
+
+async function getAllVisitesForALogement(idLogement) {
+  return new Promise((resolve, reject) => {
+    let sql = 'SELECT * FROM Visite WHERE IdLogement=?;';
+    database.getConnection((error, connection) => {
+      if (error)
+        console.error(
+          'Database connection error on getAllVisitesForALogement',
+          error.message
+        );
+      connection.query(sql, [idLogement], (error, results) => {
+        connection.release();
+        if (error) {
+          console.error(error.message);
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }).catch((error) => {
+    console.log(error);
+  });
+}
+
 async function updateVisite(dateHeureVisite, idLogement, idClient, idVisite) {
   return new Promise((resolve, reject) => {
     let parametres = new Array();
@@ -92,7 +140,8 @@ async function updateVisite(dateHeureVisite, idLogement, idClient, idVisite) {
       connection.query(sql, parametres, (error, results) => {
         connection.release();
         if (error) {
-          console.error(error.message);
+          console.error(error);
+          reject(error);
         }
         if (results === undefined) {
           resolve(null);
@@ -108,16 +157,16 @@ async function updateVisite(dateHeureVisite, idLogement, idClient, idVisite) {
   });
 }
 
-async function getAllVisitesForALogement(idLogement) {
+async function deleteVisite(id) {
   return new Promise((resolve, reject) => {
-    let sql = 'SELECT * FROM Visite WHERE IdLogement=?;';
+    let sql = 'DELETE FROM Visite WHERE IdVisite=?;';
     database.getConnection((error, connection) => {
       if (error)
         console.error(
-          'Database connection error on getAllVisitesForALogement',
+          'Database connection error on deleteVisite',
           error.message
         );
-      connection.query(sql, [idLogement], (error, results) => {
+      connection.query(sql, [id], (error, results) => {
         connection.release();
         if (error) {
           console.error(error.message);
@@ -131,25 +180,12 @@ async function getAllVisitesForALogement(idLogement) {
     console.log(error);
   });
 }
-async function deleteVisite(id) {
-  let sql = 'DELETE FROM Visite WHERE IdVisite=?;';
-  database.getConnection((error, connection) => {
-    if (error)
-      console.error('Database connection error on deleteVisite', error.message);
-    connection.query(sql, [id], (error) => {
-      connection.release();
-      if (error) {
-        console.error(error.message);
-        return;
-      }
-    });
-  });
-}
 
 module.exports = {
-  getVisite,
   createVisite,
+  getVisite,
+  getAllVisites,
+  getAllVisitesForALogement,
   deleteVisite,
   updateVisite,
-  getAllVisitesForALogement,
 };

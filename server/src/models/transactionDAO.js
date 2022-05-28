@@ -54,6 +54,28 @@ async function createTransaction(
   });
 }
 
+async function getAllTransactions() {
+  return new Promise((resolve, reject) => {
+    let sql = 'SELECT * FROM Transaction;';
+    database.getConnection((error, connection) => {
+      if (error) reject(error);
+      connection.query(sql, [], (error, results) => {
+        connection.release();
+        if (error) console.error(error.message);
+        if (results === undefined) {
+          resolve(null);
+        } else if (results.length > 0) {
+          resolve(results);
+        } else {
+          resolve(null);
+        }
+      });
+    });
+  }).catch((error) => {
+    console.log(error);
+  });
+}
+
 async function updateTransaction(
   prixVente,
   pourcentageCommission,
@@ -102,7 +124,7 @@ async function updateTransaction(
       connection.query(sql, parametres, (error, results) => {
         connection.release();
         if (error) {
-          console.error(error.message);
+          console.error(error);
           reject(error);
         } else {
           resolve(results);
@@ -123,10 +145,10 @@ async function deleteTransaction(id) {
           'Database connection error on deleteTransaction',
           error.message
         );
-      connection.query(sql, [id], (error) => {
+      connection.query(sql, [id], (error, results) => {
         connection.release();
         if (error) {
-          console.error(error.message);
+          console.error(error);
           reject(error);
         } else {
           resolve(results);
@@ -138,32 +160,10 @@ async function deleteTransaction(id) {
   });
 }
 
-async function getAllTransactions() {
-  return new Promise((resolve, reject) => {
-    let sql = 'SELECT * FROM Transaction;';
-    database.getConnection((error, connection) => {
-      if (error) reject(error);
-      connection.query(sql, [], (error, results) => {
-        connection.release();
-        if (error) console.error(error.message);
-        if (results === undefined) {
-          resolve(null);
-        } else if (results.length > 0) {
-          resolve(results);
-        } else {
-          resolve(null);
-        }
-      });
-    });
-  }).catch((error) => {
-    console.log(error);
-  });
-}
-
 module.exports = {
-  getTransaction,
   createTransaction,
+  getTransaction,
+  getAllTransactions,
   updateTransaction,
   deleteTransaction,
-  getAllTransactions,
 };
