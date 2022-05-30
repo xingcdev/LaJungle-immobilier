@@ -2,7 +2,8 @@ const database = require('../helpers/dbconnect.js');
 
 async function getLogement(id) {
   return new Promise((resolve, reject) => {
-    let sql = 'SELECT * FROM Logement WHERE IdLogement=?;';
+    let sql =
+      'SELECT *, (SELECT COUNT(IdLogement) FROM Posseder WHERE IdLogement = Logement.IdLogement) AS NbGarages FROM Logement WHERE IdLogement=?;';
     database.getConnection((error, connection) => {
       if (error) {
         console.error(
