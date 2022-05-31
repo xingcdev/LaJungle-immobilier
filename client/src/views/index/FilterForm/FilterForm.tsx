@@ -27,9 +27,6 @@ export default function FilterForm(){
       <br/> <br/> 
       <label htmlFor="nbrPiece">Nombre de pièce</label>
       <input type="number" id="nbrPiece" name="nbrPiece"/>
-      <br/> <br/>
-      
-      <br/>
       <Input label='superficieHabitable' type="number" name="surface"/>
       <p> L'Etat</p>
       <select>
@@ -52,7 +49,6 @@ export default function FilterForm(){
       <br/> 
       <label htmlFor="prix">Prix</label> <br/> 
       <input type="number" id="prix1" name="prix"/>
-      <br/> <br/>
       <input type="number" id="prix2" name="prix"/>
     </form>
         </div>
