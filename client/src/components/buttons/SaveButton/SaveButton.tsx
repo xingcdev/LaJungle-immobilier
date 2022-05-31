@@ -3,13 +3,12 @@ import styles from "./Button.module.scss";
 
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-    variant:"contained" | "outlined"
     children?:ReactNode
 }
 
 export default function Button(props:ButtonProps){
     return(
-        <button {...props} className={props.variant === "outlined"? styles.contained:styles.outlined}>{props.children}</button>
+        <button {...props} className={styles.button}>{props.children}</button>
     )
     
 }
