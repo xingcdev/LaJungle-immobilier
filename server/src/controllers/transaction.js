@@ -75,6 +75,20 @@ async function updateTransaction(req, res) {
   }
 }
 
+async function createTransaction(req, res) {
+  try {
+    await db.createTransaction(
+      req.body.prixVente,
+      req.body.pourcentageCommission,
+      req.body.idLogement,
+      req.body.idClient
+    );
+    res.status(200).send({ data: req.body, error: null });
+  } catch (error) {
+    res.status(500).send({ data: null, error: error.message });
+  }
+}
+
 async function deleteTransaction(req, res) {
   if (!req.body.id) {
     res.status(400).send({ data: null, error: 'id non défini' });
@@ -93,4 +107,5 @@ module.exports = {
   getAllTransactions,
   updateTransaction,
   deleteTransaction,
+  createTransaction
 };
