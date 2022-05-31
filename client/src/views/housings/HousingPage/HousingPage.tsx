@@ -6,6 +6,7 @@ import VisitList from '../VisitList/VisitList';
 import InfoChip from '../InfoChip/InfoChip';
 import EditHousingPage from '../EditHousingPage/EditHousingPage';
 import { useFetchGet } from '@hooks/fetching';
+import { Button } from '@/components/buttons';
 import { useParams } from 'react-router-dom';
 
 export default function HousingPage() {
@@ -85,7 +86,8 @@ export default function HousingPage() {
 							<VisitList visits={{}} />
 						</section>
 						<section>
-							<button onClick={() => setShowEditForm(true)}>Editer</button>
+							{/* <button onClick={() => setShowEditForm(true)}>Editer</button> */}
+							<Button variant= "outlined" onClick={() => setShowEditForm(true)}>Editer</Button>
 							<OwnerProfile />
 						</section>
 					</section>

@@ -1,0 +1,37 @@
+@use '@styles/variables' as v;
+
+.button {
+    background-color: none;
+    border : none;
+    border-radius: 8px;
+    color: v.$font-color-primary;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 500;
+    height: 40px;
+    line-height: 20px;
+    outline: none;
+    padding: v.$spacing-1 v.$spacing-3;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+.outlined{
+    @extend .button;
+    background-color: transparent;
+    color: v.$color-error;
+    border: 1px solid v.$color-error;
+}
+
+.contained{
+    @extend .button;
+    background-color: v.$color-primary;
+
+}

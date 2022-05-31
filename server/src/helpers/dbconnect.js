@@ -19,6 +19,10 @@ async function checkDbExists() {
 
   await createEtatHabitationTable(connection);
   await insertEtatHabitationTable(connection);
+
+  await createTypeLogementTable(connection);
+  await insertTypeLogementTable(connection);
+
   await createLogementTable(connection);
   await createGarageTable(connection);
   await createClientTable(connection);
@@ -91,10 +95,29 @@ async function createTypeLogementTable(connection) {
     connection.query(
       `CREATE TABLE IF NOT EXISTS lajungle.TypeLogement(
                 IdType VARCHAR(11),
-                Libelle VARCHAR(11),
+                LibelleType VARCHAR(11),
                 PRIMARY KEY(IdType)
              ); `,
 
+      (error) => {
+        if (error) {
+          console.error(error.message);
+          reject(error);
+        } else {
+          resolve();
+        }
+      }
+    );
+  }).catch((error) => {
+    console.error(error.message);
+  });
+}
+
+
+async function insertTypeLogementTable(connection) {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `INSERT IGNORE INTO lajungle.TypeLogement(IdType, LibelleType) VALUES ('maison', 'Maison'), ('appartement', 'Appartement'); `,
       (error) => {
         if (error) {
           console.error(error.message);
@@ -117,7 +140,7 @@ async function createLogementTable(connection) {
                 Adresse VARCHAR(50),
                 DescriptionLogement TEXT,
                 NomProprietaire VARCHAR(50),
-                TypeLogement ENUM('Appartement', 'Maison'),
+                IdType VARCHAR(11),
                 NombrePieces INT,
                 Superficie DECIMAL(7,2),
                 IdEtat VARCHAR(8),

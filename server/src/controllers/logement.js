@@ -23,7 +23,7 @@ async function getLogement(req, res) {
         adresse: element.Adresse,
         description: element.DescriptionLogement,
         nomProprietaire: element.NomProprietaire,
-        typeLogement: element.TypeLogement,
+        typeLogement: {label : element.IdType, value: element.LibelleType},
         nombrePieces: element.NombrePieces,
         superficie: element.Superficie,
         etatHabitation: {label: element.IdEtat, value: element.LibelleEtat},
