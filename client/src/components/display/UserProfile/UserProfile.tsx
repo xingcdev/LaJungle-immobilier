@@ -16,7 +16,7 @@ export default function UserProfile(props: UserProfileProps) {
 					height={150}
 				/>
 			</section>
-			<p className={styles.name}>CHEN Xingounette</p>
+			<p className={styles.name}>DEMO User</p>
 		</section>
 	);
 }

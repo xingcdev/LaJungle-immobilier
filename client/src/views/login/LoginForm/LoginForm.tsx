@@ -45,7 +45,7 @@ export default function LoginForm() {
 
 	return (
 		<form className={styles.loginForm} onSubmit={handleSubmit}>
-			<input type="text" name="username" placeholder="Nom utilisateur" />
+			<input type="text" name="username" placeholder="Nom d'utilisateur" />
 			<input type="password" name="password" placeholder="Mot de passe" />
 			{formValues.error && <InputError message={formValues.error} />}
 			<button type="submit">Connexion</button>

@@ -23,7 +23,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 			// setUser()
 			callback();
 		} else {
-			setError('Nom utilisateur ou mot de passe invalide.');
+			setError('Nom d\'utilisateur ou mot de passe invalide.');
 		}
 	}
 
