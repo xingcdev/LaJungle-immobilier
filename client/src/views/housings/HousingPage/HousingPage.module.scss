@@ -8,11 +8,11 @@
 	.housingContent {
 		margin: 0 v.$spacing-6 0 0;
 
-		.price,
-		.type,
-		.condition {
-			color: v.$font-color-secondary;
-			margin: 0 0 v.$spacing-2 0;
+		.info {
+			p {
+				color: v.$font-color-secondary;
+				margin: 0 0 v.$spacing-2 0;
+			}
 		}
 
 		.address {
@@ -20,7 +20,8 @@
 		}
 
 		.priceValue,
-		.priceDevise {
+		.priceDevise,
+		.availableDateValue {
 			font-weight: v.$font-weight-bold;
 		}
 

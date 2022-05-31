@@ -8,6 +8,7 @@ import EditHousingPage from '../EditHousingPage/EditHousingPage';
 import { useFetchGet } from '@hooks/fetching';
 import { Button } from '@/components/buttons';
 import { useParams } from 'react-router-dom';
+import { Loading } from '@/components/feedback';
 
 export default function HousingPage() {
 	const params = useParams();
@@ -24,6 +25,8 @@ export default function HousingPage() {
 
 	console.log('data, ', data);
 
+	if (isLoading) return <Loading />;
+
 	return (
 		<section className={styles.page}>
 			{showEditForm ? (
@@ -34,12 +37,12 @@ export default function HousingPage() {
 						city: data.ville,
 						owner: data.nomProprietaire,
 						price: data.prixMiseEnVente,
-						type: data.typeLogement,
-						condition: data.etatHabitation,
+						type: data.typeLogement.value,
+						condition: data.etatHabitation.value,
 						surface: data.superficie,
 						rooms: data.nombrePieces,
-						garages: data.garages,
 						description: data.description,
+						availableDate: data.dateDisponibilite,
 					}}
 					setShowEditForm={setShowEditForm}
 				/>
@@ -63,20 +66,31 @@ export default function HousingPage() {
 									</span>
 									<span className={styles.priceDevise}> €</span>
 								</p>
+								<p className={styles.availableDate}>
+									Date disponibilité :{' '}
+									<span className={styles.availableDateValue}>
+										{new Date(data.dateDisponibilite).toLocaleDateString(
+											'fr-FR'
+										)}
+									</span>
+								</p>
 								<p className={styles.type}>
 									Type:{' '}
-									<span className={styles.typeValue}>{data.typeLogement}</span>
+									<span className={styles.typeValue}>
+										{data.typeLogement.label}
+									</span>
 								</p>
 								<p className={styles.condition}>
 									État :{' '}
 									<span className={styles.conditionValue}>
-										{data.etatHabitation}
+										{data.etatHabitation.label}
 									</span>
 								</p>
+
 								<InfoChip
 									surface={data.superficie}
 									rooms={data.nombrePieces}
-									garages={data.garages}
+									garages={data.nbGarages}
 								/>
 							</section>
 							<section className={styles.description}>
@@ -86,8 +100,9 @@ export default function HousingPage() {
 							<VisitList visits={{}} />
 						</section>
 						<section>
-							{/* <button onClick={() => setShowEditForm(true)}>Editer</button> */}
-							<Button variant= "outlined" onClick={() => setShowEditForm(true)}>Editer</Button>
+							<Button variant="outlined" onClick={() => setShowEditForm(true)}>
+								Editer
+							</Button>
 							<OwnerProfile />
 						</section>
 					</section>

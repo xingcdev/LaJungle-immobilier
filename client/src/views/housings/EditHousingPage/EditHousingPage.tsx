@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './EditHousingPage.module.scss';
 import { Input } from '@components/form';
@@ -14,10 +14,9 @@ interface EditHousingPageProps {
 		condition?: string;
 		surface?: number;
 		rooms?: number;
-		garage?: number;
 		description?: string;
 		visits?: any;
-		garages?: any;
+		availableDate?: any;
 	};
 
 	setShowEditForm: (value: boolean) => void;
@@ -34,18 +33,19 @@ export default function (props: EditHousingPageProps) {
 
 	function handleChange(event: any) {
 		const name = event.target.name;
+
 		// Specific case
 		const value =
 			event.target.type === 'checkbox'
 				? event.target.checked
 				: event.target.value;
 
-		// @ts-ignore
 		setFormValues({
+			...formValues,
 			[name]: value,
 		});
 
-		console.log('form values', formValues);
+		console.log(formValues);
 	}
 
 	function handleSubmit(event: any) {
@@ -58,12 +58,16 @@ export default function (props: EditHousingPageProps) {
 			ville: formValues.city,
 			description: formValues.description,
 			nomProprietaire: formValues.owner,
-			typeLogement: formValues.type,
+			typeLogement: {
+				idType: formValues.type,
+			},
 			nombrePieces: formValues.rooms,
 			superficie: formValues.surface,
-			etatHabitation: formValues.condition,
+			etatHabitation: {
+				idEtat: formValues.condition,
+			},
 			prixMiseEnVente: formValues.price,
-			// dateDisponibilite: formValues.data
+			dateDisponibilite: formValues.availableDate,
 		};
 
 		console.log('formdata in submitting', data);
@@ -123,20 +127,31 @@ export default function (props: EditHousingPageProps) {
 
 				<label>
 					Type
-					<select value={formValues.type} onChange={handleChange}>
-						<option value="neuf">Appartement</option>
-						<option value="tresBon">maison</option>
+					<select name="type" value={formValues.type} onChange={handleChange}>
+						<option value="appartement">Appartement</option>
+						<option value="maison">Maison</option>
 					</select>
 				</label>
 				<label>
 					État
-					<select value={formValues.condition} onChange={handleChange}>
+					<select
+						name="condition"
+						value={formValues.condition}
+						onChange={handleChange}
+					>
 						<option value="neuf">Neuf</option>
 						<option value="tres_bon">Très bon</option>
 						<option value="bon">Bon</option>
 						<option value="mauvais">Mauvais</option>
 					</select>
 				</label>
+				<Input
+					type="date"
+					name="availableDate"
+					className="col-2"
+					onChange={handleChange}
+					value={formValues.availableDate}
+				/>
 				<Input
 					type="number"
 					name="surface"
@@ -152,14 +167,6 @@ export default function (props: EditHousingPageProps) {
 					className="col-2"
 					onChange={handleChange}
 					value={formValues.rooms}
-				/>
-				<Input
-					type="number"
-					name="garage"
-					placeholder="Garage(s)"
-					className="col-2"
-					onChange={handleChange}
-					value={formValues.garages}
 				/>
 				<textarea
 					name="description"
