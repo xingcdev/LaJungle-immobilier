@@ -25,8 +25,8 @@ export default function OwnerProfile(props: OwnerProfileProps) {
 					height={150}
 				/>
 			</section>
-			<p className={styles.name}>CHEN Xingounette</p>
-			<p className={styles.email}>xingounette@gmail.com</p>
+			<p className={styles.name}>DEMO User</p>
+			<p className={styles.email}>demo.user@gmail.com</p>
 		</Card>
 	);
 }
