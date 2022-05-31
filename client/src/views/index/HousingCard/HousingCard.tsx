@@ -26,7 +26,7 @@ function HousingCard(props: HousingCardProps) {
 
 					<p className={styles.price}>{props.price} €</p>
 				</section>
-			</Link>
+			
 
 			<section className={styles.content}>
 				<section className={styles.location}>
@@ -43,6 +43,7 @@ function HousingCard(props: HousingCardProps) {
 					garages={props.garages}
 				/>
 			</section>
+			</Link>
 		</Card>
 	);
 }
