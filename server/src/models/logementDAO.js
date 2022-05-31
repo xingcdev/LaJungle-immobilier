@@ -3,7 +3,7 @@ const database = require('../helpers/dbconnect.js');
 async function getLogement(id) {
   return new Promise((resolve, reject) => {
     let sql =
-      'SELECT *, (SELECT LibelleEtat FROM EtatHabitation WHERE EtatHabitation.IdEtat = Logement.IdEtat) AS LibelleEtat, (SELECT COUNT(IdLogement) FROM Posseder WHERE Posseder.IdLogement = Logement.IdLogement) AS NbGarages FROM Logement WHERE IdLogement=?;';
+      'SELECT *, (SELECT LibelleType FROM TypeLogement WHERE TypeLogement.IdType = Logement.IdType) AS LibelleType, (SELECT LibelleEtat FROM EtatHabitation WHERE EtatHabitation.IdEtat = Logement.IdEtat) AS LibelleEtat, (SELECT COUNT(IdLogement) FROM Posseder WHERE Posseder.IdLogement = Logement.IdLogement) AS NbGarages FROM Logement WHERE IdLogement=?;';
     database.getConnection((error, connection) => {
       if (error) {
         console.error(
@@ -55,17 +55,17 @@ async function getAllLogements() {
 async function createLogement(
   adresse,
   nomProprietaire,
-  typeLogement,
+  idType,
   nombrePieces,
   superficie,
-  etatHabitation,
+  idEtat,
   prixMiseEnVente,
   dateDisponibilite,
   ville
 ) {
   return new Promise((resolve, reject) => {
     let sql =
-      'INSERT INTO Logement (Adresse, NomProprietaire, TypeLogement, NombrePieces, Superficie, EtatHabitation, PrixMiseEnVente, DateDisponibilite, Ville) values (?,?,?,?,?,?,?,?,?);';
+      'INSERT INTO Logement (Adresse, NomProprietaire, IdType, NombrePieces, Superficie, IdEtat, PrixMiseEnVente, DateDisponibilite, Ville) values (?,?,?,?,?,?,?,?,?);';
     database.getConnection((error, connection) => {
       if (error) {
         console.error('Database connection error on createLogement');
@@ -76,10 +76,10 @@ async function createLogement(
         [
           adresse,
           nomProprietaire,
-          typeLogement,
+          idType,
           nombrePieces,
           superficie,
-          etatHabitation,
+          idEtat,
           prixMiseEnVente,
           dateDisponibilite,
           ville,
@@ -105,10 +105,10 @@ async function updateLogement(
   adresse,
   description,
   nomProprietaire,
-  typeLogement,
+  idType,
   nombrePieces,
   superficie,
-  etatHabitation,
+  idEtat,
   prixMiseEnVente,
   dateDisponibilite,
   codePostal,
@@ -133,9 +133,9 @@ async function updateLogement(
       parametres.push(nomProprietaire);
     }
 
-    if (typeLogement) {
-      sql += ' TypeLogement = ?,';
-      parametres.push(typeLogement);
+    if (idType) {
+      sql += ' IdType = ?,';
+      parametres.push(idType);
     }
 
     if (nombrePieces) {
@@ -148,9 +148,9 @@ async function updateLogement(
       parametres.push(superficie);
     }
 
-    if (etatHabitation) {
-      sql += ' EtatHabitation = ?,';
-      parametres.push(etatHabitation);
+    if (itEtat) {
+      sql += ' IdEtat = ?,';
+      parametres.push(idEtat);
     }
 
     if (prixMiseEnVente) {

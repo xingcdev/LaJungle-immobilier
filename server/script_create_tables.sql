@@ -10,15 +10,17 @@ CREATE TABLE Logement(
    Adresse VARCHAR(50),
    DescriptionLogement TEXT,
    NomProprietaire VARCHAR(50),
-   TypeLogement ENUM('Appartement', 'Maison'),
+   IdType VARCHAR(11),
    NombrePieces INT,
    Superficie DECIMAL(7,2),
-   EtatHabitation ENUM('Neuf','Bon','Très bon','Mauvais'),
+   IdEtat VARCHAR(8),
    PrixMiseEnVente float(10,2),
    DateDisponibilite DATE,
    CodePostal VARCHAR(5),
    Ville VARCHAR(50),
-   PRIMARY KEY(IdLogement)
+   PRIMARY KEY(IdLogement),
+   FOREIGN KEY(IdType) REFERENCES TypeLogement(IdType),
+   FOREIGN KEY(IdEtat) REFERENCES EtatLogement(IdEtat)
 );
 
 DROP TABLE IF EXISTS Garage;
