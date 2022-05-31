@@ -3,7 +3,7 @@ const database = require('../helpers/dbconnect.js');
 async function getLogement(id) {
   return new Promise((resolve, reject) => {
     let sql =
-      'SELECT *, (SELECT COUNT(IdLogement) FROM Posseder WHERE IdLogement = Logement.IdLogement) AS NbGarages FROM Logement WHERE IdLogement=?;';
+      'SELECT *, (SELECT LibelleEtat FROM EtatHabitation WHERE EtatHabitation.IdEtat = Logement.IdEtat) AS LibelleEtat, (SELECT COUNT(IdLogement) FROM Posseder WHERE Posseder.IdLogement = Logement.IdLogement) AS NbGarages FROM Logement WHERE IdLogement=?;';
     database.getConnection((error, connection) => {
       if (error) {
         console.error(
@@ -32,7 +32,7 @@ async function getLogement(id) {
 async function getAllLogements() {
   return new Promise((resolve, reject) => {
     let sql =
-      'SELECT IdLogement, Adresse, NombrePieces, Superficie, PrixMiseEnVente, CodePostal, Ville, (SELECT COUNT(IdLogement) FROM Posseder WHERE IdLogement = Logement.IdLogement) AS NbGarages FROM Logement;';
+      'SELECT IdLogement, Adresse, NombrePieces, Superficie, PrixMiseEnVente, CodePostal, Ville, (SELECT LibelleEtat FROM EtatHabitation WHERE EtatHabitation.IdEtat = Logement.IdEtat) AS LibelleEtat, (SELECT COUNT(IdLogement) FROM Posseder WHERE IdLogement = Logement.IdLogement) AS NbGarages FROM Logement;';
     database.getConnection((error, connection) => {
       if (error) reject(error);
       connection.query(sql, [], (error, results) => {

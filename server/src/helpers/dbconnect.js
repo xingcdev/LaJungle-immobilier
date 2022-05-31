@@ -17,6 +17,8 @@ async function checkDbExists() {
 
   await laJungleDb(connection);
 
+  await createEtatHabitationTable(connection);
+  await insertEtatHabitationTable(connection);
   await createLogementTable(connection);
   await createGarageTable(connection);
   await createClientTable(connection);
@@ -43,6 +45,70 @@ async function laJungleDb(connection) {
   });
 }
 
+async function createEtatHabitationTable(connection) {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `CREATE TABLE IF NOT EXISTS lajungle.EtatHabitation(
+                IdEtat VARCHAR(8),
+                LibelleEtat VARCHAR(8),
+                PRIMARY KEY(IdEtat)
+             ); `,
+
+      (error) => {
+        if (error) {
+          console.error(error.message);
+          reject(error);
+        } else {
+          resolve();
+        }
+      }
+    );
+  }).catch((error) => {
+    console.error(error.message);
+  });
+}
+
+async function insertEtatHabitationTable(connection) {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `INSERT IGNORE INTO lajungle.EtatHabitation(IdEtat, LibelleEtat) VALUES ('neuf', 'Neuf'), ('bon', 'Bon'), ('tres_bon', 'Très bon'), ('mauvais', 'Mauvais'); `,
+      (error) => {
+        if (error) {
+          console.error(error.message);
+          reject(error);
+        } else {
+          resolve();
+        }
+      }
+    );
+  }).catch((error) => {
+    console.error(error.message);
+  });
+}
+
+async function createTypeLogementTable(connection) {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `CREATE TABLE IF NOT EXISTS lajungle.TypeLogement(
+                IdType VARCHAR(11),
+                Libelle VARCHAR(11),
+                PRIMARY KEY(IdType)
+             ); `,
+
+      (error) => {
+        if (error) {
+          console.error(error.message);
+          reject(error);
+        } else {
+          resolve();
+        }
+      }
+    );
+  }).catch((error) => {
+    console.error(error.message);
+  });
+}
+
 async function createLogementTable(connection) {
   return new Promise((resolve, reject) => {
     connection.query(
@@ -54,12 +120,13 @@ async function createLogementTable(connection) {
                 TypeLogement ENUM('Appartement', 'Maison'),
                 NombrePieces INT,
                 Superficie DECIMAL(7,2),
-                EtatHabitation ENUM('Neuf','Bon','Très bon','Mauvais'),
+                IdEtat VARCHAR(8),
                 PrixMiseEnVente float(10,2),
                 DateDisponibilite DATE,
                 CodePostal VARCHAR(5),
                 Ville VARCHAR(50),
-                PRIMARY KEY(IdLogement)
+                PRIMARY KEY(IdLogement),
+                FOREIGN KEY(IdEtat) REFERENCES EtatHabitation(IdEtat)
              ); `,
 
       (error) => {

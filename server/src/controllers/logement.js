@@ -26,7 +26,7 @@ async function getLogement(req, res) {
         typeLogement: element.TypeLogement,
         nombrePieces: element.NombrePieces,
         superficie: element.Superficie,
-        etatHabitation: element.EtatHabitation,
+        etatHabitation: {label: element.IdEtat, value: element.LibelleEtat},
         prixMiseEnVente: element.PrixMiseEnVente,
         dateDisponibilite: element.DateDisponibilite,
         codePostal: element.CodePostal,
