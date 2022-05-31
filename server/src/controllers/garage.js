@@ -67,6 +67,19 @@ async function updateGarage(req, res) {
   }
 }
 
+async function createGarage(req, res) {
+  try {
+    await db.createGarage(
+      req.body.adresse,
+      req.body.IdLogement
+    );
+
+    res.status(200).send({ data: req.body, error: null });
+  } catch (error) {
+    res.status(500).send({ data: null, error: error.message });
+  }
+}
+
 async function deleteGarage(req, res) {
   if (!req.body.id) {
     res.status(400).send({ data: req.body, error: 'id ne peut être null' });
@@ -82,7 +95,7 @@ async function deleteGarage(req, res) {
 }
 
 module.exports = {
-  //createGarage,
+  createGarage,
   getGarage,
   getAllGarages,
   updateGarage,

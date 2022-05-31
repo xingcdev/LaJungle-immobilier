@@ -29,6 +29,19 @@ async function getUser(req, res) {
     res.json(User);
 }
 
+async function createUser(req, res) {
+    try {
+      await db.createUser(
+        req.body.NomUtilisateur,
+        req.body.MotDePasse
+      );
+      res.status(200).send({ data: req.body, error: null });
+    } catch (error) {
+      res.status(500).send({ data: null, error: error.message });
+    }
+}
+
 module.exports = {
-    getUser
+    getUser,
+    createUser
 };

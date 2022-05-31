@@ -26,7 +26,7 @@ async function getLogement(req, res) {
         typeLogement: element.TypeLogement,
         nombrePieces: element.NombrePieces,
         superficie: element.Superficie,
-        etatHabitation: element.EtatHabitation,
+        etatHabitation: {label: element.IdEtat, value: element.LibelleEtat},
         prixMiseEnVente: element.PrixMiseEnVente,
         dateDisponibilite: element.DateDisponibilite,
         codePostal: element.CodePostal,
@@ -95,6 +95,28 @@ async function updateLogement(req, res) {
   }
 }
 
+async function createLogement(req, res) {
+  try {
+    await db.createLogement(
+      req.body.adresse,
+      req.body.description,
+      req.body.nomProprietaire,
+      req.body.typeLogement,
+      req.body.nombrePieces,
+      req.body.superficie,
+      req.body.etatHabitation,
+      req.body.prixMiseEnVente,
+      req.body.dateDisponibilite,
+      req.body.codePostal,
+      req.body.ville
+    );
+
+    res.status(200).json({ data: req.body, error: null });
+  } catch (error) {
+    res.status(500).send({ data: null, error: error.message });
+  }
+}
+
 async function deleteLogement(req, res) {
   if (!req.body.id) {
     res.status(400).send({ data: null, error: 'id non défini' });
@@ -113,4 +135,5 @@ module.exports = {
   getAllLogements,
   updateLogement,
   deleteLogement,
+  createLogement
 };
