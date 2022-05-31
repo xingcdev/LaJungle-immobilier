@@ -13,12 +13,15 @@ export default function HousingPage() {
 	const housingPhoto =
 		'https://images.unsplash.com/photo-1460317442991-0ec209397118?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170';
 
+	const [showEditForm, setShowEditForm] = useState(false);
+
 	const { data, isLoading, error } = useFetchGet(
 		`${process.env.REACT_APP_API_URL}/logement/get`,
-		{ id: params.housingId }
+		{ id: params.housingId },
+		[showEditForm]
 	);
 
-	const [showEditForm, setShowEditForm] = useState(false);
+	console.log('data, ', data);
 
 	return (
 		<section className={styles.page}>
@@ -37,6 +40,7 @@ export default function HousingPage() {
 						garages: data.garages,
 						description: data.description,
 					}}
+					setShowEditForm={setShowEditForm}
 				/>
 			) : (
 				<>

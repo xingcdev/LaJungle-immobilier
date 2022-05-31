@@ -19,26 +19,20 @@ interface EditHousingPageProps {
 		visits?: any;
 		garages?: any;
 	};
+
+	setShowEditForm: (value: boolean) => void;
 }
 
-export default function EditHousingPage(props: EditHousingPageProps) {
+export default function (props: EditHousingPageProps) {
 	const params = useParams();
+
+	const [isOpen, setIsOpen] = useState(false);
 
 	const [formValues, setFormValues] = useState({
 		...props.initialValues,
-		// address: '',
-		// postalCode: '',
-		// city: '',
-		// price: 0,
-		// type: '',
-		// condition: '',
-		// surface: 0,
-		// rooms: 0,
-		// garages: 0,
-		// description: '',
 	});
 
-	function handleChange(event: ChangeEvent<HTMLInputElement>) {
+	function handleChange(event: any) {
 		const name = event.target.name;
 		// Specific case
 		const value =
@@ -50,6 +44,8 @@ export default function EditHousingPage(props: EditHousingPageProps) {
 		setFormValues({
 			[name]: value,
 		});
+
+		console.log('form values', formValues);
 	}
 
 	function handleSubmit(event: any) {
@@ -70,14 +66,18 @@ export default function EditHousingPage(props: EditHousingPageProps) {
 			// dateDisponibilite: formValues.data
 		};
 
+		console.log('formdata in submitting', data);
+
 		fetch(`${process.env.REACT_APP_API_URL}/logement/update`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(data),
-		});
+		}).then(() => props.setShowEditForm(false));
 	}
+
+	if (isOpen) return null;
 
 	return (
 		<section className={styles.page}>
@@ -113,27 +113,32 @@ export default function EditHousingPage(props: EditHousingPageProps) {
 					value={formValues.owner}
 				/>
 				<Input
+					type="number"
 					name="price"
 					label="Prix"
 					className="col-2"
 					onChange={handleChange}
 					value={formValues.price}
 				/>
+
+				<label>
+					Type
+					<select value={formValues.type} onChange={handleChange}>
+						<option value="neuf">Appartement</option>
+						<option value="tresBon">maison</option>
+					</select>
+				</label>
+				<label>
+					État
+					<select value={formValues.condition} onChange={handleChange}>
+						<option value="neuf">Neuf</option>
+						<option value="tres_bon">Très bon</option>
+						<option value="bon">Bon</option>
+						<option value="mauvais">Mauvais</option>
+					</select>
+				</label>
 				<Input
-					name="type"
-					label="Type"
-					className="col-2"
-					onChange={handleChange}
-					value={formValues.type}
-				/>
-				<Input
-					name="condition"
-					label="État"
-					className="col-2"
-					onChange={handleChange}
-					value={formValues.condition}
-				/>
-				<Input
+					type="number"
 					name="surface"
 					placeholder="Superficie"
 					className="col-2"
@@ -141,6 +146,7 @@ export default function EditHousingPage(props: EditHousingPageProps) {
 					value={formValues.surface}
 				/>
 				<Input
+					type="number"
 					name="rooms"
 					placeholder="Pièces"
 					className="col-2"
@@ -148,16 +154,16 @@ export default function EditHousingPage(props: EditHousingPageProps) {
 					value={formValues.rooms}
 				/>
 				<Input
+					type="number"
 					name="garage"
 					placeholder="Garage(s)"
 					className="col-2"
 					onChange={handleChange}
 					value={formValues.garages}
 				/>
-				<Input
+				<textarea
 					name="description"
-					label="Description"
-					className="col-2"
+					className="col-full"
 					onChange={handleChange}
 					value={formValues.description}
 				/>

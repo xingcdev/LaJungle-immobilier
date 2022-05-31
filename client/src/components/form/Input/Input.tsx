@@ -5,7 +5,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	className?: string;
 }
 
-export default function Input({ type = 'text', ...props }: InputProps) {
+export default function Input(props: InputProps) {
 	return (
 		<>
 			{props.label ? (
