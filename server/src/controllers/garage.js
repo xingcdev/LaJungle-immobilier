@@ -67,9 +67,9 @@ async function updateGarage(req, res) {
   }
 }
 
-async function updateGarage(req, res) {
+async function createGarage(req, res) {
   try {
-    await db.updateGarage(
+    await db.createGarage(
       req.body.adresse,
       req.body.IdLogement
     );
