@@ -20,14 +20,14 @@ INSERT INTO Garage (Adresse) VALUE
 
 -- TRUNCATE TABLE Logement;
 -- Insertion dans la table logement
-INSERT INTO Logement (Adresse, DescriptionLogement, NomProprietaire, TypeLogement, NombrePieces, Superficie, IdEtat, PrixMiseEnVente, DateDisponibilite, CodePostal, Ville) VALUES
-('9 Rue du Chat qui Pêche', 'Charmant appartement dans une ruelle parisienne', 'Charles Potté', 'Appartement', 
+INSERT INTO Logement (Adresse, DescriptionLogement, NomProprietaire, IdType, NombrePieces, Superficie, IdEtat, PrixMiseEnVente, DateDisponibilite, CodePostal, Ville) VALUES
+('9 Rue du Chat qui Pêche', 'Charmant appartement dans une ruelle parisienne', 'Charles Potté', 'appartement', 
 2, 36.4, 'bon', 150.000, '2022-06-24', '75005', 'Paris'),
-('25 Rue Brisemiche', 'Belle maison dans un village au nom atypique mais bien réel', 'Jean Miche', 'Maison', 
+('25 Rue Brisemiche', 'Belle maison dans un village au nom atypique mais bien réel', 'Jean Miche', 'maison', 
 4, 125.0, 'tres_bon', 950.000, '2022-09-01', '46800', 'Montcuq'),
-('50 Rue de la Roquette', 'Appartement à rénover du sol au plafond dans un quartier huppé', 'Franklin Tortue', 'Appartement', 
+('50 Rue de la Roquette', 'Appartement à rénover du sol au plafond dans un quartier huppé', 'Franklin Tortue', 'appartement', 
 1, 18.7, 'mauvais', 250.500, '2023-01-01', '78000', 'Versailles'),
-('60 Rue de la Grande Truanderie', 'Grande maison en plein centre de Paris', 'Jack Truant', 'Maison', 
+('60 Rue de la Grande Truanderie', 'Grande maison en plein centre de Paris', 'Jack Truant', 'maison', 
 6, 250, 'bon', 2500000, '2022-06-24', '75001', 'Paris')
 ;
 
