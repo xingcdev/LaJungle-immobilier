@@ -11,7 +11,7 @@
 
 Laurie :
 
-- [ ] La route visites/getAll qui renvoie TOUTES les visites. Les plus récentes en premier.
+- [X] La route visite/getAll qui renvoie TOUTES les visites. Les plus récentes en premier.
 - [ ] La liste de toutes les visites (le code de requête SQL inspiré de `HomePage.tsx`, et boucle inspiré de `Housings.tsx` ligne 20 avec `map()` )
 - [ ] La liste de garage
 
