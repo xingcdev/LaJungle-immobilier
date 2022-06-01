@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from './HousingPage.module.scss';
 import OwnerProfile from '../OwnerProfile/OwnerProfile';
@@ -17,34 +17,58 @@ export default function HousingPage() {
 
 	const [showEditForm, setShowEditForm] = useState(false);
 
-	const { data, isLoading, error } = useFetchGet(
-		`${process.env.REACT_APP_API_URL}/logement/get`,
-		{ id: params.housingId },
-		[showEditForm]
-	);
+	// const { data, isLoading, error } = useFetchGet(
+	// 	`${process.env.REACT_APP_API_URL}/logement/get`,
+	// 	{ id: params.housingId },
+	// 	[]
+	// );
+	const [housings, setHousings] = useState<any>({});
+	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState('');
 
-	console.log('data, ', data);
+	// Add GET params to the URL
+	// see: https://stackoverflow.com/a/58437909
+
+	useEffect(() => {
+		fetch(
+			`${process.env.REACT_APP_API_URL}/logement/get?${new URLSearchParams({
+				id: params.housingId as string,
+			})}`
+		)
+			.then((response) => {
+				if (response.ok) return response.json();
+				throw response;
+			})
+			.then((json) => {
+				setHousings(json.data);
+			})
+			.catch((error) => setError(error))
+			.finally(() => setIsLoading(false));
+	}, []);
 
 	if (isLoading) return <Loading />;
+
+	if (error) return <p>{error}</p>;
 
 	return (
 		<section className={styles.page}>
 			{showEditForm ? (
 				<EditHousingPage
 					initialValues={{
-						address: data.adresse,
-						postalCode: data.codePostal,
-						city: data.ville,
-						owner: data.nomProprietaire,
-						price: data.prixMiseEnVente,
-						type: data.typeLogement.value,
-						condition: data.etatHabitation.value,
-						surface: data.superficie,
-						rooms: data.nombrePieces,
-						description: data.description,
-						availableDate: data.dateDisponibilite,
+						address: housings.adresse,
+						postalCode: housings.codePostal,
+						city: housings.ville,
+						owner: housings.nomProprietaire,
+						price: housings.prixMiseEnVente,
+						type: housings.typeLogement.value,
+						condition: housings.etatHabitation.value,
+						surface: housings.superficie,
+						rooms: housings.nombrePieces,
+						description: housings.description,
+						availableDate: housings.dateDisponibilite,
 					}}
 					setShowEditForm={setShowEditForm}
+					setHousings={setHousings}
 				/>
 			) : (
 				<>
@@ -54,22 +78,22 @@ export default function HousingPage() {
 					<section className={styles.content}>
 						<section className={styles.housingContent}>
 							<section className={styles.info}>
-								<p className={styles.address}>{data.adresse}</p>
+								<p className={styles.address}>{housings.adresse}</p>
 								<p className={styles.postalCode}>
-									{data.codePostal}
-									<span className={styles.city}> {data.ville}</span>
+									{housings.codePostal}
+									<span className={styles.city}> {housings.ville}</span>
 								</p>
 								<p className={styles.price}>
 									Prix :{' '}
 									<span className={styles.priceValue}>
-										{data.prixMiseEnVente}
+										{housings.prixMiseEnVente}
 									</span>
 									<span className={styles.priceDevise}> €</span>
 								</p>
 								<p className={styles.availableDate}>
 									Date disponibilité :{' '}
 									<span className={styles.availableDateValue}>
-										{new Date(data.dateDisponibilite).toLocaleDateString(
+										{new Date(housings.dateDisponibilite).toLocaleDateString(
 											'fr-FR'
 										)}
 									</span>
@@ -77,25 +101,27 @@ export default function HousingPage() {
 								<p className={styles.type}>
 									Type:{' '}
 									<span className={styles.typeValue}>
-										{data.typeLogement.label}
+										{housings.typeLogement.label}
 									</span>
 								</p>
 								<p className={styles.condition}>
 									État :{' '}
 									<span className={styles.conditionValue}>
-										{data.etatHabitation.label}
+										{housings.etatHabitation.label}
 									</span>
 								</p>
 
 								<InfoChip
-									surface={data.superficie}
-									rooms={data.nombrePieces}
-									garages={data.nbGarages}
+									surface={housings.superficie}
+									rooms={housings.nombrePieces}
+									garages={housings.nbGarages}
 								/>
 							</section>
 							<section className={styles.description}>
 								<h2 className={styles.descriptionTitle}>Description</h2>
-								<p className={styles.descriptionContent}>{data.description}</p>
+								<p className={styles.descriptionContent}>
+									{housings.description}
+								</p>
 							</section>
 							<VisitList visits={{}} />
 						</section>
