@@ -19,7 +19,7 @@ async function getLogement(req, res) {
     res.status(200).send({
       // PascalCase vers camelCase
       data: logement.map((element) => ({
-        idLogement: element.IdLogement,
+        id: element.IdLogement,
         adresse: element.Adresse,
         description: element.DescriptionLogement,
         nomProprietaire: element.NomProprietaire,
@@ -48,7 +48,7 @@ async function getAllLogements(req, res) {
       res.status(200).send({
         // PascalCase vers camelCase
         data: logements.map((element) => ({
-          idLogement: element.IdLogement,
+          id: element.IdLogement,
           adresse: element.Adresse,
           nombrePieces: element.NombrePieces,
           superficie: element.Superficie,
