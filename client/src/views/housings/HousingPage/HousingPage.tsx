@@ -5,7 +5,6 @@ import OwnerProfile from '../OwnerProfile/OwnerProfile';
 import VisitList from '../VisitList/VisitList';
 import InfoChip from '../InfoChip/InfoChip';
 import EditHousingPage from '../EditHousingPage/EditHousingPage';
-import { useFetchGet } from '@hooks/fetching';
 import { Button } from '@/components/buttons';
 import { useParams } from 'react-router-dom';
 import { Loading } from '@/components/feedback';
@@ -17,20 +16,14 @@ export default function HousingPage() {
 
 	const [showEditForm, setShowEditForm] = useState(false);
 
-	// const { data, isLoading, error } = useFetchGet(
-	// 	`${process.env.REACT_APP_API_URL}/logement/get`,
-	// 	{ id: params.housingId },
-	// 	[]
-	// );
 	const [housings, setHousings] = useState<any>({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState('');
 
-	// Add GET params to the URL
-	// see: https://stackoverflow.com/a/58437909
-
 	useEffect(() => {
 		fetch(
+			// Add GET params to the URL
+			// see: https://stackoverflow.com/a/58437909
 			`${process.env.REACT_APP_API_URL}/logement/get?${new URLSearchParams({
 				id: params.housingId as string,
 			})}`
@@ -44,7 +37,7 @@ export default function HousingPage() {
 			})
 			.catch((error) => setError(error))
 			.finally(() => setIsLoading(false));
-	}, []);
+	}, [params.housingId]);
 
 	if (isLoading) return <Loading />;
 
@@ -60,8 +53,8 @@ export default function HousingPage() {
 						city: housings.ville,
 						owner: housings.nomProprietaire,
 						price: housings.prixMiseEnVente,
-						type: housings.typeLogement.value,
-						condition: housings.etatHabitation.value,
+						type: housings.typeLogement,
+						condition: housings.etatHabitation,
 						surface: housings.superficie,
 						rooms: housings.nombrePieces,
 						description: housings.description,

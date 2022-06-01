@@ -5,18 +5,24 @@ import { Loading } from '@/components/feedback';
 
 interface HousingFormProps {
 	initialValues?: {
-		address?: string;
-		postalCode?: string;
-		city?: string;
-		owner?: string;
-		price?: number;
-		type?: string;
-		condition?: string;
-		surface?: number;
-		rooms?: number;
-		description?: string;
+		address: string;
+		postalCode: string;
+		city: string;
+		owner: string;
+		price: number;
+		type: {
+			label: string;
+			value: string;
+		};
+		condition: {
+			label: string;
+			value: string;
+		};
+		surface: number;
+		rooms: number;
+		description: string;
 		visits?: any;
-		availableDate?: any;
+		availableDate: any;
 	};
 	onSubmit: (event: any, formValues: any) => void;
 	setShowEditForm?: (value: boolean) => void;
@@ -50,9 +56,6 @@ export default function HousingForm(props: HousingFormProps) {
 			.finally(() => setIsLoading(false));
 	}, []);
 
-	console.log(types);
-	console.log(etats);
-
 	const [formValues, setFormValues] = useState({
 		...props.initialValues,
 	});
@@ -61,10 +64,18 @@ export default function HousingForm(props: HousingFormProps) {
 		const name = event.target.name;
 
 		// Specific case
-		const value =
-			event.target.type === 'checkbox'
-				? event.target.checked
-				: event.target.value;
+		let value;
+
+		if (event.target.tagName === 'SELECT') {
+			value = {
+				label: event.target.options[event.target.selectedIndex].label,
+				value: event.target.value,
+			};
+		} else if (event.target.type === 'checkbox') {
+			value = event.target.checked;
+		} else {
+			value = event.target.value;
+		}
 
 		setFormValues({
 			...formValues,
@@ -120,10 +131,16 @@ export default function HousingForm(props: HousingFormProps) {
 
 			<label>
 				Type
-				<select name="type" value={formValues.type} onChange={handleChange}>
+				<select
+					name="type"
+					value={formValues?.type?.value}
+					onChange={handleChange}
+				>
 					{types &&
-						types.map((type: any) => (
-							<option value={type.value}>{type.label}</option>
+						types.map((type: any, index: number) => (
+							<option key={index} value={type.value}>
+								{type.label}
+							</option>
 						))}
 				</select>
 			</label>
@@ -131,12 +148,14 @@ export default function HousingForm(props: HousingFormProps) {
 				État
 				<select
 					name="condition"
-					value={formValues.condition}
+					value={formValues?.condition?.value}
 					onChange={handleChange}
 				>
 					{etats &&
-						etats.map((etat: any) => (
-							<option value={etat.value}>{etat.label}</option>
+						etats.map((etat: any, index: number) => (
+							<option key={index} value={etat.value}>
+								{etat.label}
+							</option>
 						))}
 				</select>
 			</label>

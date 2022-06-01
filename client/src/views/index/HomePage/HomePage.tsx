@@ -8,11 +8,13 @@ function HomePage() {
 		`${process.env.REACT_APP_API_URL}/logement/getAll`
 	);
 
+	if (error) return <p>{error}</p>;
+
 	return (
 		<section className={styles.page}>
 			<h1 className={styles.pageTitle}>Logements disponibles</h1>
 			<Housings isLoading={isLoading} housings={data} />
-			<FilterForm/>
+			<FilterForm />
 		</section>
 	);
 }
