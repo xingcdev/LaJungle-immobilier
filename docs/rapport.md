@@ -1,23 +1,25 @@
 # LaJungle
 
-Application Web backoffice immobilier de l'agence LaJungle.
+Interface d'administration d'une agence immobilière réalisée avec les technologies du web
 
-Projet réalisé par ces étudiants Efrei en L3 APP LS1 :
+Projet réalisé par :
 
 Laurie BRAL \
-CHEN Xing \
-Mélanie Dang \
+Xing CHEN \
+Mélanie DANG \
 Antoine DESPRÉS
 
-13/05/2022
+Groupe : L3-APP-LSI 1
+
+05/06/2022
 
 <div style="page-break-after: always;"></div>
 
-## Répartition de rôle
+## Répartition des rôles
 
-Laurie BRAL - développement Frontend
-CHEN Xing - développement Frontend
-Mélanie Dang - développement Backend
+Laurie BRAL - développement Frontend  
+CHEN Xing - développement Frontend  
+Mélanie Dang - développement Backend  
 Antoine DESPRÉS - développement Backend
 
 ## Environnement technique
@@ -33,7 +35,8 @@ Antoine DESPRÉS - développement Backend
 
 - Looping (logiciel permettant la création du modèle relationnel)
 - MySQL (SGBD servant à la création de tables, requêtes, et du stockage de la base de données)
-- Express (API)
+- NodeJs
+- Express
 
 ## Dépendances
 
@@ -48,9 +51,19 @@ Les dépendances sont installées et configurées avec l'outil d'installation de
 | sass             | Utiliser le préprocesseur Sass afin d'écrire du CSS de manière plus pratique                                                               | 1.51.0   |
 | typescript       | Language qui ajouter des syntaxes pour typer JavaScript                                                                                    | 4.6.4    |
 | react-icons      | Utiliser les icôns sous forme de composants React. Les icôns sont répertorié sur [React icons](https://react-icons.github.io/react-icons/) | 4.3.1    |
-| @types/react     | Ajouter les définitions de types des méthodes de React. La dépendance doit être installer avec `typescript`.                               | 18.0.9   |
+| @types/react     | Ajouter les définitions de types des méthodes de React. La dépendance doit être installée avec `typescript`.                               | 18.0.9   |
 | @types/react-dom | Ajouter les définitions de types des méthodes de `react-dom`.                                                                              | 18.0.3   |
 | @types/node      | Ajouter les définitions de types des méthodes de Node.js                                                                                   | 16.11.33 |
+
+**Backend**
+
+| Nom                               | Description                                                                                                              | Version |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------- |
+| cors                              | Middleware pour permettre le [CORS](https://developer.mozilla.org/fr/docs/Web/HTTP/CORS) entre le backend et le frontend | 2.8.5   |
+| [express](https://expressjs.com/) | Framework JavaScript permettant la conception d'APIs                                                                     | 4.18.1  |
+| express-session                   | Gestion de la connexion des utilisateurs, extension d'express                                                            | 1.17.3  |
+| mysql2                            | Permet la connexion à la base de données, supporte les requêtes préparées                                                | 2.2.5   |
+| node-fetch                        | Permet l'usage de l'API Fetch dans Node.js                                                                               | 2.6.7   |
 
 ## Process de développement Frontend
 
@@ -58,11 +71,9 @@ Les dépendances sont installées et configurées avec l'outil d'installation de
 
 Choix de la palette de couleur
 
-| Couleurs         | Code couleur        | Image |
-| ---------------- | ------------------- | ----- |
-| Couleur primaire | Vert jungle #29AB87 |       |
-|                  |                     |
-|                  |                     |
+| Couleurs         | Code couleur        | Image                                  |
+| ---------------- | ------------------- | -------------------------------------- |
+| Couleur primaire | Vert jungle #29AB87 | <span style="color: #29AB97;">■</span> |
 
 **Références**
 
@@ -116,7 +127,7 @@ Tout le code source est situé dans le répertoire `src/`. Sa structure est la s
 
 **Modèle relationnel**
 
-![Modèle relationnel](./images/modele%20relationnel.png)
+![Modèle relationnel](./images/modele%20relationnel.jpg)
 
 **Choix du modèle relationnel**
 
