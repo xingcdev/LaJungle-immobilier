@@ -1,8 +1,25 @@
-# LaJungle
+# LaJungle Immobilier
 
 Interface d'administration d'une agence immobilière réalisée avec les technologies du web
 
-Projet réalisé par :
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
+
+- [LaJungle Immobilier](#lajungle-immobilier)
+  - [Répartition des rôles](#r%C3%A9partition-des-r%C3%B4les)
+  - [Environnement technique](#environnement-technique)
+  - [Dépendances](#d%C3%A9pendances)
+  - [Process de développement Frontend](#process-de-d%C3%A9veloppement-frontend)
+    - [1. Faire une maquette de site Web qui affiche le modèle de données de la base de données.](#1-faire-une-maquette-de-site-web-qui-affiche-le-mod%C3%A8le-de-donn%C3%A9es-de-la-base-de-donn%C3%A9es)
+    - [2. Analyser la maquette et la divider en plusieurs petits components](#2-analyser-la-maquette-et-la-divider-en-plusieurs-petits-components)
+    - [3. Transformer ces composants sous forme d'une hiérarchie](#3-transformer-ces-composants-sous-forme-dune-hi%C3%A9rarchie)
+  - [Process de développement Backend](#process-de-d%C3%A9veloppement-backend)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+Membres de l'équipe :
 
 Laurie BRAL \
 Xing CHEN \
@@ -14,6 +31,11 @@ Groupe : L3-APP-LSI 1
 05/06/2022
 
 <div style="page-break-after: always;"></div>
+
+## Origine du nom
+
+Le nom « LaJungle » est tout droit inspiré du nom du réseau d'agences immobilières « Laforêt » créé en 1991. Lors de la lecture du sujet, nous nous sommes en effet souvenus de la bande sonore de [leur publicité](https://www.youtube.com/watch?v=VszkyU1yiRU) que nous entendions à la télévision lorsque nous étions plus jeunes.  
+Nous avons également envisagé le nom « Gros-Caillou Immobilier » en référence au quartier éponyme du VII<sup>e</sup> arrondissement de Paris, mais LaJungle a obtenu notre préférence.
 
 ## Répartition des rôles
 
@@ -29,7 +51,7 @@ Antoine DESPRÉS - développement Backend
 - HTML 5
 - CSS 3
 - JavaScript
-- React : bibliothèque frontend publiée par Meta (Facebook) en 2013. Il permet de réaliser l'interface utilisateur facilement et rapidement, en développant des composants.
+- React : bibliothèque frontend publiée par Meta (Facebook) en 2013. Celle-ci permet de réaliser l'interface utilisateur facilement et rapidement, en développant des composants réutilisables à travers le site.
 
 **Backend**
 
@@ -38,7 +60,7 @@ Antoine DESPRÉS - développement Backend
 - NodeJs
 - Express
 
-## Dépendances
+## Dépendances node.js
 
 **Frontend**
 
@@ -71,7 +93,7 @@ Les dépendances sont installées et configurées avec l'outil d'installation de
 
 Choix de la palette de couleur
 
-| Couleurs         | Code couleur        | Image                                  |
+| Couleurs         | Code couleur        | Représentation                         |
 | ---------------- | ------------------- | -------------------------------------- |
 | Couleur primaire | Vert jungle #29AB87 | <span style="color: #29AB97;">■</span> |
 
@@ -131,7 +153,7 @@ Tout le code source est situé dans le répertoire `src/`. Sa structure est la s
 
 **Choix du modèle relationnel**
 
-- On considère qu'un logement possède 0 ou plusieurs garages, et qu'un garage est possédé par 1 ou plusieurs logements. Pour un souci de clarté, on a ajouté un attribut "Adresse" à la table garage.
+- On considère qu'un logement possède 0 ou plusieurs garages, et qu'un garage est possédé par 1 ou plusieurs logements (dans le cas d'un parking commun à toute une résidence, par exemple). Dans un souci de clarté, on a ajouté un attribut "Adresse" à la table garage.
 - Une visite concerne 1 logement, et un logement peut être visité plusieurs fois.
 - Un client peur effectuer plusieurs visites, et une visite est faite par un seul client.
 - Un client peut procéder à 0 ou plusieurs transactions, et une transaction ne concerne qu'un client.
