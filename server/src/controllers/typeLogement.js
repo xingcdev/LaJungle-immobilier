@@ -11,8 +11,8 @@ async function getList(req, res) {
 
     res.status(200).send({
       data: types.map((element) => ({
-        label: element.IdType,
-        value: element.LibelleType,
+        label: element.LibelleType,
+        value: element.IdType,
       })),
       error: null,
     });

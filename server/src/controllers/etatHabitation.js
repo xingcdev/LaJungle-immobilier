@@ -11,8 +11,8 @@ async function getList(req, res) {
 
     res.status(200).send({
       data: etats.map((element) => ({
-        label: element.IdEtat,
-        value: element.LibelleEtat,
+        label: element.LibelleEtat,
+        value: element.IdEtat,
       })),
       error: null,
     });
