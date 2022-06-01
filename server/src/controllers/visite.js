@@ -42,6 +42,8 @@ async function getAllVisites(req, res) {
           dateHeureVisite: element.DateHeureVisite,
           idLogement: element.IdLogement,
           idClient: element.IdClient,
+          adresse: element.Adresse,
+          nomClient: element.NomClient,
         })),
         error: null,
       });
