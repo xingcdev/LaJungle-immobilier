@@ -5,7 +5,7 @@ import OwnerProfile from '../OwnerProfile/OwnerProfile';
 import VisitList from '../VisitList/VisitList';
 import InfoChip from '../InfoChip/InfoChip';
 import EditHousingPage from '../EditHousingPage/EditHousingPage';
-import { Button } from '@/components/buttons';
+import { EditButton } from '@components/buttons';
 import { useParams } from 'react-router-dom';
 import { Loading } from '@/components/feedback';
 
@@ -58,7 +58,10 @@ export default function HousingPage() {
 						surface: housings.superficie,
 						rooms: housings.nombrePieces,
 						description: housings.description,
-						availableDate: housings.dateDisponibilite,
+						// The server send use 'YYYY-MM-DDT22:00:00.000Z' format
+						availableDate: new Date(housings.dateDisponibilite)
+							.toISOString()
+							.slice(0, 10),
 					}}
 					setShowEditForm={setShowEditForm}
 					setHousings={setHousings}
@@ -119,10 +122,8 @@ export default function HousingPage() {
 							<VisitList visits={{}} />
 						</section>
 						<section>
-							<Button variant="outlined" onClick={() => setShowEditForm(true)}>
-								Editer
-							</Button>
-							<OwnerProfile />
+							<EditButton onClick={() => setShowEditForm(true)} />
+							<OwnerProfile name={housings.nomProprietaire} />
 						</section>
 					</section>
 				</>

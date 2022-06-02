@@ -1,14 +1,14 @@
-import { HTMLAttributes,ReactNode } from "react";
-import styles from "./Button.module.scss";
+import { HTMLAttributes } from 'react';
+import Button from '../Button/Button';
 
-
-interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-    children?:ReactNode
+interface EditButtonProps extends HTMLAttributes<HTMLButtonElement> {
+	children?: never;
 }
 
-export default function Button(props:ButtonProps){
-    return(
-        <button {...props} className={styles.button}>{props.children}</button>
-    )
-    
+export default function EditButton(props: EditButtonProps) {
+	return (
+		<Button variant="contained" {...props}>
+			Éditer
+		</Button>
+	);
 }

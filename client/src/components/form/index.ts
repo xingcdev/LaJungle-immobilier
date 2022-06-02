@@ -1,5 +1,6 @@
-import InputError from './InputError/InputError';
+import FieldError from './FieldError/FieldError';
 import Input from './Input/Input';
 import HousingForm from './HousingForm/HousingForm';
+import SubmitButton from './SubmitButton/SubmitButton';
 
-export { InputError, Input, HousingForm };
+export { FieldError, Input, HousingForm, SubmitButton };

@@ -1,13 +1,14 @@
-import { HTMLAttributes,ReactNode } from "react";
-import styles from "./CancelButton.module.scss";
-
+import { HTMLAttributes } from 'react';
+import Button from '../Button/Button';
 
 interface CancelButtonProps extends HTMLAttributes<HTMLButtonElement> {
-    children?:ReactNode
+	children?: never;
 }
 
-export default function CancelButton(props:CancelButtonProps){
-    return(
-        <button {...props} className={styles.button}>{props.children}</button>
-    )
+export default function CancelButton(props: CancelButtonProps) {
+	return (
+		<Button variant="outlined" {...props}>
+			Annuler
+		</Button>
+	);
 }

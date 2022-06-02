@@ -31,8 +31,6 @@ export default function EditHousingPage(props: EditHousingPageProps) {
 	const params = useParams();
 
 	function handleSubmit(event: any, formValues: any) {
-		event.preventDefault();
-
 		const data = {
 			id: params.housingId,
 			adresse: formValues.address,
@@ -67,12 +65,17 @@ export default function EditHousingPage(props: EditHousingPageProps) {
 			.catch((error) => console.log(error));
 	}
 
+	function handleClose() {
+		props.setShowEditForm(false);
+	}
+
 	return (
 		<section className={styles.page}>
 			<h1 className={styles.pageTitle}>Édition de logement</h1>
 			<HousingForm
 				initialValues={props.initialValues}
 				onSubmit={handleSubmit}
+				onClose={handleClose}
 			/>
 		</section>
 	);

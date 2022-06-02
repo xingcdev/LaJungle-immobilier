@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
+import _isEqual from 'lodash/isEqual';
 import styles from './HousingForm.module.scss';
 import { Input } from '@components/form';
-import { Loading } from '@/components/feedback';
+import { Loading } from '@components/feedback';
+import { CancelButton } from '@components/buttons';
+import { SubmitButton } from '@components/form';
 
 interface HousingFormProps {
 	initialValues?: {
@@ -26,10 +29,12 @@ interface HousingFormProps {
 	};
 	onSubmit: (event: any, formValues: any) => void;
 	setShowEditForm?: (value: boolean) => void;
+	onClose: () => void;
 }
 
 export default function HousingForm(props: HousingFormProps) {
 	const [isLoading, setIsLoading] = useState(true);
+	const [formErrors, setFormErrors] = useState<any>({});
 
 	const [types, setTypes] = useState([]);
 	useEffect(() => {
@@ -63,6 +68,25 @@ export default function HousingForm(props: HousingFormProps) {
 	function handleChange(event: any) {
 		const name = event.target.name;
 
+		setFormErrors({});
+
+		if (name === 'postalCode') {
+			if (event.target.value.length > 5) {
+				setFormErrors((prevErrors: any) => ({
+					...prevErrors,
+					[name]: 'La valeur doit être < à 5 chiffres.',
+				}));
+			}
+		}
+		if (event.target.type === 'number') {
+			if (event.target.value < 0) {
+				setFormErrors((prevErrors: any) => ({
+					...prevErrors,
+					[name]: 'La valeur doit être positive.',
+				}));
+			}
+		}
+
 		// Specific case
 		let value;
 
@@ -87,51 +111,58 @@ export default function HousingForm(props: HousingFormProps) {
 
 	return (
 		<form
-			className="grid"
+			className={styles.form}
 			onSubmit={(event) => {
+				event.preventDefault();
 				props.onSubmit(event, formValues);
 			}}
 		>
 			<Input
 				name="address"
 				label="Adresse"
-				className="col-full"
 				onChange={handleChange}
 				value={formValues.address}
+				required
 			/>
 			<Input
+				className={styles.postalCode}
 				name="postalCode"
 				label="Code postal"
-				className="col-6"
 				onChange={handleChange}
 				value={formValues.postalCode}
+				error={formErrors.postalCode}
+				required
 			/>
 			<Input
+				className={styles.city}
 				name="city"
 				label="Ville"
-				className="col-6"
 				onChange={handleChange}
 				value={formValues.city}
+				required
 			/>
 			<Input
 				name="owner"
 				label="Propriétaire"
-				className="col-full"
 				onChange={handleChange}
 				value={formValues.owner}
+				required
 			/>
 			<Input
+				className={styles.price}
 				type="number"
 				name="price"
 				label="Prix"
-				className="col-2"
 				onChange={handleChange}
 				value={formValues.price}
+				error={formErrors.price}
+				required
 			/>
 
-			<label>
-				Type
+			<div className={styles.type}>
+				<label htmlFor="type">Type</label>
 				<select
+					id="type"
 					name="type"
 					value={formValues?.type?.value}
 					onChange={handleChange}
@@ -143,10 +174,13 @@ export default function HousingForm(props: HousingFormProps) {
 							</option>
 						))}
 				</select>
-			</label>
-			<label>
-				État
+			</div>
+
+			<div className={styles.condition}>
+				<label htmlFor="condition">État</label>
+
 				<select
+					id="condition"
 					name="condition"
 					value={formValues?.condition?.value}
 					onChange={handleChange}
@@ -158,38 +192,56 @@ export default function HousingForm(props: HousingFormProps) {
 							</option>
 						))}
 				</select>
-			</label>
+			</div>
 			<Input
 				type="date"
 				name="availableDate"
-				className="col-2"
+				label="Date"
 				onChange={handleChange}
 				value={formValues.availableDate}
+				required
 			/>
 			<Input
+				className={styles.surface}
 				type="number"
 				name="surface"
+				label="Superficie"
 				placeholder="Superficie"
-				className="col-2"
 				onChange={handleChange}
 				value={formValues.surface}
+				error={formErrors.surface}
+				required
 			/>
 			<Input
+				className={styles.rooms}
 				type="number"
 				name="rooms"
+				label="Pièces"
 				placeholder="Pièces"
-				className="col-2"
 				onChange={handleChange}
 				value={formValues.rooms}
+				error={formErrors.rooms}
+				required
 			/>
 			<textarea
 				name="description"
-				className="col-full"
 				onChange={handleChange}
 				value={formValues.description}
 			/>
-
-			<button type="submit">Sauvegarder</button>
+			<div className="action-area">
+				<CancelButton
+					onClick={props.onClose}
+					style={{ margin: '0 1rem 0 0' }}
+				/>
+				<SubmitButton
+					disabled={
+						Object.keys(formErrors).length > 0 ||
+						_isEqual(props.initialValues, formValues)
+							? true
+							: false
+					}
+				/>
+			</div>
 		</form>
 	);
 }

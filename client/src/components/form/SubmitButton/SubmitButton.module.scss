@@ -1,7 +1,7 @@
 @use '@styles/variables' as v;
 
-.button {
-	background-color: none;
+.submit {
+	background-color: v.$color-primary;
 	border: none;
 	border-radius: 8px;
 	color: v.$font-color-primary;
@@ -21,21 +21,9 @@
 	user-select: none;
 	-webkit-user-select: none;
 	touch-action: manipulation;
-}
 
-.outlined {
-	@extend .button;
-	background-color: transparent;
-	color: v.$color-error;
-	border: 1px solid v.$color-error;
-}
-
-.contained {
-	@extend .button;
-	background-color: v.$color-primary;
-
-	&:hover,
-	&:focus {
-		background-color: v.$color-primary-hover;
+	&:disabled {
+		background-color: #cccccc;
+		color: #666666;
 	}
 }

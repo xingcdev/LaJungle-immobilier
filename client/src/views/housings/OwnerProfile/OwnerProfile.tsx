@@ -4,6 +4,7 @@ import { Card } from '@components/container';
 
 interface OwnerProfileProps {
 	style?: CSSProperties;
+	name: string;
 }
 
 export default function OwnerProfile(props: OwnerProfileProps) {
@@ -25,8 +26,7 @@ export default function OwnerProfile(props: OwnerProfileProps) {
 					height={150}
 				/>
 			</section>
-			<p className={styles.name}>DEMO User</p>
-			<p className={styles.email}>demo.user@gmail.com</p>
+			<p className={styles.name}>{props.name}</p>
 		</Card>
 	);
 }

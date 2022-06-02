@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './LoginForm.module.scss';
 import { useAuth } from '@context/auth';
-import { InputError } from '@components/form';
+import { FieldError } from '@components/form';
 
 // Define manually the state of Location because it is 'unknown' type
 // see: https://github.com/reach/router/issues/414#issuecomment-1056839570
@@ -47,7 +47,7 @@ export default function LoginForm() {
 		<form className={styles.loginForm} onSubmit={handleSubmit}>
 			<input type="text" name="username" placeholder="Nom d'utilisateur" />
 			<input type="password" name="password" placeholder="Mot de passe" />
-			{formValues.error && <InputError message={formValues.error} />}
+			{formValues.error && <FieldError message={formValues.error} />}
 			<button type="submit">Connexion</button>
 		</form>
 	);

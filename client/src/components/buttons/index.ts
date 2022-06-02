@@ -1,3 +1,4 @@
-import Button from './Button/Button';
+import CancelButton from './CancelButton/CancelButton';
+import EditButton from './EditButton/EditButton';
 
-export { Button };
+export { CancelButton, EditButton };
