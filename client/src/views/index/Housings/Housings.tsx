@@ -19,7 +19,7 @@ function Housings(props: HousingsProps) {
 			{props.housings
 				? props.housings.map((housing: any) => (
 						<HousingCard
-							housingId={housing.idLogement}
+							housingId={housing.id}
 							photo={housing.photo}
 							price={housing.prixMiseEnVente}
 							address={housing.adresse}

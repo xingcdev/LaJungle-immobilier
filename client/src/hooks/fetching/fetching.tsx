@@ -10,7 +10,7 @@ import { useEffect, useState, DependencyList } from 'react';
 export function useFetchGet(
 	url: string,
 	params?: Record<string, any>,
-	dependencies?: DependencyList | [] | undefined,
+	dependencies: DependencyList | [] = [],
 	init?: RequestInit
 ) {
 	const [data, setData] = useState<any>({});
