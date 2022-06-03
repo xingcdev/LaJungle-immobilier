@@ -7,7 +7,7 @@ Il s'agit d'une interface d'administration pour l'agence immobilière fictive La
 
 Le rapport de projet se trouve dans le répertoire `docs/`.
 
-## Configuration
+## Installation
 
 **Backend**
 
@@ -46,13 +46,27 @@ npm start
 
 **Frontend**
 
-Dans un second terminal, aller dans le répertoire `client/` :
+Copier le fichier `client/.env.example` et le coller en tant qu'un nouveau fichier `.env` puis mettre l'url de l'api dans ce fichier:
+
+```
+REACT_APP_API_URL = "http://localhost:5000/api"
+```
+
+L'url ci-dessus est l'api local en développement.
+
+Si vous voulez utilisez l'api déployé :
+
+```
+REACT_APP_API_URL = "https://votre_domain.com/api"
+```
+
+Ouvrir un terminal et se positionner dans le répertoire `client/` :
 
 ```bash
 cd client
 ```
 
-Installer les dépendances (requiert [node.js](https://nodejs.org/fr/download/)) :
+Installer les dépendances (nécessite [node.js](https://nodejs.org/fr/download/)) :
 
 ```bash
 npm install
