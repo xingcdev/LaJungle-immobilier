@@ -1,11 +1,8 @@
 import { CSSProperties } from 'react';
 import { RiRulerLine } from 'react-icons/ri';
 import { IoBedOutline, IoCarOutline } from 'react-icons/io5';
-import styles from './InfoChip.module.scss';
-import { DataChip } from '@components/display';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
-import FaceIcon from '@mui/icons-material/Face';
 
 interface InfoChipProps {
 	style?: CSSProperties;
