@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
-import styles from './HousingCard.module.scss';
-import { Card } from '@components/container';
 import InfoChip from '../../housings/InfoChip/InfoChip';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+import PreviewPhoto from '@assets/housings/housing-preview.png';
 
 interface HousingCardProps {
 	housingId: number;
@@ -17,32 +21,37 @@ interface HousingCardProps {
 
 function HousingCard(props: HousingCardProps) {
 	return (
-		<Card hasHoverEffect style={{ padding: 0, maxWidth: 300, border: 'none' }}>
+		<Card sx={{ maxWidth: 310 }} variant="outlined">
 			<Link to={`housings/${props.housingId}`}>
-				<section className={styles.preview}>
-					<section className={styles.photo}>
-						<img src={props.photo} alt="housing" width="100%" height={160} />
-					</section>
-
-					<p className={styles.price}>{props.price} €</p>
-				</section>
-			
-
-			<section className={styles.content}>
-				<section className={styles.location}>
-					<p className={styles.address}>{props.address}</p>
-					<p>
-						<span className={styles.postalCode}>{props.postalCode}</span>
-						<span className={styles.city}>{props.city}</span>
-					</p>
-				</section>
-
-				<InfoChip
-					surface={props.surface}
-					rooms={props.rooms}
-					garages={props.garages}
-				/>
-			</section>
+				<CardActionArea>
+					<CardMedia
+						component="img"
+						height="170"
+						image={PreviewPhoto}
+						alt="housing-preview"
+					/>
+					<CardContent>
+						<Typography gutterBottom variant="h5" color="text.primary">
+							{props.price} €
+						</Typography>
+						<Typography color="text.secondary">{props.address}</Typography>
+						<Typography color="text.secondary">
+							{props.postalCode}{' '}
+							<Typography
+								variant="body2"
+								color="text.secondary"
+								component="span"
+							>
+								{props.city}
+							</Typography>
+						</Typography>
+						<InfoChip
+							surface={props.surface}
+							rooms={props.rooms}
+							garages={props.garages}
+						/>
+					</CardContent>
+				</CardActionArea>
 			</Link>
 		</Card>
 	);

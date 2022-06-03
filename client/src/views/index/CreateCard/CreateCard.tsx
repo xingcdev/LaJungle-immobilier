@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Card } from '@components/container';
 import { IoAddOutline } from 'react-icons/io5';
 import CreateFormDialog from '../CreateFormDialog/CreateFormDialog';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActionArea from '@mui/material/CardActionArea';
 
 interface CreateCardProps {}
 
@@ -23,19 +25,22 @@ export default function CreateCard(props: CreateCardProps) {
 	return (
 		<>
 			<Card
-				hasHoverEffect
-				style={{
-					padding: 0,
-					width: 200,
-					height: 200,
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					cursor: 'pointer',
+				sx={{
+					maxWidth: 310,
+					height: 324,
 				}}
-				onClick={handleClick}
+				variant="outlined"
 			>
-				<IoAddOutline size={30} />
+				<CardActionArea
+					sx={{
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						height: '100%',
+					}}
+				>
+					<IoAddOutline size={60} />
+				</CardActionArea>
 			</Card>
 
 			<CreateFormDialog
