@@ -1,4 +1,4 @@
-import { useEffect, useState, DependencyList } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * React Hook allows you to make a GET fetch query
@@ -10,7 +10,6 @@ import { useEffect, useState, DependencyList } from 'react';
 export function useFetchGet(
 	url: string,
 	params?: Record<string, any>,
-	dependencies: DependencyList | [] = [],
 	init?: RequestInit
 ) {
 	const [data, setData] = useState<any>({});
@@ -34,7 +33,7 @@ export function useFetchGet(
 			})
 			.catch((error) => setError(error))
 			.finally(() => setIsLoading(false));
-	}, dependencies);
+	}, [computedUrl, init]);
 
 	return { data, isLoading, error };
 }
