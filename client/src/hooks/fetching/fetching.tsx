@@ -31,7 +31,10 @@ export function useFetchGet(
 			.then((json) => {
 				setData(json.data);
 			})
-			.catch((error) => setError(error))
+			.catch((error) => {
+				console.log(error);
+				setError(error.message);
+			})
 			.finally(() => setIsLoading(false));
 	}, [computedUrl, init]);
 
