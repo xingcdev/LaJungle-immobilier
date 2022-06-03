@@ -1,17 +1,22 @@
-import { InputHTMLAttributes } from 'react';
-import styles from './SubmitButton.module.scss';
+import LoadingButton, { LoadingButtonProps } from '@mui/lab/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
 
-interface SubmitButtonProps extends InputHTMLAttributes<HTMLInputElement> {
+interface SubmitButtonProps extends LoadingButtonProps {
 	children?: never;
+	loading: boolean;
 }
 
 export default function SubmitButton(props: SubmitButtonProps) {
 	return (
-		<input
-			type="submit"
-			value="Sauvegarder"
-			className={styles.submit}
+		<LoadingButton
 			{...props}
-		/>
+			type="submit"
+			loading={props.loading}
+			loadingPosition="start"
+			startIcon={<SaveIcon />}
+			variant="contained"
+		>
+			Sauvegarder
+		</LoadingButton>
 	);
 }

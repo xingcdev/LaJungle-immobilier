@@ -75,35 +75,35 @@ a {
 	color: $color-primary;
 }
 
-form {
-	// .field,
-	// .select,
-	// textarea,
-	// .action-area {
-	// 	grid-column: 1 / end;
-	// }
+// form {
+// .field,
+// .select,
+// textarea,
+// .action-area {
+// 	grid-column: 1 / end;
+// }
 
-	.field {
-		label {
-			display: block;
-		}
-		input {
-			color: $font-color-primary;
-			display: block;
-			width: 100%;
-			padding: $spacing-4;
-			background: $color-surface;
-			border: $border;
-			border-radius: $border-radius;
-		}
-	}
+// 	.field {
+// 		label {
+// 			display: block;
+// 		}
+// 			 {
+// 			color: $font-color-primary;
+// 			display: block;
+// 			width: 100%;
+// 			padding: $spacing-4;
+// 			background: $color-surface;
+// 			border: $border;
+// 			border-radius: $border-radius;
+// 		}
+// 	}
 
-	input:focus,
-	textarea:focus {
-		outline: none;
-		border: 1px $color-primary solid;
-	}
-}
+// 	input:focus,
+// 	textarea:focus {
+// 		outline: none;
+// 		border: 1px $color-primary solid;
+// 	}
+// }
 
 .grid-form {
 	display: grid;

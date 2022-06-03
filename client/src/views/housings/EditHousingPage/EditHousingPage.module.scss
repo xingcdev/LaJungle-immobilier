@@ -3,6 +3,11 @@
 .page {
 	padding: v.$spacing-padding;
 
+	.pageContent {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
 	.pageTitle {
 		font-size: v.$font-size-3;
 		margin: 0 0 v.$spacing-margin 0;

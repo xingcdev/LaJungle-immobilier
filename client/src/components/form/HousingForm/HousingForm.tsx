@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import _isEqual from 'lodash/isEqual';
-import styles from './HousingForm.module.scss';
-import { Input } from '@components/form';
 import { Loading } from '@components/feedback';
 import { CancelButton } from '@components/buttons';
 import { SubmitButton } from '@components/form';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
+import Grid from '@mui/material/Grid';
 
 interface HousingFormProps {
 	initialValues?: {
@@ -27,7 +28,8 @@ interface HousingFormProps {
 		visits?: any;
 		availableDate: any;
 	};
-	onSubmit: (event: any, formValues: any) => void;
+	isLoading: boolean;
+	onSubmit: (formValues: any) => void;
 	setShowEditForm?: (value: boolean) => void;
 	onClose: () => void;
 }
@@ -48,7 +50,7 @@ export default function HousingForm(props: HousingFormProps) {
 			});
 	}, []);
 
-	const [etats, setEtats] = useState([]);
+	const [conditions, setConditions] = useState([]);
 	useEffect(() => {
 		fetch(`${process.env.REACT_APP_API_URL}/etatHabitation/getList`)
 			.then((response) => {
@@ -56,7 +58,7 @@ export default function HousingForm(props: HousingFormProps) {
 				throw response;
 			})
 			.then((json) => {
-				setEtats(json.data);
+				setConditions(json.data);
 			})
 			.finally(() => setIsLoading(false));
 	}, []);
@@ -90,9 +92,10 @@ export default function HousingForm(props: HousingFormProps) {
 		// Specific case
 		let value;
 
-		if (event.target.tagName === 'SELECT') {
+		// MUI select element
+		if (event.explicitOriginalTarget?.nodeName === 'LI') {
 			value = {
-				label: event.target.options[event.target.selectedIndex].label,
+				label: event.explicitOriginalTarget.innerText,
 				value: event.target.value,
 			};
 		} else if (event.target.type === 'checkbox') {
@@ -110,130 +113,176 @@ export default function HousingForm(props: HousingFormProps) {
 	if (isLoading) return <Loading />;
 
 	return (
-		<form
-			className={styles.form}
-			onSubmit={(event) => {
-				event.preventDefault();
-				props.onSubmit(event, formValues);
+		<Grid
+			container
+			spacing={3}
+			component="form"
+			onSubmit={(e: any) => {
+				e.preventDefault();
+
+				props.onSubmit(formValues);
 			}}
 		>
-			<Input
-				name="address"
-				label="Adresse"
-				onChange={handleChange}
-				value={formValues.address}
-				required
-			/>
-			<Input
-				className={styles.postalCode}
-				name="postalCode"
-				label="Code postal"
-				onChange={handleChange}
-				value={formValues.postalCode}
-				error={formErrors.postalCode}
-				required
-			/>
-			<Input
-				className={styles.city}
-				name="city"
-				label="Ville"
-				onChange={handleChange}
-				value={formValues.city}
-				required
-			/>
-			<Input
-				name="owner"
-				label="Propriétaire"
-				onChange={handleChange}
-				value={formValues.owner}
-				required
-			/>
-			<Input
-				className={styles.price}
-				type="number"
-				name="price"
-				label="Prix"
-				onChange={handleChange}
-				value={formValues.price}
-				error={formErrors.price}
-				required
-			/>
+			<Grid item xs={12}>
+				<TextField
+					name="address"
+					label="Adresse"
+					onChange={handleChange}
+					value={formValues.address}
+					required
+					fullWidth
+				/>
+			</Grid>
 
-			<div className={styles.type}>
-				<label htmlFor="type">Type</label>
-				<select
-					id="type"
+			<Grid item xs={3}>
+				<TextField
+					name="postalCode"
+					label="Code postal"
+					onChange={handleChange}
+					value={formValues.postalCode}
+					helperText={formErrors.postalCode}
+					required
+					fullWidth
+				/>
+			</Grid>
+			<Grid item xs>
+				<TextField
+					name="city"
+					label="Ville"
+					onChange={handleChange}
+					value={formValues.city}
+					required
+					fullWidth
+				/>
+			</Grid>
+
+			<Grid item xs={12}>
+				<TextField
+					name="owner"
+					label="Propriétaire"
+					onChange={handleChange}
+					value={formValues.owner}
+					required
+					fullWidth
+				/>
+			</Grid>
+
+			<Grid item xs={12}>
+				<TextField
+					type="number"
+					name="price"
+					label="Prix"
+					onChange={handleChange}
+					value={formValues.price}
+					helperText={formErrors.price}
+					required
+					fullWidth
+				/>
+			</Grid>
+
+			<Grid item xs={4}>
+				<TextField
+					type="date"
+					name="availableDate"
+					label="Date"
+					onChange={handleChange}
+					value={formValues.availableDate}
+					required
+					fullWidth
+				/>
+			</Grid>
+			<Grid item xs={4}>
+				<TextField
+					id="select-type"
 					name="type"
+					select
+					label="Type"
 					value={formValues?.type?.value}
 					onChange={handleChange}
+					fullWidth
 				>
 					{types &&
-						types.map((type: any, index: number) => (
-							<option key={index} value={type.value}>
+						types.map((type: any) => (
+							<MenuItem key={type.value} value={type.value}>
 								{type.label}
-							</option>
+							</MenuItem>
 						))}
-				</select>
-			</div>
+				</TextField>
+			</Grid>
 
-			<div className={styles.condition}>
-				<label htmlFor="condition">État</label>
-
-				<select
-					id="condition"
+			<Grid item xs={4}>
+				<TextField
+					id="select-condition"
 					name="condition"
+					select
+					label="État"
 					value={formValues?.condition?.value}
 					onChange={handleChange}
+					fullWidth
 				>
-					{etats &&
-						etats.map((etat: any, index: number) => (
-							<option key={index} value={etat.value}>
-								{etat.label}
-							</option>
+					{conditions &&
+						conditions.map((condition: any) => (
+							<MenuItem key={condition.value} value={condition.value}>
+								{condition.label}
+							</MenuItem>
 						))}
-				</select>
-			</div>
-			<Input
-				type="date"
-				name="availableDate"
-				label="Date"
-				onChange={handleChange}
-				value={formValues.availableDate}
-				required
-			/>
-			<Input
-				className={styles.surface}
-				type="number"
-				name="surface"
-				label="Superficie"
-				placeholder="Superficie"
-				onChange={handleChange}
-				value={formValues.surface}
-				error={formErrors.surface}
-				required
-			/>
-			<Input
-				className={styles.rooms}
-				type="number"
-				name="rooms"
-				label="Pièces"
-				placeholder="Pièces"
-				onChange={handleChange}
-				value={formValues.rooms}
-				error={formErrors.rooms}
-				required
-			/>
-			<textarea
-				name="description"
-				onChange={handleChange}
-				value={formValues.description}
-			/>
-			<div className="action-area">
-				<CancelButton
-					onClick={props.onClose}
-					style={{ margin: '0 1rem 0 0' }}
+				</TextField>
+			</Grid>
+
+			<Grid item xs={6}>
+				<TextField
+					type="number"
+					name="surface"
+					label="Superficie"
+					placeholder="Superficie"
+					onChange={handleChange}
+					value={formValues.surface}
+					helperText={formErrors.surface}
+					required
+					fullWidth
 				/>
+			</Grid>
+
+			<Grid item xs={6}>
+				<TextField
+					type="number"
+					name="rooms"
+					label="Pièces"
+					placeholder="Pièces"
+					onChange={handleChange}
+					value={formValues.rooms}
+					error={formErrors.rooms}
+					helperText={formErrors.rooms}
+					required
+					fullWidth
+				/>
+			</Grid>
+
+			<Grid item xs={12}>
+				<TextField
+					name="description"
+					label="Description"
+					onChange={handleChange}
+					value={formValues.description}
+					multiline
+					minRows={3}
+					maxRows={5}
+					fullWidth
+				/>
+			</Grid>
+
+			<Grid
+				item
+				xs={12}
+				sx={{
+					display: 'flex',
+					justifyContent: 'flex-end',
+					alignItems: 'center',
+				}}
+			>
+				<CancelButton onClick={props.onClose} sx={{ mr: 3 }} />
 				<SubmitButton
+					loading={props.isLoading}
 					disabled={
 						Object.keys(formErrors).length > 0 ||
 						_isEqual(props.initialValues, formValues)
@@ -241,7 +290,7 @@ export default function HousingForm(props: HousingFormProps) {
 							: false
 					}
 				/>
-			</div>
-		</form>
+			</Grid>
+		</Grid>
 	);
 }

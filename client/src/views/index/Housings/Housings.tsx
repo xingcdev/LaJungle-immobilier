@@ -1,6 +1,7 @@
 import styles from './Housings.module.scss';
 import HousingCard from '../HousingCard/HousingCard';
 import { Loading } from '@components/feedback';
+import CreateCard from '../CreateCard/CreateCard';
 
 interface HousingsProps {
 	housings: any | null;
@@ -31,6 +32,7 @@ function Housings(props: HousingsProps) {
 						/>
 				  ))
 				: emptyMessage}
+			<CreateCard />
 		</section>
 	);
 }

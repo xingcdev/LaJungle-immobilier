@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-
 import styles from './HousingPage.module.scss';
 import OwnerProfile from '../OwnerProfile/OwnerProfile';
 import VisitList from '../VisitList/VisitList';
@@ -8,6 +7,8 @@ import EditHousingPage from '../EditHousingPage/EditHousingPage';
 import { EditButton } from '@components/buttons';
 import { useParams } from 'react-router-dom';
 import { Loading } from '@/components/feedback';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 export default function HousingPage() {
 	const params = useParams();
@@ -19,6 +20,8 @@ export default function HousingPage() {
 	const [housings, setHousings] = useState<any>({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState('');
+
+	const [openSnackbar, setOpenSnackbar] = useState(false);
 
 	useEffect(() => {
 		fetch(
@@ -65,6 +68,7 @@ export default function HousingPage() {
 					}}
 					setShowEditForm={setShowEditForm}
 					setHousings={setHousings}
+					setOpenSnackbar={setOpenSnackbar}
 				/>
 			) : (
 				<>
@@ -126,6 +130,21 @@ export default function HousingPage() {
 							<OwnerProfile name={housings.nomProprietaire} />
 						</section>
 					</section>
+					<Snackbar
+						open={openSnackbar}
+						autoHideDuration={5000}
+						onClose={() => setOpenSnackbar(false)}
+						anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+					>
+						<MuiAlert
+							onClose={() => setOpenSnackbar(false)}
+							severity="success"
+							variant="filled"
+							sx={{ width: '100%' }}
+						>
+							Logement modifié avec succès.
+						</MuiAlert>
+					</Snackbar>
 				</>
 			)}
 		</section>

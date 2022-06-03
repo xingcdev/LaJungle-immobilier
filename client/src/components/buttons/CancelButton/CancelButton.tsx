@@ -1,7 +1,6 @@
-import { HTMLAttributes } from 'react';
-import Button from '../Button/Button';
+import Button, { ButtonProps } from '@mui/material/Button';
 
-interface CancelButtonProps extends HTMLAttributes<HTMLButtonElement> {
+interface CancelButtonProps extends ButtonProps {
 	children?: never;
 }
 

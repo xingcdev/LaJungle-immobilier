@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './EditHousingPage.module.scss';
 import { HousingForm } from '@components/form';
@@ -25,12 +26,17 @@ interface EditHousingPageProps {
 	};
 	setShowEditForm: (value: boolean) => void;
 	setHousings: (value: any) => void;
+	setOpenSnackbar: (value: boolean) => void;
 }
 
 export default function EditHousingPage(props: EditHousingPageProps) {
 	const params = useParams();
 
-	function handleSubmit(event: any, formValues: any) {
+	const [isFormLoading, setIsFormLoading] = useState(false);
+
+	function handleSubmit(formValues: any) {
+		setIsFormLoading(true);
+
 		const data = {
 			id: params.housingId,
 			adresse: formValues.address,
@@ -57,12 +63,16 @@ export default function EditHousingPage(props: EditHousingPageProps) {
 			.then((res) => {
 				if (res.error) throw new Error(res.error);
 
-				if (res.data)
+				setIsFormLoading(false);
+				if (res.data) {
 					props.setHousings((prevData: any) => ({ ...prevData, ...res.data }));
-
-				props.setShowEditForm(false);
+				}
 			})
-			.catch((error) => console.log(error));
+			.catch((error) => console.log(error))
+			.finally(() => {
+				props.setOpenSnackbar(true);
+				props.setShowEditForm(false);
+			});
 	}
 
 	function handleClose() {
@@ -71,12 +81,15 @@ export default function EditHousingPage(props: EditHousingPageProps) {
 
 	return (
 		<section className={styles.page}>
-			<h1 className={styles.pageTitle}>Édition de logement</h1>
-			<HousingForm
-				initialValues={props.initialValues}
-				onSubmit={handleSubmit}
-				onClose={handleClose}
-			/>
+			<section className={styles.pageContent}>
+				<h1 className={styles.pageTitle}>Éditer un logement</h1>
+				<HousingForm
+					initialValues={props.initialValues}
+					onSubmit={handleSubmit}
+					onClose={handleClose}
+					isLoading={isFormLoading}
+				/>
+			</section>
 		</section>
 	);
 }
