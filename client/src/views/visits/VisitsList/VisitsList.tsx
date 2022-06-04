@@ -7,6 +7,10 @@ import {
 	TableData,
 } from '@/components/display';
 
+interface VisitListProps {
+	visits: any;
+}
+
 function VisiteRow() {
 	return (
 		<TableRow>
