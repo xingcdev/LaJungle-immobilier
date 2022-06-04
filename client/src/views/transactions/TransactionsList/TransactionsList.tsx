@@ -30,10 +30,11 @@ function Transactions(props: TransactionsProps) {
 			{!props.transactions || !props.transactions.length
 				? emptyMessage
 				:props.transactions?.map((transaction: any) => (
-					<Stack>
+					<Stack spacing={6}>
 						<TransactionCard
-							logementId={transaction.id}
-							clientId={transaction.id}
+							key={transaction.id}
+							logementId={transaction.logementId}
+							clientId={transaction.clientId}
 							prixVent={transaction.prixVent}
 							pourcentageCommission={transaction.pourcentageCommission}
 							// clientId: number;
