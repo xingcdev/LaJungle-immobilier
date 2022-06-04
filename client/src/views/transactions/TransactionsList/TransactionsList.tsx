@@ -37,7 +37,7 @@ function Transactions(props: TransactionsProps) {
 			});
 
 			// todo: remove this if the response of logement/create returns 'nbGarages'
-			computedTransaction['nbGarages'] = 0;
+			//computedTransaction['nbGarages'] = 0;
 
 			props.setTransactionsData([...existingData, computedTransaction]);
 		});
@@ -50,10 +50,10 @@ function Transactions(props: TransactionsProps) {
 				:props.transactions?.map((transaction: any) => (
 					<Stack spacing={6}>
 						<TransactionCard
-							key={transaction.id}
-							logementId={transaction.logementId}
-							clientId={transaction.clientId}
-							prixVent={transaction.prixVent}
+							//key={transaction.id}
+							logementId={transaction.idLogement}
+							idTransaction={transaction.idTransaction}
+							prixVente={transaction.prixVente}
 							pourcentageCommission={transaction.pourcentageCommission}
 							// clientId: number;
 							// logementId: number;

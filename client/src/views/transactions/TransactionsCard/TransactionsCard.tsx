@@ -5,12 +5,15 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import PreviewPhoto from '@assets/housings/housing-preview.png';
+import TransactionPhoto from '@assets/transactions/transaction-photo.png';
+import styles from './TransactionsCard.module.scss';
 
 interface TransactionsCardProps {
-	clientId: number;
+	//Voici le retour web du getAll
+	//idTransaction: 1, prixVente: 135, pourcentageCommission: "4.20", idLogement: 3
+	idTransaction: number;
 	logementId: number;
-	prixVent: number;
+	prixVente: number;
 	pourcentageCommission: number;
 	// photo?: string;
 	// price: number;
@@ -24,36 +27,40 @@ interface TransactionsCardProps {
 
 function TransactionCard(props: TransactionsCardProps) {
 	return (
-		<Card sx={{ maxWidth: 310 }} variant="outlined">
-			<Link to={`transaction/${props.clientId}`}>
+		// <CardMedia
+		// 				component="img"
+		// 				height="170"
+		// 				image={TransactionPhoto}
+		// 				alt="transaction-photo"
+		// 			/>
+
+		// <li className={styles.visitItem}>
+		// 		<span className={styles.date}>Sunday 10th may </span>
+		// 		<span className={styles.time}>10h - 11h</span>
+		// 	</li>
+		<Card sx={{ maxWidth: 400 }} variant="outlined">
+			<Link to={`transaction/${props.idTransaction}`}>
 				<CardActionArea>
-					{/* <CardMedia
-						component="img"
-						height="170"
-						image={PreviewPhoto}
-						alt="housing-preview"
-					/> */}
-					{/* <CardContent>
-						<Typography gutterBottom variant="h5" color="text.primary">
-							{props.price} €
-						</Typography>
-						<Typography color="text.secondary">{props.address}</Typography>
-						<Typography color="text.secondary">
-							{props.postalCode}{' '}
-							<Typography
+					<CardContent>
+						<li className={styles.visitItem}>
+							<span><CardMedia component="img"
+						height="80rem"
+					image={TransactionPhoto}
+						alt="transaction-photo"
+					/></span>
+							<span><Typography color="text.secondary">{props.idTransaction}</Typography> </span>
+							<span><Typography color="text.secondary">{props.prixVente} €</Typography> </span>
+							<span><Typography color="text.secondary">{props.pourcentageCommission} %</Typography> </span>
+							<span><Typography color="text.secondary">{props.logementId}</Typography></span>
+						</li>
+						
+							 {/* <Typography
 								variant="body2"
 								color="text.secondary"
 								component="span"
 							>
-								{props.city}
-							</Typography>
-						</Typography>
-						<InfoChip
-							surface={props.surface}
-							rooms={props.rooms}
-							garages={props.garages}
-						/>
-					</CardContent> */}
+							</Typography> */}
+					</CardContent>
 				</CardActionArea>
 			</Link>
 		</Card>
