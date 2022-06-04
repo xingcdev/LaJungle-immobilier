@@ -173,3 +173,8 @@ Nous avons rédigé deux scripts SQL afin de construire une base de données en 
 - Pour la fonction asynchrone update, qui permet de modifier les informations d'une ligne, nous avons utilisé un string dynamique qui prend seulement en compte les paramètres modifiés.
 
 Nous avons ajouté une table utilisateur avec les attributs "NomUtilisateur" et "MotDePasse", qui permet à une personne de créer son compte et son mot de passe afin d'accéder au site.
+
+## Fonctionnalités à faire
+
+- ajouter, modifier, supprimer une visite depuis la page détail d'un logement
+- ajouter, modifier, supprimer une transaction
