@@ -2,25 +2,44 @@ import { useState } from 'react';
 import { IoAddOutline } from 'react-icons/io5';
 import CreateFormDialog from '../CreateFormDialog/CreateFormDialog';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardActionArea from '@mui/material/CardActionArea';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
-interface CreateCardProps {}
+interface CreateCardProps {
+	addHousingMethod: (newHousing: any) => void;
+}
 
 export default function CreateCard(props: CreateCardProps) {
 	const [openDialog, setOpenDialog] = useState(false);
+	const [openSnackbar, setOpenSnackbar] = useState(false);
 
-	function handleClick() {
-		setOpenDialog(true);
+	function onSuccessCreate(response: any) {
+		props.addHousingMethod(response.data);
+		setOpenSnackbar(true);
 	}
 
-	function handleSubmit() {
-		// setOpenDialog(true);
-	}
-
-	function handleClose() {
+	function onCloseFormDialog() {
 		setOpenDialog(false);
 	}
+
+	const snackbar = (
+		<Snackbar
+			open={openSnackbar}
+			autoHideDuration={5000}
+			onClose={() => setOpenSnackbar(false)}
+			anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+		>
+			<MuiAlert
+				onClose={() => setOpenSnackbar(false)}
+				severity="success"
+				variant="filled"
+				sx={{ width: '100%' }}
+			>
+				Logement créé avec succès.
+			</MuiAlert>
+		</Snackbar>
+	);
 
 	return (
 		<>
@@ -30,6 +49,7 @@ export default function CreateCard(props: CreateCardProps) {
 					height: 324,
 				}}
 				variant="outlined"
+				onClick={() => setOpenDialog(true)}
 			>
 				<CardActionArea
 					sx={{
@@ -44,10 +64,31 @@ export default function CreateCard(props: CreateCardProps) {
 			</Card>
 
 			<CreateFormDialog
+				initialValues={{
+					address: '',
+					postalCode: '',
+					city: '',
+					owner: '',
+					price: 0,
+					type: {
+						label: '',
+						value: '',
+					},
+					condition: {
+						label: '',
+						value: '',
+					},
+					surface: 10,
+					rooms: 1,
+					description: '',
+					availableDate: new Date().toISOString().slice(0, 10),
+				}}
 				isOpen={openDialog}
-				handleSubmit={handleSubmit}
-				handleClose={handleClose}
+				onClose={onCloseFormDialog}
+				onSuccess={onSuccessCreate}
 			/>
+
+			{snackbar}
 		</>
 	);
 }

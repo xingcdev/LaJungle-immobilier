@@ -2,28 +2,10 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './EditHousingPage.module.scss';
 import { HousingForm } from '@components/form';
+import { HousingFormValues } from '@components/form/HousingForm/HousingForm';
 
 interface EditHousingPageProps {
-	initialValues?: {
-		address: string;
-		postalCode: string;
-		city: string;
-		owner: string;
-		price: number;
-		type: {
-			label: string;
-			value: string;
-		};
-		condition: {
-			label: string;
-			value: string;
-		};
-		surface: number;
-		rooms: number;
-		description: string;
-		visits?: any;
-		availableDate: any;
-	};
+	initialValues: HousingFormValues;
 	setShowEditForm: (value: boolean) => void;
 	setHousings: (value: any) => void;
 	setOpenSnackbar: (value: boolean) => void;

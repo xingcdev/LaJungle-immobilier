@@ -1,9 +1,9 @@
 import styles from './HomePage.module.scss';
-import Housings from '../Housings/Housings';
+import HousingsList from '../HousingsList/HousingsList';
 import { useFetchGet } from '@hooks/fetching';
 
 function HomePage() {
-	const { data, isLoading, error } = useFetchGet(
+	const { data, setData, isLoading, error } = useFetchGet(
 		`${process.env.REACT_APP_API_URL}/logement/getAll`
 	);
 
@@ -12,7 +12,11 @@ function HomePage() {
 	return (
 		<section className={styles.page}>
 			<h1 className={styles.pageTitle}>Logements disponibles</h1>
-			<Housings isLoading={isLoading} housings={data} />
+			<HousingsList
+				isLoading={isLoading}
+				housings={data}
+				setHousingsData={setData}
+			/>
 		</section>
 	);
 }

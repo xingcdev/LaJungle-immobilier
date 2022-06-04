@@ -38,5 +38,5 @@ export function useFetchGet(
 			.finally(() => setIsLoading(false));
 	}, [computedUrl, init]);
 
-	return { data, isLoading, error };
+	return { data, setData, isLoading, error };
 }

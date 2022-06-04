@@ -7,27 +7,29 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid';
 
-interface HousingFormProps {
-	initialValues?: {
-		address: string;
-		postalCode: string;
-		city: string;
-		owner: string;
-		price: number;
-		type: {
-			label: string;
-			value: string;
-		};
-		condition: {
-			label: string;
-			value: string;
-		};
-		surface: number;
-		rooms: number;
-		description: string;
-		visits?: any;
-		availableDate: any;
+export interface HousingFormValues {
+	address: string;
+	postalCode: string;
+	city: string;
+	owner: string;
+	price: number;
+	type: {
+		label: string;
+		value: string;
 	};
+	condition: {
+		label: string;
+		value: string;
+	};
+	surface: number;
+	rooms: number;
+	description: string;
+	visits?: any;
+	availableDate: any;
+}
+
+interface HousingFormProps {
+	initialValues: HousingFormValues;
 	isLoading: boolean;
 	onSubmit: (formValues: any) => void;
 	setShowEditForm?: (value: boolean) => void;
@@ -70,14 +72,16 @@ export default function HousingForm(props: HousingFormProps) {
 	function handleChange(event: any) {
 		const name = event.target.name;
 
-		setFormErrors({});
-
 		if (name === 'postalCode') {
-			if (event.target.value.length > 5) {
+			if (event.target.value.length !== 5) {
 				setFormErrors((prevErrors: any) => ({
 					...prevErrors,
-					[name]: 'La valeur doit être < à 5 chiffres.',
+					[name]: 'La valeur doit être à 5 chiffres.',
 				}));
+			} else {
+				const copiedState = { ...formErrors };
+				delete copiedState[name];
+				setFormErrors(copiedState);
 			}
 		}
 		if (event.target.type === 'number') {
@@ -86,6 +90,10 @@ export default function HousingForm(props: HousingFormProps) {
 					...prevErrors,
 					[name]: 'La valeur doit être positive.',
 				}));
+			} else {
+				const copiedState = { ...formErrors };
+				delete copiedState[name];
+				setFormErrors(copiedState);
 			}
 		}
 
@@ -134,12 +142,13 @@ export default function HousingForm(props: HousingFormProps) {
 				/>
 			</Grid>
 
-			<Grid item xs={3}>
+			<Grid item xs={4}>
 				<TextField
 					name="postalCode"
 					label="Code postal"
 					onChange={handleChange}
 					value={formValues.postalCode}
+					error={Boolean(formErrors.postalCode)}
 					helperText={formErrors.postalCode}
 					required
 					fullWidth
@@ -197,10 +206,15 @@ export default function HousingForm(props: HousingFormProps) {
 					name="type"
 					select
 					label="Type"
-					value={formValues?.type?.value}
+					defaultValue=""
+					value={formValues.type?.value}
 					onChange={handleChange}
 					fullWidth
+					required
 				>
+					<MenuItem key="defaultType" value="">
+						Sélectionner un type
+					</MenuItem>
 					{types &&
 						types.map((type: any) => (
 							<MenuItem key={type.value} value={type.value}>
@@ -216,10 +230,14 @@ export default function HousingForm(props: HousingFormProps) {
 					name="condition"
 					select
 					label="État"
-					value={formValues?.condition?.value}
+					value={formValues.condition?.value}
 					onChange={handleChange}
 					fullWidth
+					required
 				>
+					<MenuItem key="defaultCondition" value="">
+						Sélectionner un état
+					</MenuItem>
 					{conditions &&
 						conditions.map((condition: any) => (
 							<MenuItem key={condition.value} value={condition.value}>
