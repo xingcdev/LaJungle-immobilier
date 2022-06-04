@@ -8,3 +8,29 @@
 		margin: 0 0 v.$spacing-margin 0;
 	}
 }
+
+.test {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	//border: v.$border;
+	padding: v.$spacing-1;
+	padding-left: 75px;
+	//padding-right: 40px;
+	margin: 0 0 v.$spacing-1 0;
+	max-width: 100 rem;
+}
+
+.visitItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	//border: v.$border;
+	padding: v.$spacing-1;
+	margin: 0 0 v.$spacing-1 0;
+	max-width: 1000px;
+
+	.time {
+		color: v.$font-color-secondary;
+	}
+}

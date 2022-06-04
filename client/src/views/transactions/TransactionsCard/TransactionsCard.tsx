@@ -38,8 +38,8 @@ function TransactionCard(props: TransactionsCardProps) {
 		// 		<span className={styles.date}>Sunday 10th may </span>
 		// 		<span className={styles.time}>10h - 11h</span>
 		// 	</li>
-		<Card sx={{ maxWidth: 400 }} variant="outlined">
-			<Link to={`transaction/${props.idTransaction}`}>
+		<Card sx={{ maxWidth: 1000 }} variant="outlined">
+			{/* <Link to={`transaction/${props.idTransaction}`}> */}
 				<CardActionArea>
 					<CardContent>
 						<li className={styles.visitItem}>
@@ -62,7 +62,7 @@ function TransactionCard(props: TransactionsCardProps) {
 							</Typography> */}
 					</CardContent>
 				</CardActionArea>
-			</Link>
+			{/* </Link> */}
 		</Card>
 	);
 }

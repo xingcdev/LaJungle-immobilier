@@ -13,6 +13,13 @@ function TransactionsPage(){
 	return (
 		<section className={styles.page}>
 			<h1 className={styles.pageTitle}>Transactions disponibles</h1>
+			<li className={styles.test}>
+				<span className={styles.test}><h5></h5></span>
+		 		<span className={styles.test}><h5 >idTransaction</h5></span>
+		 		<span className={styles.test}><h5>Prix de la vente</h5></span>
+				<span className={styles.test}><h5>Pourcentage de la commission</h5></span>
+				<span className={styles.test}><h5>idLogement</h5></span>
+		 	</li>
 			<TransactionsList
 				isLoading={isLoading}
 				transactions={data}
