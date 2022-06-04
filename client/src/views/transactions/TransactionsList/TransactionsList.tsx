@@ -11,7 +11,7 @@ import { Loading } from '@/components/feedback';
 } from '@/components/display';*/
 
 interface TransactionsProps {
-	transaction: any | null;
+	transactions: any | null;
 	isLoading: boolean;
 	setHousingsData: (newHousings: any) => void;
 }
@@ -22,6 +22,20 @@ function Transactions(props: TransactionsProps) {
 	
 	const emptyMessage = (
 		<p className={styles.emptyMessage}>Transactions non trouvées :(</p>
+	);
+
+	return (
+		<Stack spacing={2}>
+			{!props.transactions || !props.transactions.length
+				? emptyMessage
+				:props.transactions?.map((transaction: any) => (
+					<Stack>
+						{/* <TransactionCard */}
+					</Stack>
+				)
+				)
+			}
+		</Stack>
 	);
 
 	/*return (
