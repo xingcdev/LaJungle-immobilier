@@ -16,7 +16,7 @@ export default function SubmitButton(props: SubmitButtonProps) {
 			startIcon={<SaveIcon />}
 			variant="contained"
 		>
-			Sauvegarder
+			OK
 		</LoadingButton>
 	);
 }

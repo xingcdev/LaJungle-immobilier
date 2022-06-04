@@ -21,6 +21,7 @@ function Housings(props: HousingsProps) {
 		props.setHousingsData((existingData: any) => {
 			// Overwrite only the values in existingData.
 			// 'newHousing' data has so much values that we don't need in 'existingData'
+			if (!existingData) return props.setHousingsData([newHousing]);
 			const keys = Object.keys(existingData[0]);
 			let computedHousing: Record<string, any> = {};
 			keys.map((key) => {

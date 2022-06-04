@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { Loading } from '@/components/feedback';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import DeleteHousingButton from '../DeleteHousingButton/DeleteHousingButton';
 
 export default function HousingPage() {
 	const params = useParams();
@@ -127,6 +128,10 @@ export default function HousingPage() {
 						</section>
 						<section>
 							<EditButton onClick={() => setShowEditForm(true)} />
+							<DeleteHousingButton
+								address={`${housings.adresse} ${housings.codePostal} ${housings.ville}`}
+								owner={housings.nomProprietaire}
+							/>
 							<OwnerProfile name={housings.nomProprietaire} />
 						</section>
 					</section>

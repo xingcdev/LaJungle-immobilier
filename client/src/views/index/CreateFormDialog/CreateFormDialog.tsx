@@ -16,6 +16,8 @@ export default function CreateFormDialog(props: CreateFormDialogProps) {
 	const [isFormLoading, setIsFormLoading] = useState(false);
 
 	function handleSubmit(formValues: HousingFormValues) {
+		setIsFormLoading(true);
+
 		const data = {
 			adresse: formValues.address,
 			codePostal: formValues.postalCode,
@@ -39,7 +41,6 @@ export default function CreateFormDialog(props: CreateFormDialogProps) {
 		})
 			.then((res) => res.json())
 			.then((json) => {
-				setIsFormLoading(true);
 				if (json.error) throw new Error(json.error);
 
 				if (json.data) {
@@ -54,7 +55,7 @@ export default function CreateFormDialog(props: CreateFormDialogProps) {
 	}
 
 	return (
-		<Dialog open={props.isOpen}>
+		<Dialog open={props.isOpen} onClose={props.onClose}>
 			<DialogTitle>Créer un logement</DialogTitle>
 			<DialogContent style={{ paddingTop: '1rem' }}>
 				<HousingForm
