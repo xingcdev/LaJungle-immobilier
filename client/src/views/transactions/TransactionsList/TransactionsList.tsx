@@ -1,6 +1,7 @@
 import styles from './TransactionsList.module.scss';
 import Stack from '@mui/material/Stack';
 import { Loading } from '@/components/feedback';
+import TransactionCard from '../TransactionsCard/TransactionsCard';
 /*import {
 	Table,
 	TableHead,
@@ -30,6 +31,16 @@ function Transactions(props: TransactionsProps) {
 				? emptyMessage
 				:props.transactions?.map((transaction: any) => (
 					<Stack>
+						<TransactionCard
+							logementId={transaction.id}
+							clientId={transaction.id}
+							prixVent={transaction.prixVent}
+							pourcentageCommission={transaction.pourcentageCommission}
+							// clientId: number;
+							// logementId: number;
+							// prixVent: number;
+							// pourcentageCommission: number;
+						/>
 						{/* <TransactionCard */}
 					</Stack>
 				)
@@ -47,6 +58,7 @@ function Transactions(props: TransactionsProps) {
 		</TableRow>
 	);*/
 }
+export default Transactions;
 
 /*export default function TransactionsList() {
 	const rows = [
