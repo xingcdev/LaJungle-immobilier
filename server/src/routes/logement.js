@@ -5,6 +5,6 @@ router.get('/get', logement.getLogement);
 router.get('/getAll', logement.getAllLogements);
 router.post('/create', logement.createLogement);
 router.post('/update', logement.updateLogement);
-router.delete('/remove', logement.deleteLogement);
+router.delete('/delete', logement.deleteLogement);
 
 module.exports = router;
