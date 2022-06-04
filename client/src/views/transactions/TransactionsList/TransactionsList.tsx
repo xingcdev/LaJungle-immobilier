@@ -1,6 +1,7 @@
 import styles from './TransactionsList.module.scss';
 import Stack from '@mui/material/Stack';
 import { Loading } from '@/components/feedback';
+import TransactionCard from '../TransactionsCard/TransactionsCard';
 /*import {
 	Table,
 	TableHead,
@@ -13,7 +14,7 @@ import { Loading } from '@/components/feedback';
 interface TransactionsProps {
 	transactions: any | null;
 	isLoading: boolean;
-	setHousingsData: (newHousings: any) => void;
+	setTransactionsData: (newTransactions: any) => void;
 }
 
 
@@ -24,12 +25,41 @@ function Transactions(props: TransactionsProps) {
 		<p className={styles.emptyMessage}>Transactions non trouvées :(</p>
 	);
 
+	function addTransactions(newTransactions: any) {
+		props.setTransactionsData((existingData: any) => {
+			// Overwrite only the values in existingData.
+			// 'newHousing' data has so much values that we don't need in 'existingData'
+			if (!existingData) return props.setTransactionsData([newTransactions]);
+			const keys = Object.keys(existingData[0]);
+			let computedTransaction: Record<string, any> = {};
+			keys.map((key) => {
+				computedTransaction[key] = newTransactions[key];
+			});
+
+			// todo: remove this if the response of logement/create returns 'nbGarages'
+			//computedTransaction['nbGarages'] = 0;
+
+			props.setTransactionsData([...existingData, computedTransaction]);
+		});
+	}
+
 	return (
 		<Stack spacing={2}>
 			{!props.transactions || !props.transactions.length
 				? emptyMessage
 				:props.transactions?.map((transaction: any) => (
-					<Stack>
+					<Stack spacing={6}>
+						<TransactionCard
+							//key={transaction.id}
+							logementId={transaction.idLogement}
+							idTransaction={transaction.idTransaction}
+							prixVente={transaction.prixVente}
+							pourcentageCommission={transaction.pourcentageCommission}
+							// clientId: number;
+							// logementId: number;
+							// prixVent: number;
+							// pourcentageCommission: number;
+						/>
 						{/* <TransactionCard */}
 					</Stack>
 				)
@@ -47,6 +77,7 @@ function Transactions(props: TransactionsProps) {
 		</TableRow>
 	);*/
 }
+export default Transactions;
 
 /*export default function TransactionsList() {
 	const rows = [
@@ -70,3 +101,4 @@ function Transactions(props: TransactionsProps) {
 		</Table>
 	);
 }*/
+
