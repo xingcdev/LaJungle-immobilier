@@ -14,7 +14,7 @@ import TransactionCard from '../TransactionsCard/TransactionsCard';
 interface TransactionsProps {
 	transactions: any | null;
 	isLoading: boolean;
-	setHousingsData: (newHousings: any) => void;
+	setTransactionsData: (newTransactions: any) => void;
 }
 
 
@@ -24,6 +24,24 @@ function Transactions(props: TransactionsProps) {
 	const emptyMessage = (
 		<p className={styles.emptyMessage}>Transactions non trouvées :(</p>
 	);
+
+	function addTransactions(newTransactions: any) {
+		props.setTransactionsData((existingData: any) => {
+			// Overwrite only the values in existingData.
+			// 'newHousing' data has so much values that we don't need in 'existingData'
+			if (!existingData) return props.setTransactionsData([newTransactions]);
+			const keys = Object.keys(existingData[0]);
+			let computedTransaction: Record<string, any> = {};
+			keys.map((key) => {
+				computedTransaction[key] = newTransactions[key];
+			});
+
+			// todo: remove this if the response of logement/create returns 'nbGarages'
+			computedTransaction['nbGarages'] = 0;
+
+			props.setTransactionsData([...existingData, computedTransaction]);
+		});
+	}
 
 	return (
 		<Stack spacing={2}>
@@ -83,3 +101,4 @@ export default Transactions;
 		</Table>
 	);
 }*/
+

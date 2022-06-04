@@ -16,7 +16,7 @@ function TransactionsPage(){
 			<TransactionsList
 				isLoading={isLoading}
 				transactions={data}
-				setHousingsData={setData}
+				setTransactionsData={setData}
 			/>
 		</section>
 	);
