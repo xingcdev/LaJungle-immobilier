@@ -36,14 +36,12 @@ function Housings(props: HousingsProps) {
 	}
 
 	return (
-		// <section className={styles.housingsList}>
 		<Grid container spacing={4}>
 			{!props.housings || !props.housings.length
 				? emptyMessage
 				: props.housings?.map((housing: any) => (
-						<Grid item md={6} lg={4}>
+						<Grid item md={6} lg={4} key={housing.id}>
 							<HousingCard
-								key={housing.id}
 								housingId={housing.id}
 								photo={housing.photo}
 								price={housing.prixMiseEnVente}
