@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
-import styles from './HousingPage.module.scss';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import OwnerProfile from '../OwnerProfile/OwnerProfile';
 import VisitList from '../VisitList/VisitList';
 import InfoChip from '../InfoChip/InfoChip';
@@ -10,12 +13,10 @@ import { Loading } from '@/components/feedback';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import DeleteHousingButton from '../DeleteHousingButton/DeleteHousingButton';
+import EmptyPhoto from '@assets/housings/empty-housing-photo.png';
 
 export default function HousingPage() {
 	const params = useParams();
-	const housingPhoto =
-		'https://images.unsplash.com/photo-1460317442991-0ec209397118?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170';
-
 	const [showEditForm, setShowEditForm] = useState(false);
 
 	const [housings, setHousings] = useState<any>({});
@@ -48,7 +49,7 @@ export default function HousingPage() {
 	if (error) return <p>{error}</p>;
 
 	return (
-		<section className={styles.page}>
+		<Box component="section">
 			{showEditForm ? (
 				<EditHousingPage
 					initialValues={{
@@ -73,68 +74,123 @@ export default function HousingPage() {
 				/>
 			) : (
 				<>
-					<section className={styles.hero}>
-						<img src={housingPhoto} alt="housing" />
-					</section>
-					<section className={styles.content}>
-						<section className={styles.housingContent}>
-							<section className={styles.info}>
-								<p className={styles.address}>{housings.adresse}</p>
-								<p className={styles.postalCode}>
-									{housings.codePostal}
-									<span className={styles.city}> {housings.ville}</span>
-								</p>
-								<p className={styles.price}>
-									Prix :{' '}
-									<span className={styles.priceValue}>
-										{housings.prixMiseEnVente}
-									</span>
-									<span className={styles.priceDevise}> €</span>
-								</p>
-								<p className={styles.availableDate}>
-									Date disponibilité :{' '}
-									<span className={styles.availableDateValue}>
-										{new Date(housings.dateDisponibilite).toLocaleDateString(
-											'fr-FR'
-										)}
-									</span>
-								</p>
-								<p className={styles.type}>
-									Type:{' '}
-									<span className={styles.typeValue}>
-										{housings.typeLogement.label}
-									</span>
-								</p>
-								<p className={styles.condition}>
-									État :{' '}
-									<span className={styles.conditionValue}>
-										{housings.etatHabitation.label}
-									</span>
-								</p>
+					<Grid container>
+						<Grid
+							item
+							xs={5}
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+								justifyContent: 'center',
+							}}
+							sx={{
+								mb: 4,
+							}}
+						>
+							<Stack spacing={1}>
+								<Typography variant="h3" style={{ fontWeight: 600 }}>
+									{housings.adresse}
+								</Typography>
 
+								<Typography
+									variant="h3"
+									gutterBottom
+									style={{ fontWeight: 600 }}
+								>
+									{housings.codePostal} {''}
+									<Typography
+										component="span"
+										variant="h3"
+										style={{ fontWeight: 600 }}
+									>
+										{housings.ville}
+									</Typography>
+								</Typography>
+								<Typography color="text.secondary">
+									Prix: {housings.prixMiseEnVente} €
+								</Typography>
+								<Typography color="text.secondary">
+									Date disponibilité:{' '}
+									{new Date(housings.dateDisponibilite).toLocaleDateString(
+										'fr-FR'
+									)}
+								</Typography>
+
+								<Typography color="text.secondary">
+									Type: {housings.typeLogement.label}
+								</Typography>
+
+								<Typography color="text.secondary">
+									État: {housings.etatHabitation.label}
+								</Typography>
 								<InfoChip
 									surface={housings.superficie}
 									rooms={housings.nombrePieces}
 									garages={housings.nbGarages}
 								/>
-							</section>
-							<section className={styles.description}>
-								<h2 className={styles.descriptionTitle}>Description</h2>
-								<p className={styles.descriptionContent}>
-									{housings.description}
-								</p>
-							</section>
-							<VisitList visits={{}} />
-						</section>
-						<section>
-							<EditButton onClick={() => setShowEditForm(true)} />
-							<DeleteHousingButton
-								address={`${housings.adresse} ${housings.codePostal} ${housings.ville}`}
-								owner={housings.nomProprietaire}
+							</Stack>
+							<Stack
+								direction="row"
+								spacing={2}
+								sx={{
+									mt: 3,
+								}}
+							>
+								<EditButton onClick={() => setShowEditForm(true)} />
+								<DeleteHousingButton
+									address={`${housings.adresse} ${housings.codePostal} ${housings.ville}`}
+									owner={housings.nomProprietaire}
+								/>
+							</Stack>
+						</Grid>
+
+						<Grid
+							item
+							xs
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+								justifyContent: 'center',
+							}}
+							sx={{
+								mb: 4,
+							}}
+						>
+							<img
+								src={EmptyPhoto}
+								alt="Default housing photo"
+								style={{
+									maxHeight: '600px',
+								}}
 							/>
+							<Typography
+								variant="h6"
+								textAlign="center"
+								color="text.secondary"
+							>
+								Le propriétaire n'a pas mis de photos.
+							</Typography>
+						</Grid>
+
+						<Grid item xs={8}>
+							<Typography component="h2" variant="h4" gutterBottom>
+								Description
+							</Typography>
+
+							<Typography paragraph>{housings.description}</Typography>
+						</Grid>
+
+						<Grid item>
 							<OwnerProfile name={housings.nomProprietaire} />
-						</section>
-					</section>
+						</Grid>
+
+						<Grid item xs={12}>
+							<Typography component="h2" variant="h4" gutterBottom>
+								Visites
+							</Typography>
+							<VisitList visits={{}} />
+						</Grid>
+					</Grid>
 					<Snackbar
 						open={openSnackbar}
 						autoHideDuration={5000}
@@ -152,6 +208,6 @@ export default function HousingPage() {
 					</Snackbar>
 				</>
 			)}
-		</section>
+		</Box>
 	);
 }

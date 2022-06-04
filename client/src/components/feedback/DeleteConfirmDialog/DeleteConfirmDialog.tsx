@@ -24,9 +24,11 @@ export default function DeleteConfirmDialog({
 }: DeleteConfirmDialogProps) {
 	return (
 		<Dialog {...dialogProps}>
-			<DialogTitle color="error">{title}</DialogTitle>
+			<DialogTitle>{title}</DialogTitle>
 			<DialogContent>
-				<Alert severity="warning">{children}</Alert>
+				<Alert severity="warning" variant="outlined">
+					{children}
+				</Alert>
 			</DialogContent>
 			<DialogActions>
 				<CancelButton onClick={onClose} />
