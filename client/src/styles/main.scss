@@ -9,6 +9,11 @@
 	height: 100%;
 }
 
+// Create-React-App create a <iframe> that prevents clicking. Use the rule below to enable the clicking
+iframe {
+	pointer-events: none;
+}
+
 /*button {
 	background: none;
 	padding: 0;
