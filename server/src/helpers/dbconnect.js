@@ -221,8 +221,8 @@ async function createVisiteTable(connection) {
                 IdLogement INT NOT NULL,
                 IdClient INT NOT NULL,
                 PRIMARY KEY(IdVisite),
-                FOREIGN KEY(IdLogement) REFERENCES Logement(IdLogement),
-                FOREIGN KEY(IdClient) REFERENCES Client(IdClient)
+                FOREIGN KEY(IdLogement) REFERENCES Logement(IdLogement) ON DELETE CASCASE,
+                FOREIGN KEY(IdClient) REFERENCES Client(IdClient) ON DELETE CASCADE
              ); `,
 
       (error) => {
