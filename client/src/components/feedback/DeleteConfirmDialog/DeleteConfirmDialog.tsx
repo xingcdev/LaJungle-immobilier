@@ -14,16 +14,23 @@ interface DeleteConfirmDialogProps extends DialogProps {
 	children: ReactNode;
 }
 
-export default function DeleteConfirmDialog(props: DeleteConfirmDialogProps) {
+export default function DeleteConfirmDialog({
+	onClose,
+	onConfirm,
+	loading,
+	title,
+	children,
+	...dialogProps
+}: DeleteConfirmDialogProps) {
 	return (
-		<Dialog {...props}>
-			<DialogTitle color="error">{props.title}</DialogTitle>
+		<Dialog {...dialogProps}>
+			<DialogTitle color="error">{title}</DialogTitle>
 			<DialogContent>
-				<Alert severity="warning">{props.children}</Alert>
+				<Alert severity="warning">{children}</Alert>
 			</DialogContent>
 			<DialogActions>
-				<CancelButton onClick={props.onClose} />
-				<OKButton onClick={props.onConfirm} loading={props.loading} />
+				<CancelButton onClick={onClose} />
+				<OKButton onClick={onConfirm} loading={loading} />
 			</DialogActions>
 		</Dialog>
 	);
