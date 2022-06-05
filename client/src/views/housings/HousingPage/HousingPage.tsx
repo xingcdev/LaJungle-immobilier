@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import OwnerProfile from '../OwnerProfile/OwnerProfile';
-import VisitList from '../VisitList/VisitList';
+//import VisitList from '../VisitList/VisitList';
 import InfoChip from '../InfoChip/InfoChip';
 import EditHousingPage from '../EditHousingPage/EditHousingPage';
 import { EditButton } from '@components/buttons';
@@ -182,12 +182,12 @@ export default function HousingPage() {
 							<OwnerProfile name={housings.nomProprietaire} />
 						</Grid>
 
-						<Grid item xs={12}>
+						{/* <Grid item xs={12}>
 							<Typography component="h2" variant="h4" gutterBottom>
 								Visites
 							</Typography>
 							<VisitList visits={{}} />
-						</Grid>
+						</Grid> */}
 					</Grid>
 					<Snackbar
 						open={openSnackbar}
