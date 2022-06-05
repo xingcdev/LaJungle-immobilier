@@ -57,7 +57,7 @@ async function createVisite(DateHeureVisite, IdLogement, IdClient) {
 async function getAllVisites() {
   return new Promise((resolve, reject) => {
     let sql =
-      'SELECT v.*, l.Adresse, c.NomClient FROM Visite v INNER JOIN Logement l ON v.IdLogement = l.idLogement INNER JOIN Client c ON v.IdClient = c.IdClient;';
+      'SELECT v.*, l.Adresse, c.NomClient FROM Visite v INNER JOIN Logement l ON v.IdLogement = l.idLogement INNER JOIN Client c ON v.IdClient = c.IdClient ORDER BY v.IdVisite;';
     database.getConnection((error, connection) => {
       if (error)
         console.error(

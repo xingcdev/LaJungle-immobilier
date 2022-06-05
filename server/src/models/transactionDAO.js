@@ -56,7 +56,7 @@ async function createTransaction(
 
 async function getAllTransactions() {
   return new Promise((resolve, reject) => {
-    let sql = 'SELECT t.*, l.Adresse, c.NomClient FROM Transaction t INNER JOIN Logement l ON t.IdLogement = l.IdLogement INNER JOIN Client c ON t.IdClient = c.IdClient;';
+    let sql = 'SELECT t.*, l.Adresse, c.NomClient FROM Transaction t INNER JOIN Logement l ON t.IdLogement = l.IdLogement INNER JOIN Client c ON t.IdClient = c.IdClient ORDER BY t.IdTransaction;';
     database.getConnection((error, connection) => {
       if (error) reject(error);
       connection.query(sql, [], (error, results) => {
