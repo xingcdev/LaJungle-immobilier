@@ -1,6 +1,3 @@
-import { Link } from 'react-router-dom';
-//import InfoChip from '../../housings/InfoChip/InfoChip';
-import Stack from '@mui/material/Stack';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -33,7 +30,6 @@ function VisitsCard(props: VisitsCardProps) {
 						<Typography component="span" color="text.secondary">
 							{props.idVisite}
 						</Typography>
-						{/* <Typography component='span' color="text.secondary">{new Date(props.dateHeureVisite).toLocaleDateString('fr-FR')}</Typography> */}
 						<Typography component="span" color="text.secondary">
 							{new Date(props.dateHeureVisite).toLocaleString('fr-FR')}
 						</Typography>

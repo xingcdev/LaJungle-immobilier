@@ -155,7 +155,7 @@ export default function HousingPage() {
 							<Box>
 								<img
 									src={EmptyPhoto}
-									alt="Default housing photo"
+									alt="Default housing"
 									style={{
 										maxWidth: '600px',
 									}}
@@ -181,13 +181,6 @@ export default function HousingPage() {
 						<Grid item>
 							<OwnerProfile name={housings.nomProprietaire} />
 						</Grid>
-
-						{/* <Grid item xs={12}>
-							<Typography component="h2" variant="h4" gutterBottom>
-								Visites
-							</Typography>
-							<VisitList visits={{}} />
-						</Grid> */}
 					</Grid>
 					<Snackbar
 						open={openSnackbar}

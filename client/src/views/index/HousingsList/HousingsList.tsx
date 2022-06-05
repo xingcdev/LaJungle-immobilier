@@ -24,7 +24,7 @@ function Housings(props: HousingsProps) {
 			if (!existingData) return props.setHousingsData([newHousing]);
 			const keys = Object.keys(existingData[0]);
 			let computedHousing: Record<string, any> = {};
-			keys.map((key) => {
+			keys.forEach((key) => {
 				computedHousing[key] = newHousing[key];
 			});
 
