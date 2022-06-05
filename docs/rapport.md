@@ -196,10 +196,10 @@ Pour chaque requête, un code de statut de réponse HTTP est envoyé afin de vé
 
  Voici les API routes pour les requêtes que nous avons utilisé dans notre projet :  
 ## Table Transaction :
-### http://localhost:5000/api/Transaction/create : 
+### http://localhost:5000/api/transaction/create : 
 Permet de créer une transaction.
 
-### http://localhost:5000/api/Transaction/get : 
+### http://localhost:5000/api/transaction/get : 
 Prend en paramètre l'ID de la transaction souhaitée. Permet de retourner les informations d'une transaction spécifique (IdTransaction, PrixVente PourcentageCommissionIdLogement, IdClient).
 
 Exemple de réponse JSON : 
@@ -211,29 +211,56 @@ Exemple de réponse JSON :
     "IdLogement": 3 
 }
 ```
-### http://localhost:5000/api/Transaction/getAll : 
-Permet de retourner la liste de toutes les transactions de la base de données. 
-### http://localhost:5000/api/Transaction/update : 
-Prend en paramètre l'ID de la transaction souhaitée. Permet de modifier les informations d'une transaction, en fonction des paramètres envoyés.
-### http://localhost:5000/api/Transaction/remove : 
-Prend en paramètre l'ID de la transaction souhaitée. Permet de supprimer une transaction spécifique de la base de données. 
+### http://localhost:5000/api/transaction/getAll : 
+Permet de retourner la liste de toutes les transactions de la base de données.
+### http://localhost:5000/api/transaction/update : 
+Prend en paramètre l'id de la transaction souhaitée. Permet de modifier les informations d'une transaction, en fonction des paramètres envoyés.
+### http://localhost:5000/api/transaction/remove : 
+Prend en paramètre l'id de la transaction souhaitée. Permet de supprimer une transaction spécifique de la base de données. 
 
 ## Table Visite :
-### http://localhost:5000/api/Visite/get : 
+### http://localhost:5000/api/visite/get : 
 Prend en paramètre l'ID de la visite souhaitée. Permet de retourner les informations d'une transaction spécifique (IdTransaction, PrixVente PourcentageCommissionIdLogement, IdClient).
 
 Exemple de réponse JSON : 
 ```json
 {
-    "PrixVente": 135.000,
-    "PourcentageCommission": 4.2,
-    "IdClient": 1,
-    "IdLogement": 3 
+    "data": {
+        "idVisite": 1,
+        "idLogement": 1,
+        "idClient": 4
+    },
+    "error": null
 }
 ```
-### http://localhost:5000/api/Visite/getAll : 
-Permet de retourner la liste de toutes les transactions de la base de données. 
-### http://localhost:5000/api/Visite/update : 
+### http://localhost:5000/api/visite/getAll : 
+Permet de retourner la liste de toutes les transactions de la base de données.
+
+```json
+{
+    "data": [
+        {
+            "idVisite": 1,
+            "dateHeureVisite": "2022-11-29T13:15:00.000Z",
+            "idLogement": 1,
+            "idClient": 4,
+            "adresse": "9 Rue du Chat qui Pêche",
+            "nomClient": "Mélanie Dang"
+        },
+        {
+            "idVisite": 2,
+            "dateHeureVisite": "2022-10-11T08:30:00.000Z",
+            "idLogement": 2,
+            "idClient": 2,
+            "adresse": "25 Rue Brisemiche",
+            "nomClient": "Xing Chen"
+        }
+    ],
+    "error": null
+}
+```
+
+### http://localhost:5000/api/visite/update : 
 Permet de modifier les informations d'une transaction, en fonction des paramètres envoyés.
-### http://localhost:5000/api/Visite/remove : 
+### http://localhost:5000/api/visite/remove : 
 Permet de supprimer une transaction spécifique de la base de données. 
