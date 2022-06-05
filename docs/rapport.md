@@ -219,11 +219,11 @@ Exemple de réponse JSON :
     "IdLogement": 3 
 }
 ```
-### http://localhost:5000/api/Transaction/getAll : 
+### http://localhost:5000/api/transaction/getAll : 
 Permet de retourner la liste de toutes les transactions de la base de données. 
-### http://localhost:5000/api/Transaction/update : 
+### http://localhost:5000/api/transaction/update : 
 Prend en paramètre l'ID de la transaction souhaitée. Permet de modifier les informations d'une transaction, en fonction des paramètres envoyés.
-### http://localhost:5000/api/Transaction/remove : 
+### http://localhost:5000/api/transaction/remove : 
 Permet de supprimer une transaction spécifique de la base de données.
 
 | Paramètres      |
@@ -232,7 +232,7 @@ Permet de supprimer une transaction spécifique de la base de données.
 
 
 ## Table Visite :
-### http://localhost:5000/api/Visite/create : 
+### http://localhost:5000/api/visite/create : 
 Permet de créer une visite.
 | Paramètres      |
 |-----------------|
@@ -241,7 +241,7 @@ Permet de créer une visite.
 | IdLogement      |
 | IdClient        |
 
-### http://localhost:5000/api/Visite/get : 
+### http://localhost:5000/api/visite/get : 
 Permet de retourner les informations d'une transaction spécifique (IdVisite, DateHeureVisite IdLogement, IdClient).
 
 | Paramètres      |
@@ -285,11 +285,11 @@ Permet de retourner la liste de toutes les transactions de la base de données.
     "error": null
 }
 ```
-### http://localhost:5000/api/Visite/getAll : 
+### http://localhost:5000/api/visite/getAll : 
 Permet de retourner la liste de toutes les visites de la base de données. 
-### http://localhost:5000/api/Visite/update : 
+### http://localhost:5000/api/visite/update : 
 Permet de modifier les informations d'une visite, en fonction des paramètres envoyés.
-### http://localhost:5000/api/Visite/remove : 
+### http://localhost:5000/api/visite/remove : 
 Permet de supprimer une visite spécifique de la base de données. 
 
 | Paramètres      |
