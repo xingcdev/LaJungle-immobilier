@@ -127,7 +127,17 @@ Les composants Reacts s'organisent sous forme d'un arbre. `App` est le composant
   - HousingPage
   - TransactionsPage
 
-  ## Structure des fichiers frontend
+  ## Structure des fichiers backend
+  Tout le code source est situé dans le répertoire `src/`. Sa structure est la suivante :
+
+- `controllers/`: Chaque fichier JS correspond à une table de données. Un contrôleur fait appel au modèle qui lui est associé pour récupérer les résultats d'une requête en passant les paramètres voulus. Le contrôleur renvoie ensuite les résultats à la partie *front* au format JSON.
+- `helpers/`: le fichier dbconnect.js à l'intérieur du dossier gère la connexion à la base de données mySQL et crée les tables au démarrage de l'API si elles n'existent pas. La configuration mySQL (identifiant, mot de passe) se trouve dans le fichier `src/config.json`.
+- `middlewares/`: Le fichier auth.js à l'intérieur du dossier gère l'authentification via JSON Web Token (JWT) et vérifie que l'utilisateur est autorisé à accéder aux pages du site.
+- `models/`: Chaque fichier JS à l'intérieur du dossier correspond à une table de la base de données. Ils contiennent les différentes requêtes SQL possibles, reçoivent les paramètres envoyés par le contrôleur et lui renvoient le résultat de la requête.  
+Par exemple, on trouvera dans le fichier `logementDAO.js` les requêtes SQL permettant d'ajouter, de consulter, de mettre à jour ou encore de supprimer un logement.
+- `routes/`: Contient les différentes routes de l'API, par exemple : `/api/exemple`. Utilise la dépendance express-router.
+- `strategies/`: Permet l'authentification de l'utilisateur via son compte Microsoft.
+## Structure des fichiers frontend
 
 Tout le code source est situé dans le répertoire `src/`. Sa structure est la suivante :
 
@@ -174,7 +184,56 @@ Nous avons rédigé deux scripts SQL afin de construire une base de données en 
 
 Nous avons ajouté une table utilisateur avec les attributs "NomUtilisateur" et "MotDePasse", qui permet à une personne de créer son compte et son mot de passe afin d'accéder au site.
 
-## Fonctionnalités à faire
+**API Routes**
+Pour chaque requête, un code de statut de réponse HTTP est envoyé afin de vérifier si la requête s'est bien réalisée ou non.
 
-- ajouter, modifier, supprimer une visite depuis la page détail d'un logement
-- ajouter, modifier, supprimer une transaction
+| Code HTTP | Description                                                |
+|-----------|------------------------------------------------------------|
+| 200       | La requête s'est bien déroulée                             |
+| 400       | Erreur dans la requête (exemple : ID de l'objet non défini |
+| 500       | Erreur du serveur                                          |
+
+
+ Voici les API routes pour les requêtes que nous avons utilisé dans notre projet :  
+## Table Transaction :
+### http://localhost:5000/api/Transaction/create : 
+Permet de créer une transaction.
+
+### http://localhost:5000/api/Transaction/get : 
+Prend en paramètre l'ID de la transaction souhaitée. Permet de retourner les informations d'une transaction spécifique (IdTransaction, PrixVente PourcentageCommissionIdLogement, IdClient).
+
+Exemple de réponse JSON : 
+```json
+{
+    "PrixVente": 135.000,
+    "PourcentageCommission": 4.2,
+    "IdClient": 1,
+    "IdLogement": 3 
+}
+```
+### http://localhost:5000/api/Transaction/getAll : 
+Permet de retourner la liste de toutes les transactions de la base de données. 
+### http://localhost:5000/api/Transaction/update : 
+Prend en paramètre l'ID de la transaction souhaitée. Permet de modifier les informations d'une transaction, en fonction des paramètres envoyés.
+### http://localhost:5000/api/Transaction/remove : 
+Prend en paramètre l'ID de la transaction souhaitée. Permet de supprimer une transaction spécifique de la base de données. 
+
+## Table Visite :
+### http://localhost:5000/api/Visite/get : 
+Prend en paramètre l'ID de la visite souhaitée. Permet de retourner les informations d'une transaction spécifique (IdTransaction, PrixVente PourcentageCommissionIdLogement, IdClient).
+
+Exemple de réponse JSON : 
+```json
+{
+    "PrixVente": 135.000,
+    "PourcentageCommission": 4.2,
+    "IdClient": 1,
+    "IdLogement": 3 
+}
+```
+### http://localhost:5000/api/Visite/getAll : 
+Permet de retourner la liste de toutes les transactions de la base de données. 
+### http://localhost:5000/api/Visite/update : 
+Permet de modifier les informations d'une transaction, en fonction des paramètres envoyés.
+### http://localhost:5000/api/Visite/remove : 
+Permet de supprimer une transaction spécifique de la base de données. 

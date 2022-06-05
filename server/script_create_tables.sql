@@ -72,7 +72,7 @@ CREATE TABLE Posseder(
 
 DROP TABLE IF EXISTS Utilisateur;
 CREATE TABLE Utilisateur(
-   NomUtilisateur NOT NULL VARCHAR(50),
-   MotDePasse NOT NULL VARCHAR(50),
+   NomUtilisateur VARCHAR(50) NOT NULL,
+   MotDePasse VARCHAR(50) NOT NULL,
    PRIMARY KEY (NomUtilisateur)  
 )

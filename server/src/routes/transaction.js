@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const transaction = require('../controllers/transaction.js');
 
+router.get('/create', transaction.createTransaction);
 router.get('/get', transaction.getTransaction);
 router.get('/getAll', transaction.getAllTransactions);
 router.post('/update', transaction.updateTransaction);
