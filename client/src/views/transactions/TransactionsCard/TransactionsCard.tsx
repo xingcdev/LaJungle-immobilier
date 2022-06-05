@@ -15,6 +15,7 @@ interface TransactionsCardProps {
 	logementId: number;
 	prixVente: number;
 	pourcentageCommission: number;
+	idClient: number;
 	// photo?: string;
 	// price: number;
 	// address: string;
@@ -52,6 +53,7 @@ function TransactionCard(props: TransactionsCardProps) {
 							<span><Typography color="text.secondary">{props.prixVente} €</Typography> </span>
 							<span><Typography color="text.secondary">{props.pourcentageCommission} %</Typography> </span>
 							<span><Typography color="text.secondary">{props.logementId}</Typography></span>
+							<span><Typography color="text.secondary">{props.idClient}</Typography></span>
 						</li>
 						
 							 {/* <Typography

@@ -55,7 +55,7 @@ function Transactions(props: TransactionsProps) {
 							idTransaction={transaction.idTransaction}
 							prixVente={transaction.prixVente}
 							pourcentageCommission={transaction.pourcentageCommission}
-							// clientId: number;
+							idClient={transaction.idClient}
 							// logementId: number;
 							// prixVent: number;
 							// pourcentageCommission: number;

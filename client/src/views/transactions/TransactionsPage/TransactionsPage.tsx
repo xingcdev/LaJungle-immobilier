@@ -19,6 +19,7 @@ function TransactionsPage(){
 		 		<span className={styles.test}><h5>Prix de la vente</h5></span>
 				<span className={styles.test}><h5>Pourcentage de la commission</h5></span>
 				<span className={styles.test}><h5>idLogement</h5></span>
+				<span className={styles.test}><h5>idClient</h5></span>
 		 	</li>
 			<TransactionsList
 				isLoading={isLoading}
