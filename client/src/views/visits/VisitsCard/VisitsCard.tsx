@@ -32,7 +32,7 @@ function VisitsCard(props: VisitsCardProps) {
 	adresse:string;
 	nomClient:string; */}
 							<Typography component='span' color="text.secondary">{props.idVisite}</Typography>
-							<Typography component='span' color="text.secondary">{new Date(props.dateHeureVisite).toLocaleDateString('fr-FR')}</Typography>
+							{/* <Typography component='span' color="text.secondary">{new Date(props.dateHeureVisite).toLocaleDateString('fr-FR')}</Typography> */}
 							<Typography component='span' color="text.secondary">{new Date(props.dateHeureVisite).toLocaleString('fr-FR')}</Typography>
 							<Typography component='span' color="text.secondary">{props.adresse}</Typography>
 							<Typography component='span' color="text.secondary">{props.nomClient}</Typography>
