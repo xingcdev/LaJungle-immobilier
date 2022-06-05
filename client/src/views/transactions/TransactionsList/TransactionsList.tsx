@@ -1,7 +1,5 @@
 import styles from './TransactionsList.module.scss';
-import Stack from '@mui/material/Stack';
 import { Loading } from '@/components/feedback';
-import TransactionCard from '../TransactionsCard/TransactionsCard';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
