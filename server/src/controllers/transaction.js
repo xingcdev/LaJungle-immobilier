@@ -43,7 +43,7 @@ async function getAllTransactions(req, res) {
           prixVente: element.PrixVente,
           pourcentageCommission: element.PourcentageCommission,
           idLogement: element.IdLogement,
-          idClient: element.idClient,
+          idClient: element.IdClient,
         })),
         error: null,
       });
