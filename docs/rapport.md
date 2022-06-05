@@ -340,34 +340,26 @@ Permet de supprimer une transaction spécifique de la base de données.
 
 ## Table Visite :
 
-<<<<<<< HEAD
-
-### http://localhost:5000/api/visite/create :
-
-=======
 Route http://localhost:5000/api/visite/create :
 
-> > > > > > > 0943edd7c7cc556e251572f54730f0b0ed29ff75
-> > > > > > > Permet de créer une visite.
-> > > > > > > | Paramètres |
-> > > > > > > |-----------------|
-> > > > > > > | IdVisite |
-> > > > > > > | DateHeureVisite |
-> > > > > > > | IdLogement |
-> > > > > > > | IdClient |
+
+Permet de créer une visite.
+| Paramètres |
+|-----------------|
+| dateHeureVisite |
+| idLogement |
+| idClient |
 
 ### http://localhost:5000/api/visite/get :
 
-# <<<<<<< HEAD
 
 Route http://localhost:5000/api/visite/get :
 
-> > > > > > > 0943edd7c7cc556e251572f54730f0b0ed29ff75
-> > > > > > > Permet de retourner les informations d'une transaction spécifique (IdVisite, DateHeureVisite IdLogement, IdClient).
+Permet de retourner les informations d'une transaction spécifique (IdVisite, DateHeureVisite IdLogement, IdClient).
 
 | Paramètres |
 | ---------- |
-| IdVisite   |
+| id  |
 
 Exemple de réponse JSON :
 
@@ -435,17 +427,17 @@ Permet de créer un logement.
 
 | Paramètres          |
 | ------------------- |
-| Adresse             |
-| DescriptionLogement |
-| NomProprietaire     |
-| IdType              |
-| NombrePieces        |
-| Superficie          |
-| IdEtat              |
-| PrixMiseEnVente     |
-| DateDisponibilite   |
-| CodePostal          |
-| Ville               |
+| adresse             |
+| descriptionLogement |
+| nomProprietaire     |
+| idType              |
+| nombrePieces        |
+| superficie          |
+| idEtat              |
+| prixMiseEnVente     |
+| dateDisponibilite   |
+| codePostal          |
+| ville               |
 
 Route http://localhost:5000/api/logement/get :
 Permet de retourner les informations d'un logement spécifique (IdLogement, Adresse, DescriptionLogement, NomProprietaire, IdType, NombrePieces, Superficie, IdEtat, PrixMiseEnVente, DateDisponibilite, CodePostal, Ville).
@@ -480,7 +472,7 @@ Exemple de réponse JSON :
         "nbGarages": 1
     },
     "error": null
-}s
+}
 ```
 
 Route http://localhost:5000/api/logement/getAll :
@@ -641,3 +633,8 @@ Durant ce projet, nous avons pu pratiquer ce que nous avons appris en cours de b
 ### Perspectives d'amélioration
 
 Avec plus de temps à notre disposition, nous aurions pu réaliser plus de fonctions portant notamment sur la gestion des garages et concevoir l'interface pour supprimer des transactions ou des visites. Nous aurions également pu créer une page dédiée aux statistiques afin d'obtenir, entre autres, le prix moyen des logements, le prix moyen des transactions, le total des commissions à l'aide des fonctions AVG et SUM de SQL.
+
+### Commentaire constructif
+
+Nous pensons qu'il pourrait être judicieux de lier ce projet à celui de développement web. En effet, ceux ayant opté pour la création d'un site web lors du projet de bases de données devront recommencer de zéro en développement web.
+Un projet commun nous permettrait de bénéficier d'un temps plus long pour proposer plus de fonctionnalités sans effectuer des tâches en double.
