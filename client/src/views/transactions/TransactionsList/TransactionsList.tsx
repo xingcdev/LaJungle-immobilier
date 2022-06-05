@@ -20,7 +20,7 @@ interface TransactionsProps {
 
 function Transactions(props: TransactionsProps) {
 	if (props.isLoading) return <Loading />;
-	
+
 	const emptyMessage = (
 		<p className={styles.emptyMessage}>Transactions non trouvées :(</p>
 	);
@@ -47,18 +47,19 @@ function Transactions(props: TransactionsProps) {
 		<Stack spacing={2}>
 			{!props.transactions || !props.transactions.length
 				? emptyMessage
-				:props.transactions?.map((transaction: any) => (
+				: props.transactions?.map((transaction: any) => (
 					<Stack spacing={6}>
 						<TransactionCard
 							//key={transaction.id}
-							logementId={transaction.idLogement}
+							adresse={transaction.adresse}
 							idTransaction={transaction.idTransaction}
 							prixVente={transaction.prixVente}
 							pourcentageCommission={transaction.pourcentageCommission}
-							idClient={transaction.idClient}
-							// logementId: number;
-							// prixVent: number;
-							// pourcentageCommission: number;
+							nomClient={transaction.nomClient}
+							montantCommission={transaction.montantCommission}
+						// logementId: number;
+						// prixVent: number;
+						// pourcentageCommission: number;
 						/>
 						{/* <TransactionCard */}
 					</Stack>
