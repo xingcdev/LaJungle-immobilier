@@ -44,6 +44,8 @@ Assurez-vous au préalable que le serveur mySQL est démarré. Le port utilisé 
 npm start
 ```
 
+Nous vous invitons à insérer les données se trouvant dans le fichier `server/script_insert_tables/sql` depuis l'interface de votre SGBD afin de disposer d'un jeu de données permettant de tester le projet
+
 **Frontend**
 
 Copier le fichier `client/.env.example` et le coller en tant qu'un nouveau fichier `.env` puis mettre l'url de l'api dans ce fichier:
