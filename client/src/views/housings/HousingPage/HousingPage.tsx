@@ -74,17 +74,15 @@ export default function HousingPage() {
 				/>
 			) : (
 				<>
-					<Grid container>
+					<Grid container spacing={4}>
 						<Grid
 							item
-							xs={5}
+							xs={12}
+							sm={6}
 							style={{
 								display: 'flex',
 								flexDirection: 'column',
 								justifyContent: 'center',
-							}}
-							sx={{
-								mb: 4,
 							}}
 						>
 							<Stack spacing={1}>
@@ -146,30 +144,30 @@ export default function HousingPage() {
 
 						<Grid
 							item
-							xs
+							xs={12}
+							sm={6}
 							style={{
 								display: 'flex',
-								flexDirection: 'column',
 								justifyContent: 'center',
-							}}
-							sx={{
-								mb: 4,
+								alignItems: 'center',
 							}}
 						>
-							<img
-								src={EmptyPhoto}
-								alt="Default housing photo"
-								style={{
-									maxHeight: '600px',
-								}}
-							/>
-							<Typography
-								variant="h6"
-								textAlign="center"
-								color="text.secondary"
-							>
-								Le propriétaire n'a pas mis de photos.
-							</Typography>
+							<Box>
+								<img
+									src={EmptyPhoto}
+									alt="Default housing photo"
+									style={{
+										maxWidth: '600px',
+									}}
+								/>
+								<Typography
+									variant="h6"
+									textAlign="center"
+									color="text.secondary"
+								>
+									Le propriétaire n'a pas mis de photos.
+								</Typography>
+							</Box>
 						</Grid>
 
 						<Grid item xs={8}>
