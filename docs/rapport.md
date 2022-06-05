@@ -5,17 +5,50 @@ Interface d'administration d'une agence immobilière réalisée avec les technol
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
 
-- [LaJungle Immobilier](#lajungle-immobilier)
-  - [Répartition des rôles](#r%C3%A9partition-des-r%C3%B4les)
-  - [Environnement technique](#environnement-technique)
-  - [Dépendances](#d%C3%A9pendances)
-  - [Process de développement Frontend](#process-de-d%C3%A9veloppement-frontend)
-    - [1. Faire une maquette de site Web qui affiche le modèle de données de la base de données.](#1-faire-une-maquette-de-site-web-qui-affiche-le-mod%C3%A8le-de-donn%C3%A9es-de-la-base-de-donn%C3%A9es)
-    - [2. Analyser la maquette et la divider en plusieurs petits components](#2-analyser-la-maquette-et-la-divider-en-plusieurs-petits-components)
-    - [3. Transformer ces composants sous forme d'une hiérarchie](#3-transformer-ces-composants-sous-forme-dune-hi%C3%A9rarchie)
-  - [Process de développement Backend](#process-de-d%C3%A9veloppement-backend)
+- [Origine du nom](#origine-du-nom)
+- [Répartition des rôles](#r%C3%A9partition-des-r%C3%B4les)
+- [Accès au site](#acc%C3%A8s-au-site)
+- [Environnement technique](#environnement-technique)
+- [Dépendances node.js](#d%C3%A9pendances-nodejs)
+- [Process de développement Frontend](#process-de-d%C3%A9veloppement-frontend)
+  - [1. Faire une maquette de site Web qui affiche le modèle de données de la base de données.](#1-faire-une-maquette-de-site-web-qui-affiche-le-mod%C3%A8le-de-donn%C3%A9es-de-la-base-de-donn%C3%A9es)
+  - [2. Analyser la maquette et la divider en plusieurs petits components](#2-analyser-la-maquette-et-la-divider-en-plusieurs-petits-components)
+  - [3. Transformer ces composants sous forme d'une hiérarchie](#3-transformer-ces-composants-sous-forme-dune-hi%C3%A9rarchie)
+- [Structure des fichiers frontend](#structure-des-fichiers-frontend)
+- [Process de développement Backend](#process-de-d%C3%A9veloppement-backend)
+- [Table Transaction :](#table-transaction-)
+  - [http://localhost:5000/api/transaction/create :](#httplocalhost5000apitransactioncreate-)
+  - [http://localhost:5000/api/transaction/get :](#httplocalhost5000apitransactionget-)
+  - [http://localhost:5000/api/transaction/getAll :](#httplocalhost5000apitransactiongetall-)
+  - [http://localhost:5000/api/transaction/update :](#httplocalhost5000apitransactionupdate-)
+  - [http://localhost:5000/api/transaction/remove :](#httplocalhost5000apitransactionremove-)
+- [Table Visite :](#table-visite-)
+  - [http://localhost:5000/api/visite/create :](#httplocalhost5000apivisitecreate-)
+  - [http://localhost:5000/api/visite/get :](#httplocalhost5000apivisiteget-)
+  - [http://localhost:5000/api/visite/getAll :](#httplocalhost5000apivisitegetall-)
+  - [http://localhost:5000/api/visite/update :](#httplocalhost5000apivisiteupdate-)
+  - [http://localhost:5000/api/visite/remove :](#httplocalhost5000apivisiteremove-)
+- [Table Logement :](#table-logement-)
+  - [http://localhost:5000/api/logement/create :](#httplocalhost5000apilogementcreate-)
+  - [http://localhost:5000/api/logement/get :](#httplocalhost5000apilogementget-)
+  - [http://localhost:5000/api/logement/getAll :](#httplocalhost5000apilogementgetall-)
+  - [http://localhost:5000/api/logement/update :](#httplocalhost5000apilogementupdate-)
+  - [http://localhost:5000/api/logement/remove :](#httplocalhost5000apilogementremove-)
+- [Table Garage :](#table-garage-)
+  - [http://localhost:5000/api/garage/get :](#httplocalhost5000apigarageget-)
+  - [http://localhost:5000/api/garage/getAll :](#httplocalhost5000apigaragegetall-)
+  - [http://localhost:5000/api/garage/update :](#httplocalhost5000apigarageupdate-)
+  - [http://localhost:5000/api/garage/remove :](#httplocalhost5000apigarageremove-)
+- [Table Garage :](#table-garage--1)
+  - [http://localhost:5000/api/garage/get :](#httplocalhost5000apigarageget--1)
+  - [http://localhost:5000/api/garage/getAll :](#httplocalhost5000apigaragegetall--1)
+  - [http://localhost:5000/api/garage/update :](#httplocalhost5000apigarageupdate--1)
+  - [http://localhost:5000/api/garage/remove :](#httplocalhost5000apigarageremove--1)
+- [etatHabitation](#etathabitation)
+  - [http://localhost:5000/api/etatHabitation/getList :](#httplocalhost5000apietathabitationgetlist-)
+- [typeLogement](#typelogement)
+  - [http://localhost:5000/api/typeLogement/getList :](#httplocalhost5000apitypelogementgetlist-)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -43,6 +76,10 @@ Laurie BRAL - développement Frontend
 CHEN Xing - développement Frontend  
 Mélanie Dang - développement Backend  
 Antoine DESPRÉS - développement Backend
+
+## Accès au site
+
+Nous avons profité de ce projet pour prendre en main le déploiement d'un site web sur serveur. Ainsi, nous vous proposons d'accéder au site depuis l'adrese [http://lajungle.antoinedespres.fr/](http://lajungle.antoinedespres.fr/). En cas d'indisponibilité du site, nous vous invitons à suivre les étapes de configuration 
 
 ## Environnement technique
 
@@ -130,9 +167,9 @@ Les composants Reacts s'organisent sous forme d'un arbre. `App` est le composant
   ## Structure des fichiers backend
   Tout le code source est situé dans le répertoire `src/`. Sa structure est la suivante :
 
+- `config.json`: Ce fichier contient un exemple de configuration permettant d'utiliser l'API. Il faut donc créer un fichier config.json dans le même répertoire et le compléter avec les information nécessaires, notamment le nom d'utilisateur et le mot de passe permettant de se connecter à mySQL.
 - `controllers/`: Chaque fichier JS correspond à une table de données. Un contrôleur fait appel au modèle qui lui est associé pour récupérer les résultats d'une requête en passant les paramètres voulus. Le contrôleur renvoie ensuite les résultats à la partie *front* au format JSON.
 - `helpers/`: le fichier dbconnect.js à l'intérieur du dossier gère la connexion à la base de données mySQL et crée les tables au démarrage de l'API si elles n'existent pas. La configuration mySQL (identifiant, mot de passe) se trouve dans le fichier `src/config.json`.
-- `middlewares/`: Le fichier auth.js à l'intérieur du dossier gère l'authentification via JSON Web Token (JWT) et vérifie que l'utilisateur est autorisé à accéder aux pages du site.
 - `models/`: Chaque fichier JS à l'intérieur du dossier correspond à une table de la base de données. Ils contiennent les différentes requêtes SQL possibles, reçoivent les paramètres envoyés par le contrôleur et lui renvoient le résultat de la requête.  
 Par exemple, on trouvera dans le fichier `logementDAO.js` les requêtes SQL permettant d'ajouter, de consulter, de mettre à jour ou encore de supprimer un logement.
 - `routes/`: Contient les différentes routes de l'API, par exemple : `/api/exemple`. Utilise la dépendance express-router.
@@ -208,21 +245,50 @@ Prend paramètres :
 | IdLogement        |
 
 ### http://localhost:5000/api/transaction/get : 
-Prend en paramètre l'ID de la transaction souhaitée. Permet de retourner les informations d'une transaction spécifique (IdTransaction, PrixVente PourcentageCommissionIdLogement, IdClient).
+Prend en paramètre l'id de la transaction souhaitée. Permet de retourner les informations d'une transaction spécifique (IdTransaction, PrixVente PourcentageCommissionIdLogement, IdClient).
 
 Exemple de réponse JSON : 
 ```json
 {
-    "PrixVente": 135.000,
-    "PourcentageCommission": 4.2,
-    "IdClient": 1,
-    "IdLogement": 3 
+    "data": {
+        "idTransaction": 1,
+        "prixVente": 135,
+        "pourcentageCommission": "4.20",
+        "idLogement": 3,
+        "idClient": 1
+    },
+    "error": null
 }
 ```
 ### http://localhost:5000/api/transaction/getAll : 
-Permet de retourner la liste de toutes les transactions de la base de données. 
+Permet de retourner la liste de toutes les transactions de la base de données.
+
+```json
+{
+    "data": [
+        {
+            "idVisite": 1,
+            "dateHeureVisite": "2022-11-29T13:15:00.000Z",
+            "idLogement": 1,
+            "idClient": 4,
+            "adresse": "9 Rue du Chat qui Pêche",
+            "nomClient": "Mélanie Dang"
+        },
+        {
+            "idVisite": 2,
+            "dateHeureVisite": "2022-10-11T08:30:00.000Z",
+            "idLogement": 2,
+            "idClient": 2,
+            "adresse": "25 Rue Brisemiche",
+            "nomClient": "Xing Chen"
+        }
+    ],
+    "error": null
+}
+```
+
 ### http://localhost:5000/api/transaction/update : 
-Prend en paramètre l'ID de la transaction souhaitée. Permet de modifier les informations d'une transaction, en fonction des paramètres envoyés.
+Prend en paramètre l'id de la transaction souhaitée. Permet de modifier les informations d'une transaction, en fonction des paramètres envoyés.
 ### http://localhost:5000/api/transaction/remove : 
 Permet de supprimer une transaction spécifique de la base de données.
 
@@ -285,8 +351,6 @@ Permet de retourner la liste de toutes les transactions de la base de données.
     "error": null
 }
 ```
-### http://localhost:5000/api/visite/getAll : 
-Permet de retourner la liste de toutes les visites de la base de données. 
 ### http://localhost:5000/api/visite/update : 
 Permet de modifier les informations d'une visite, en fonction des paramètres envoyés.
 ### http://localhost:5000/api/visite/remove : 
@@ -295,3 +359,197 @@ Permet de supprimer une visite spécifique de la base de données.
 | Paramètres      |
 |-----------------|
 | IdVisite       |
+
+
+## Table Logement :
+### http://localhost:5000/api/logement/create : 
+Permet de créer un logement.
+
+| Paramètres      |
+|-----------------|
+| Adresse |
+| DescriptionLogement      |
+| NomProprietaire        |
+| IdType        |
+| NombrePieces |
+| Superficie      |
+| IdEtat        |
+| PrixMiseEnVente        |
+| DateDisponibilite |
+| CodePostal      |
+| Ville        |
+
+### http://localhost:5000/api/logement/get : 
+Permet de retourner les informations d'un logement spécifique (IdLogement, Adresse, DescriptionLogement, NomProprietaire, IdType, NombrePieces, Superficie, IdEtat, PrixMiseEnVente, DateDisponibilite, CodePostal, Ville).
+
+| Paramètres      |
+|-----------------|
+| id        |
+
+Exemple de réponse JSON : 
+```json
+{
+    "data": {
+        "id": 1,
+        "adresse": "9 Rue du Chat qui Pêche",
+        "description": "Charmant appartement dans une ruelle parisienne",
+        "nomProprietaire": "Charles Potté",
+        "typeLogement": {
+            "label": "Appartement",
+            "value": "appartement"
+        },
+        "nombrePieces": 2,
+        "superficie": "36.40",
+        "etatHabitation": {
+            "label": "Bon",
+            "value": "bon"
+        },
+        "prixMiseEnVente": 350000,
+        "dateDisponibilite": "2022-06-22T22:00:00.000Z",
+        "codePostal": "75005",
+        "ville": "Paris",
+        "nbGarages": 1
+    },
+    "error": null
+}s
+```
+### http://localhost:5000/api/logement/getAll : 
+Permet de retourner la liste de touts les logements de la base de données. 
+### http://localhost:5000/api/logement/update : 
+Permet de modifier les informations d'un logement, en fonction des paramètres envoyés.
+### http://localhost:5000/api/logement/remove : 
+Permet de supprimer un logement spécifique de la base de données. 
+
+| Paramètres      |
+|-----------------|
+| id      |
+
+## Table Garage :
+### http://localhost:5000/api/garage/get : 
+Permet de retourner les informations d'un garage spécifique (IdGarage, Adresse, IdLogement).
+
+| Paramètres      |
+|-----------------|
+| id   |
+
+Exemple de réponse JSON : 
+```json
+{
+    "data": {
+        "idGarage": 1,
+        "adresse": "106 Rue des 2 Boules"
+    },
+    "error": null
+}
+```
+### http://localhost:5000/api/garage/getAll : 
+Permet de retourner la liste de tous les garages de la base de données.
+
+```json
+{
+    "data": [
+        {
+            "idGarage": 1,
+            "adresse": "106 Rue des 2 Boules"
+        },
+        {
+            "idGarage": 2,
+            "adresse": "7 Rue des Boulets"
+        },
+        {
+            "idGarage": 3,
+            "adresse": "14 Rue Gros"
+        },
+        {
+            "idGarage": 4,
+            "adresse": "8 Rue des femmes Fraîches"
+        }
+    ],
+    "error": null
+}
+```
+
+### http://localhost:5000/api/garage/update : 
+Permet de modifier les informations d'un garage, en fonction des paramètres envoyés.
+### http://localhost:5000/api/garage/remove : 
+Permet de supprimer un garage spécifique de la base de données. 
+
+| Paramètres      |
+|-----------------|
+| id       |
+
+## Table Garage :
+### http://localhost:5000/api/garage/get : 
+Permet de retourner les informations d'un garage spécifique (IdGarage, Adresse, IdLogement).
+
+| Paramètres      |
+|-----------------|
+| id        |
+
+Exemple de réponse JSON : 
+```json
+
+```
+### http://localhost:5000/api/garage/getAll : 
+Permet de retourner la liste de tous les garages de la base de données.
+
+```json
+
+```
+
+### http://localhost:5000/api/garage/update : 
+Permet de modifier les informations d'un garage, en fonction des paramètres envoyés.
+### http://localhost:5000/api/garage/remove : 
+Permet de supprimer un garage spécifique de la base de données. 
+
+| Paramètres      |
+|-----------------|
+| id       |
+
+## etatHabitation
+### http://localhost:5000/api/etatHabitation/getList : 
+Permet de récupérer la liste de tous les états d'habitations.
+
+```json
+{
+    "data": [
+        {
+            "label": "Bon",
+            "value": "bon"
+        },
+        {
+            "label": "Mauvais",
+            "value": "mauvais"
+        },
+        {
+            "label": "Neuf",
+            "value": "neuf"
+        },
+        {
+            "label": "Très bon",
+            "value": "tres_bon"
+        }
+    ],
+    "error": null
+}
+```
+
+## typeLogement
+### http://localhost:5000/api/typeLogement/getList : 
+Permet de récupérer la liste de tous les types de logement.
+
+```json
+{
+    "data": [
+        {
+            "label": "Appartement",
+            "value": "appartement"
+        },
+        {
+            "label": "Maison",
+            "value": "maison"
+        }
+    ],
+    "error": null
+}
+```
