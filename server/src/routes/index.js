@@ -1,6 +1,5 @@
 const router = require('express').Router();
 
-const user = require('./user.js');
 const garage = require('./garage.js');
 const logement = require('./logement.js');
 const transaction = require('./transaction.js');
@@ -9,7 +8,6 @@ const visite = require('./visite.js');
 const etatHabitation = require('./etatHabitation.js');
 const typeLogement = require('./typeLogement.js');
 
-router.use('/user', user);
 router.use('/garage', garage);
 router.use('/logement', logement);
 router.use('/transaction', transaction);
