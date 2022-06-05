@@ -18,37 +18,12 @@ Interface d'administration d'une agence immobilière réalisée avec les technol
 - [Structure des fichiers frontend](#structure-des-fichiers-frontend)
 - [Process de développement Backend](#process-de-d%C3%A9veloppement-backend)
 - [Table Transaction :](#table-transaction-)
-  - [http://localhost:5000/api/transaction/create :](#httplocalhost5000apitransactioncreate-)
-  - [http://localhost:5000/api/transaction/get :](#httplocalhost5000apitransactionget-)
-  - [http://localhost:5000/api/transaction/getAll :](#httplocalhost5000apitransactiongetall-)
-  - [http://localhost:5000/api/transaction/update :](#httplocalhost5000apitransactionupdate-)
-  - [http://localhost:5000/api/transaction/remove :](#httplocalhost5000apitransactionremove-)
 - [Table Visite :](#table-visite-)
-  - [http://localhost:5000/api/visite/create :](#httplocalhost5000apivisitecreate-)
-  - [http://localhost:5000/api/visite/get :](#httplocalhost5000apivisiteget-)
-  - [http://localhost:5000/api/visite/getAll :](#httplocalhost5000apivisitegetall-)
-  - [http://localhost:5000/api/visite/update :](#httplocalhost5000apivisiteupdate-)
-  - [http://localhost:5000/api/visite/remove :](#httplocalhost5000apivisiteremove-)
 - [Table Logement :](#table-logement-)
-  - [http://localhost:5000/api/logement/create :](#httplocalhost5000apilogementcreate-)
-  - [http://localhost:5000/api/logement/get :](#httplocalhost5000apilogementget-)
-  - [http://localhost:5000/api/logement/getAll :](#httplocalhost5000apilogementgetall-)
-  - [http://localhost:5000/api/logement/update :](#httplocalhost5000apilogementupdate-)
-  - [http://localhost:5000/api/logement/remove :](#httplocalhost5000apilogementremove-)
 - [Table Garage :](#table-garage-)
-  - [http://localhost:5000/api/garage/get :](#httplocalhost5000apigarageget-)
-  - [http://localhost:5000/api/garage/getAll :](#httplocalhost5000apigaragegetall-)
-  - [http://localhost:5000/api/garage/update :](#httplocalhost5000apigarageupdate-)
-  - [http://localhost:5000/api/garage/remove :](#httplocalhost5000apigarageremove-)
 - [Table Garage :](#table-garage--1)
-  - [http://localhost:5000/api/garage/get :](#httplocalhost5000apigarageget--1)
-  - [http://localhost:5000/api/garage/getAll :](#httplocalhost5000apigaragegetall--1)
-  - [http://localhost:5000/api/garage/update :](#httplocalhost5000apigarageupdate--1)
-  - [http://localhost:5000/api/garage/remove :](#httplocalhost5000apigarageremove--1)
 - [etatHabitation](#etathabitation)
-  - [http://localhost:5000/api/etatHabitation/getList :](#httplocalhost5000apietathabitationgetlist-)
 - [typeLogement](#typelogement)
-  - [http://localhost:5000/api/typeLogement/getList :](#httplocalhost5000apitypelogementgetlist-)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -233,7 +208,7 @@ Pour chaque requête, un code de statut de réponse HTTP est envoyé afin de vé
 
  Voici les API routes pour les requêtes que nous avons utilisé dans notre projet :  
 ## Table Transaction :
-### http://localhost:5000/api/transaction/create : 
+Route http://localhost:5000/api/transaction/create : 
 Permet de créer une transaction.
 Prend paramètres :
 | Paramètres      |
@@ -244,7 +219,7 @@ Prend paramètres :
 | IdClient      |
 | IdLogement        |
 
-### http://localhost:5000/api/transaction/get : 
+Route http://localhost:5000/api/transaction/get : 
 Prend en paramètre l'id de la transaction souhaitée. Permet de retourner les informations d'une transaction spécifique (IdTransaction, PrixVente PourcentageCommissionIdLogement, IdClient).
 
 Exemple de réponse JSON : 
@@ -260,7 +235,7 @@ Exemple de réponse JSON :
     "error": null
 }
 ```
-### http://localhost:5000/api/transaction/getAll : 
+Route http://localhost:5000/api/transaction/getAll : 
 Permet de retourner la liste de toutes les transactions de la base de données.
 
 ```json
@@ -287,9 +262,9 @@ Permet de retourner la liste de toutes les transactions de la base de données.
 }
 ```
 
-### http://localhost:5000/api/transaction/update : 
+Route http://localhost:5000/api/transaction/update : 
 Prend en paramètre l'id de la transaction souhaitée. Permet de modifier les informations d'une transaction, en fonction des paramètres envoyés.
-### http://localhost:5000/api/transaction/remove : 
+Route http://localhost:5000/api/transaction/remove : 
 Permet de supprimer une transaction spécifique de la base de données.
 
 | Paramètres      |
@@ -298,7 +273,7 @@ Permet de supprimer une transaction spécifique de la base de données.
 
 
 ## Table Visite :
-### http://localhost:5000/api/visite/create : 
+Route http://localhost:5000/api/visite/create : 
 Permet de créer une visite.
 | Paramètres      |
 |-----------------|
@@ -307,7 +282,7 @@ Permet de créer une visite.
 | IdLogement      |
 | IdClient        |
 
-### http://localhost:5000/api/visite/get : 
+Route http://localhost:5000/api/visite/get : 
 Permet de retourner les informations d'une transaction spécifique (IdVisite, DateHeureVisite IdLogement, IdClient).
 
 | Paramètres      |
@@ -325,7 +300,7 @@ Exemple de réponse JSON :
     "error": null
 }
 ```
-### http://localhost:5000/api/visite/getAll : 
+Route http://localhost:5000/api/visite/getAll : 
 Permet de retourner la liste de toutes les transactions de la base de données.
 
 ```json
@@ -351,9 +326,9 @@ Permet de retourner la liste de toutes les transactions de la base de données.
     "error": null
 }
 ```
-### http://localhost:5000/api/visite/update : 
+Route http://localhost:5000/api/visite/update : 
 Permet de modifier les informations d'une visite, en fonction des paramètres envoyés.
-### http://localhost:5000/api/visite/remove : 
+Route http://localhost:5000/api/visite/remove : 
 Permet de supprimer une visite spécifique de la base de données. 
 
 | Paramètres      |
@@ -362,7 +337,7 @@ Permet de supprimer une visite spécifique de la base de données.
 
 
 ## Table Logement :
-### http://localhost:5000/api/logement/create : 
+Route http://localhost:5000/api/logement/create : 
 Permet de créer un logement.
 
 | Paramètres      |
@@ -379,7 +354,7 @@ Permet de créer un logement.
 | CodePostal      |
 | Ville        |
 
-### http://localhost:5000/api/logement/get : 
+Route http://localhost:5000/api/logement/get : 
 Permet de retourner les informations d'un logement spécifique (IdLogement, Adresse, DescriptionLogement, NomProprietaire, IdType, NombrePieces, Superficie, IdEtat, PrixMiseEnVente, DateDisponibilite, CodePostal, Ville).
 
 | Paramètres      |
@@ -413,11 +388,11 @@ Exemple de réponse JSON :
     "error": null
 }s
 ```
-### http://localhost:5000/api/logement/getAll : 
+Route http://localhost:5000/api/logement/getAll : 
 Permet de retourner la liste de touts les logements de la base de données. 
-### http://localhost:5000/api/logement/update : 
+Route http://localhost:5000/api/logement/update : 
 Permet de modifier les informations d'un logement, en fonction des paramètres envoyés.
-### http://localhost:5000/api/logement/remove : 
+Route http://localhost:5000/api/logement/remove : 
 Permet de supprimer un logement spécifique de la base de données. 
 
 | Paramètres      |
@@ -425,7 +400,7 @@ Permet de supprimer un logement spécifique de la base de données.
 | id      |
 
 ## Table Garage :
-### http://localhost:5000/api/garage/get : 
+Route http://localhost:5000/api/garage/get : 
 Permet de retourner les informations d'un garage spécifique (IdGarage, Adresse, IdLogement).
 
 | Paramètres      |
@@ -442,7 +417,7 @@ Exemple de réponse JSON :
     "error": null
 }
 ```
-### http://localhost:5000/api/garage/getAll : 
+Route http://localhost:5000/api/garage/getAll : 
 Permet de retourner la liste de tous les garages de la base de données.
 
 ```json
@@ -469,9 +444,9 @@ Permet de retourner la liste de tous les garages de la base de données.
 }
 ```
 
-### http://localhost:5000/api/garage/update : 
+Route http://localhost:5000/api/garage/update : 
 Permet de modifier les informations d'un garage, en fonction des paramètres envoyés.
-### http://localhost:5000/api/garage/remove : 
+Route http://localhost:5000/api/garage/remove : 
 Permet de supprimer un garage spécifique de la base de données. 
 
 | Paramètres      |
@@ -479,7 +454,7 @@ Permet de supprimer un garage spécifique de la base de données.
 | id       |
 
 ## Table Garage :
-### http://localhost:5000/api/garage/get : 
+Route http://localhost:5000/api/garage/get : 
 Permet de retourner les informations d'un garage spécifique (IdGarage, Adresse, IdLogement).
 
 | Paramètres      |
@@ -490,16 +465,16 @@ Exemple de réponse JSON :
 ```json
 
 ```
-### http://localhost:5000/api/garage/getAll : 
+Route http://localhost:5000/api/garage/getAll : 
 Permet de retourner la liste de tous les garages de la base de données.
 
 ```json
 
 ```
 
-### http://localhost:5000/api/garage/update : 
+Route http://localhost:5000/api/garage/update : 
 Permet de modifier les informations d'un garage, en fonction des paramètres envoyés.
-### http://localhost:5000/api/garage/remove : 
+Route http://localhost:5000/api/garage/remove : 
 Permet de supprimer un garage spécifique de la base de données. 
 
 | Paramètres      |
@@ -507,7 +482,7 @@ Permet de supprimer un garage spécifique de la base de données.
 | id       |
 
 ## etatHabitation
-### http://localhost:5000/api/etatHabitation/getList : 
+Route http://localhost:5000/api/etatHabitation/getList : 
 Permet de récupérer la liste de tous les états d'habitations.
 
 ```json
@@ -535,7 +510,7 @@ Permet de récupérer la liste de tous les états d'habitations.
 ```
 
 ## typeLogement
-### http://localhost:5000/api/typeLogement/getList : 
+Route http://localhost:5000/api/typeLogement/getList : 
 Permet de récupérer la liste de tous les types de logement.
 
 ```json
