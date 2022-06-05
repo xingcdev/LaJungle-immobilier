@@ -12,32 +12,32 @@ INSERT INTO Client (NomClient) VALUE
 -- TRUNCATE TABLE Garage;
 -- Insertion dans la table garage
 INSERT INTO Garage (Adresse) VALUE
-('106 Rue des 2 Boules'),
-('7 Rue des Boulets'),
-('14 Rue Gros'),
-('8 Rue des femmes Fraîches')
+('106 rue des 2 Boules'),
+('7 rue des Boulets'),
+('14 rue Gros'),
+('8 rue des Femmes')
 ;
 
 -- TRUNCATE TABLE Logement;
 -- Insertion dans la table logement
 INSERT INTO Logement (Adresse, DescriptionLogement, NomProprietaire, IdType, NombrePieces, Superficie, IdEtat, PrixMiseEnVente, DateDisponibilite, CodePostal, Ville) VALUES
-('9 Rue du Chat qui Pêche', 'Charmant appartement dans une ruelle parisienne', 'Charles Potté', 'appartement', 
-2, 36.4, 'bon', 150.000, '2022-06-24', '75005', 'Paris'),
-('25 Rue Brisemiche', 'Belle maison dans un village au nom atypique mais bien réel', 'Jean Miche', 'maison', 
-4, 125.0, 'tres_bon', 950.000, '2022-09-01', '46800', 'Montcuq'),
-('50 Rue de la Roquette', 'Appartement à rénover du sol au plafond dans un quartier huppé', 'Franklin Tortue', 'appartement', 
-1, 18.7, 'mauvais', 250.500, '2023-01-01', '78000', 'Versailles'),
-('60 Rue de la Grande Truanderie', 'Grande maison en plein centre de Paris', 'Jack Truant', 'maison', 
-6, 250, 'bon', 2500000, '2022-06-24', '75001', 'Paris')
+('9 rue du Chat qui Pêche', 'Charmant appartement dans une ruelle parisienne', 'Charles Potté', 'appartement', 
+2, 36.4, 'bon', 350000.00, '2022-06-24', '75005', 'Paris'),
+('25 rue Brisemiche', 'Belle maison dans un village au nom atypique mais bien réel', 'Jean Miche', 'maison', 
+4, 125.0, 'tres_bon', 400000.000, '2022-09-01', '46800', 'Montcuq'),
+('50 rue de la Roquette', 'Appartement à rénover du sol au plafond dans un quartier huppé', 'Franklin Tortue', 'appartement', 
+1, 18.7, 'mauvais', 250000.00, '2023-01-01', '78000', 'Versailles'),
+('60 rue de la Grande Truanderie', 'Grande maison en plein centre de Paris', 'Jack Truant', 'maison', 
+6, 250, 'bon', 850000.00, '2022-06-24', '75001', 'Paris')
 ;
 
 -- TRUNCATE TABLE Transaction;
 -- Insertion dans la table transaction
 INSERT INTO Transaction (PrixVente, PourcentageCommission, IdClient, IdLogement) VALUES
-(135.000, 4.2,1,3),
-(900.750, 3.1,2,4),
-(250.000, 5.0,3,1),
-(135.000, 3.8,4,2)
+(332000.00, 4.2,1,3),
+(400000.00, 3.1,2,4),
+(248000.00, 5.0,3,1),
+(850000.00, 3.8,4,2)
 ;
 
 -- TRUNCATE TABLE Visite;

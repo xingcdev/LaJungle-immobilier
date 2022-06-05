@@ -6,17 +6,27 @@ Interface d'administration d'une agence immobilière réalisée avec les technol
 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-**Table of Contents** _generated with [DocToc](https://github.com/thlorenz/doctoc)_
-
-- [LaJungle Immobilier](#lajungle-immobilier)
-  - [Répartition des rôles](#r%C3%A9partition-des-r%C3%B4les)
-  - [Environnement technique](#environnement-technique)
-  - [Dépendances](#d%C3%A9pendances)
-  - [Process de développement Frontend](#process-de-d%C3%A9veloppement-frontend)
-    - [1. Faire une maquette de site Web qui affiche le modèle de données de la base de données.](#1-faire-une-maquette-de-site-web-qui-affiche-le-mod%C3%A8le-de-donn%C3%A9es-de-la-base-de-donn%C3%A9es)
-    - [2. Analyser la maquette et la divider en plusieurs petits components](#2-analyser-la-maquette-et-la-divider-en-plusieurs-petits-components)
-    - [3. Transformer ces composants sous forme d'une hiérarchie](#3-transformer-ces-composants-sous-forme-dune-hi%C3%A9rarchie)
-  - [Process de développement Backend](#process-de-d%C3%A9veloppement-backend)
+- [Origine du nom](#origine-du-nom)
+- [Répartition des rôles](#r%C3%A9partition-des-r%C3%B4les)
+- [Accès au site](#acc%C3%A8s-au-site)
+- [Environnement technique](#environnement-technique)
+- [Dépendances node.js](#d%C3%A9pendances-nodejs)
+- [Process de développement Frontend](#process-de-d%C3%A9veloppement-frontend)
+  - [1. Faire une maquette de site Web qui affiche le modèle de données de la base de données.](#1-faire-une-maquette-de-site-web-qui-affiche-le-mod%C3%A8le-de-donn%C3%A9es-de-la-base-de-donn%C3%A9es)
+  - [2. Analyser la maquette et la divider en plusieurs petits components](#2-analyser-la-maquette-et-la-divider-en-plusieurs-petits-components)
+  - [3. Transformer ces composants sous forme d'une hiérarchie](#3-transformer-ces-composants-sous-forme-dune-hi%C3%A9rarchie)
+- [Structure des fichiers frontend](#structure-des-fichiers-frontend)
+- [Process de développement Backend](#process-de-d%C3%A9veloppement-backend)
+- [Table Transaction :](#table-transaction-)
+- [Table Visite :](#table-visite-)
+- [Table Logement :](#table-logement-)
+- [Table Garage :](#table-garage-)
+- [Table Garage :](#table-garage--1)
+- [etatHabitation](#etathabitation)
+- [typeLogement](#typelogement)
+- [Bilan de projet](#bilan-de-projet)
+  - [Ce qui a été fait](#ce-qui-a-%C3%A9t%C3%A9-fait)
+  - [Perspectives d'amélioration](#perspectives-dam%C3%A9lioration)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -45,6 +55,10 @@ CHEN Xing - développement Frontend
 Mélanie Dang - développement Backend  
 Antoine DESPRÉS - développement Backend
 
+## Accès au site
+
+Nous avons profité de ce projet pour prendre en main le déploiement d'un site web sur serveur. Ainsi, nous vous proposons d'accéder au site depuis l'adrese [http://lajungle.antoinedespres.fr/](http://lajungle.antoinedespres.fr/). En cas d'indisponibilité du site, nous vous invitons à suivre les étapes de configuration
+
 ## Environnement technique
 
 **Frontend**
@@ -64,7 +78,7 @@ Côté design, on a choisi la biliothèque React Material UI pour réaliser l'UI
 
 React permet de créer une SPA (Single Page Application) qui génère du HTML en JavaScript côté navigateur contrairement à une application traditionnel où le HTML est généré côté serveur avec par exemple le langage de programmation PHP.
 
-Pour que la SPA communique le serveur, on doit réaliser une API côté serveur qui envoie des données en format JSON.
+Pour que la SPA communique avec le serveur, on doit réaliser une API côté serveur qui envoie des données en format JSON.
 
 ## Dépendances node.js
 
@@ -147,12 +161,20 @@ Les composants Reacts s'organisent sous forme d'un arbre. `App` est le composant
 
   Tout le code source est situé dans le répertoire `src/`. Sa structure est la suivante :
 
+<<<<<<< HEAD
+
 - `controllers/`: Chaque fichier JS correspond à une table de données. Un contrôleur fait appel au modèle qui lui est associé pour récupérer les résultats d'une requête en passant les paramètres voulus. Le contrôleur renvoie ensuite les résultats à la partie _front_ au format JSON.
 
 - `helpers/`: le fichier dbconnect.js à l'intérieur du dossier gère la connexion à la base de données mySQL et crée les tables au démarrage de l'API si elles n'existent pas. La configuration mySQL (identifiant, mot de passe) se trouve dans le fichier `src/config.json`.
 
 - `middlewares/`: Le fichier auth.js à l'intérieur du dossier gère l'authentification via JSON Web Token (JWT) et vérifie que l'utilisateur est autorisé à accéder aux pages du site.
 
+=======
+
+- `config.json`: Ce fichier contient un exemple de configuration permettant d'utiliser l'API. Il faut donc créer un fichier config.json dans le même répertoire et le compléter avec les information nécessaires, notamment le nom d'utilisateur et le mot de passe permettant de se connecter à mySQL.
+- `controllers/`: Chaque fichier JS correspond à une table de données. Un contrôleur fait appel au modèle qui lui est associé pour récupérer les résultats d'une requête en passant les paramètres voulus. Le contrôleur renvoie ensuite les résultats à la partie _front_ au format JSON.
+- `helpers/`: le fichier dbconnect.js à l'intérieur du dossier gère la connexion à la base de données mySQL et crée les tables au démarrage de l'API si elles n'existent pas. La configuration mySQL (identifiant, mot de passe) se trouve dans le fichier `src/config.json`.
+  > > > > > > > 0943edd7c7cc556e251572f54730f0b0ed29ff75
 - `models/`: Chaque fichier JS à l'intérieur du dossier correspond à une table de la base de données. Ils contiennent les différentes requêtes SQL possibles, reçoivent les paramètres envoyés par le contrôleur et lui renvoient le résultat de la requête.  
   Par exemple, on trouvera dans le fichier `logementDAO.js` les requêtes SQL permettant d'ajouter, de consulter, de mettre à jour ou encore de supprimer un logement.
 
@@ -214,26 +236,39 @@ Voici les API routes pour les requêtes que nous avons utilisé dans notre proje
 
 ## Table Transaction :
 
+<<<<<<< HEAD
+
 ### http://localhost:5000/api/transaction/create :
 
-Permet de créer une transaction.
-Prend paramètres :
-| Paramètres |
-|-----------------|
-| IdTransaction |
-| PrixVente |
-| PourcentageCommission |
-| IdClient |
-| IdLogement |
+=======
+Route http://localhost:5000/api/transaction/create :
+
+> > > > > > > 0943edd7c7cc556e251572f54730f0b0ed29ff75
+> > > > > > > Permet de créer une transaction.
+> > > > > > > Prend paramètres :
+> > > > > > > | Paramètres |
+> > > > > > > |-----------------|
+> > > > > > > | IdTransaction |
+> > > > > > > | PrixVente |
+> > > > > > > | PourcentageCommission |
+> > > > > > > | IdClient |
+> > > > > > > | IdLogement |
 
 ### http://localhost:5000/api/transaction/get :
 
+<<<<<<< HEAD
 Prend en paramètre l'ID de la transaction souhaitée. Permet de retourner les informations d'une transaction spécifique (IdTransaction, PrixVente PourcentageCommissionIdLogement, IdClient).
+=======
+Route http://localhost:5000/api/transaction/get :
+Prend en paramètre l'id de la transaction souhaitée. Permet de retourner les informations d'une transaction spécifique (IdTransaction, PrixVente PourcentageCommissionIdLogement, IdClient).
+
+> > > > > > > 0943edd7c7cc556e251572f54730f0b0ed29ff75
 
 Exemple de réponse JSON :
 
 ```json
 {
+<<<<<<< HEAD
 	"PrixVente": 135.0,
 	"PourcentageCommission": 4.2,
 	"IdClient": 1,
@@ -247,7 +282,53 @@ Permet de retourner la liste de toutes les transactions de la base de données.
 
 ### http://localhost:5000/api/transaction/update :
 
-Prend en paramètre l'ID de la transaction souhaitée. Permet de modifier les informations d'une transaction, en fonction des paramètres envoyés.
+# Prend en paramètre l'ID de la transaction souhaitée. Permet de modifier les informations d'une transaction, en fonction des paramètres envoyés.
+
+    "data": {
+        "idTransaction": 1,
+        "prixVente": 135,
+        "pourcentageCommission": "4.20",
+        "idLogement": 3,
+        "idClient": 1
+    },
+    "error": null
+
+}
+
+````
+Route http://localhost:5000/api/transaction/getAll :
+Permet de retourner la liste de toutes les transactions de la base de données.
+
+```json
+{
+    "data": [
+        {
+            "idVisite": 1,
+            "dateHeureVisite": "2022-11-29T13:15:00.000Z",
+            "idLogement": 1,
+            "idClient": 4,
+            "adresse": "9 Rue du Chat qui Pêche",
+            "nomClient": "Mélanie Dang"
+        },
+        {
+            "idVisite": 2,
+            "dateHeureVisite": "2022-10-11T08:30:00.000Z",
+            "idLogement": 2,
+            "idClient": 2,
+            "adresse": "25 Rue Brisemiche",
+            "nomClient": "Xing Chen"
+        }
+    ],
+    "error": null
+}
+````
+
+Route http://localhost:5000/api/transaction/update :
+Prend en paramètre l'id de la transaction souhaitée. Permet de modifier les informations d'une transaction, en fonction des paramètres envoyés.
+Route http://localhost:5000/api/transaction/remove :
+Permet de supprimer une transaction spécifique de la base de données.
+
+> > > > > > > 0943edd7c7cc556e251572f54730f0b0ed29ff75
 
 ### http://localhost:5000/api/transaction/remove :
 
@@ -259,19 +340,30 @@ Permet de supprimer une transaction spécifique de la base de données.
 
 ## Table Visite :
 
+<<<<<<< HEAD
+
 ### http://localhost:5000/api/visite/create :
 
-Permet de créer une visite.
-| Paramètres |
-|-----------------|
-| IdVisite |
-| DateHeureVisite |
-| IdLogement |
-| IdClient |
+=======
+Route http://localhost:5000/api/visite/create :
+
+> > > > > > > 0943edd7c7cc556e251572f54730f0b0ed29ff75
+> > > > > > > Permet de créer une visite.
+> > > > > > > | Paramètres |
+> > > > > > > |-----------------|
+> > > > > > > | IdVisite |
+> > > > > > > | DateHeureVisite |
+> > > > > > > | IdLogement |
+> > > > > > > | IdClient |
 
 ### http://localhost:5000/api/visite/get :
 
-Permet de retourner les informations d'une transaction spécifique (IdVisite, DateHeureVisite IdLogement, IdClient).
+# <<<<<<< HEAD
+
+Route http://localhost:5000/api/visite/get :
+
+> > > > > > > 0943edd7c7cc556e251572f54730f0b0ed29ff75
+> > > > > > > Permet de retourner les informations d'une transaction spécifique (IdVisite, DateHeureVisite IdLogement, IdClient).
 
 | Paramètres |
 | ---------- |
@@ -290,9 +382,15 @@ Exemple de réponse JSON :
 }
 ```
 
+<<<<<<< HEAD
+
 ### http://localhost:5000/api/visite/getAll :
 
-Permet de retourner la liste de toutes les transactions de la base de données.
+=======
+Route http://localhost:5000/api/visite/getAll :
+
+> > > > > > > 0943edd7c7cc556e251572f54730f0b0ed29ff75
+> > > > > > > Permet de retourner la liste de toutes les transactions de la base de données.
 
 ```json
 {
@@ -318,18 +416,228 @@ Permet de retourner la liste de toutes les transactions de la base de données.
 }
 ```
 
-### http://localhost:5000/api/visite/getAll :
-
-Permet de retourner la liste de toutes les visites de la base de données.
-
-### http://localhost:5000/api/visite/update :
+Route http://localhost:5000/api/visite/update :
 
 Permet de modifier les informations d'une visite, en fonction des paramètres envoyés.
 
-### http://localhost:5000/api/visite/remove :
+Route http://localhost:5000/api/visite/remove :
 
 Permet de supprimer une visite spécifique de la base de données.
 
 | Paramètres |
 | ---------- |
 | IdVisite   |
+
+## Table Logement :
+
+Route http://localhost:5000/api/logement/create :
+Permet de créer un logement.
+
+| Paramètres          |
+| ------------------- |
+| Adresse             |
+| DescriptionLogement |
+| NomProprietaire     |
+| IdType              |
+| NombrePieces        |
+| Superficie          |
+| IdEtat              |
+| PrixMiseEnVente     |
+| DateDisponibilite   |
+| CodePostal          |
+| Ville               |
+
+Route http://localhost:5000/api/logement/get :
+Permet de retourner les informations d'un logement spécifique (IdLogement, Adresse, DescriptionLogement, NomProprietaire, IdType, NombrePieces, Superficie, IdEtat, PrixMiseEnVente, DateDisponibilite, CodePostal, Ville).
+
+| Paramètres |
+| ---------- |
+| id         |
+
+Exemple de réponse JSON :
+
+```json
+{
+    "data": {
+        "id": 1,
+        "adresse": "9 Rue du Chat qui Pêche",
+        "description": "Charmant appartement dans une ruelle parisienne",
+        "nomProprietaire": "Charles Potté",
+        "typeLogement": {
+            "label": "Appartement",
+            "value": "appartement"
+        },
+        "nombrePieces": 2,
+        "superficie": "36.40",
+        "etatHabitation": {
+            "label": "Bon",
+            "value": "bon"
+        },
+        "prixMiseEnVente": 350000,
+        "dateDisponibilite": "2022-06-22T22:00:00.000Z",
+        "codePostal": "75005",
+        "ville": "Paris",
+        "nbGarages": 1
+    },
+    "error": null
+}s
+```
+
+Route http://localhost:5000/api/logement/getAll :
+Permet de retourner la liste de touts les logements de la base de données.
+Route http://localhost:5000/api/logement/update :
+Permet de modifier les informations d'un logement, en fonction des paramètres envoyés.
+Route http://localhost:5000/api/logement/remove :
+Permet de supprimer un logement spécifique de la base de données.
+
+| Paramètres |
+| ---------- |
+| id         |
+
+## Table Garage :
+
+Route http://localhost:5000/api/garage/get :
+Permet de retourner les informations d'un garage spécifique (IdGarage, Adresse, IdLogement).
+
+| Paramètres |
+| ---------- |
+| id         |
+
+Exemple de réponse JSON :
+
+```json
+{
+	"data": {
+		"idGarage": 1,
+		"adresse": "106 Rue des 2 Boules"
+	},
+	"error": null
+}
+```
+
+Route http://localhost:5000/api/garage/getAll :
+Permet de retourner la liste de tous les garages de la base de données.
+
+```json
+{
+	"data": [
+		{
+			"idGarage": 1,
+			"adresse": "106 Rue des 2 Boules"
+		},
+		{
+			"idGarage": 2,
+			"adresse": "7 Rue des Boulets"
+		},
+		{
+			"idGarage": 3,
+			"adresse": "14 Rue Gros"
+		},
+		{
+			"idGarage": 4,
+			"adresse": "8 Rue des femmes Fraîches"
+		}
+	],
+	"error": null
+}
+```
+
+Route http://localhost:5000/api/garage/update :
+Permet de modifier les informations d'un garage, en fonction des paramètres envoyés.
+Route http://localhost:5000/api/garage/remove :
+Permet de supprimer un garage spécifique de la base de données.
+
+| Paramètres |
+| ---------- |
+| id         |
+
+## Table Garage :
+
+Route http://localhost:5000/api/garage/get :
+Permet de retourner les informations d'un garage spécifique (IdGarage, Adresse, IdLogement).
+
+| Paramètres |
+| ---------- |
+| id         |
+
+Exemple de réponse JSON :
+
+```json
+
+```
+
+Route http://localhost:5000/api/garage/getAll :
+Permet de retourner la liste de tous les garages de la base de données.
+
+```json
+
+```
+
+Route http://localhost:5000/api/garage/update :
+Permet de modifier les informations d'un garage, en fonction des paramètres envoyés.
+Route http://localhost:5000/api/garage/remove :
+Permet de supprimer un garage spécifique de la base de données.
+
+| Paramètres |
+| ---------- |
+| id         |
+
+## etatHabitation
+
+Route http://localhost:5000/api/etatHabitation/getList :
+Permet de récupérer la liste de tous les états d'habitations.
+
+```json
+{
+	"data": [
+		{
+			"label": "Bon",
+			"value": "bon"
+		},
+		{
+			"label": "Mauvais",
+			"value": "mauvais"
+		},
+		{
+			"label": "Neuf",
+			"value": "neuf"
+		},
+		{
+			"label": "Très bon",
+			"value": "tres_bon"
+		}
+	],
+	"error": null
+}
+```
+
+## typeLogement
+
+Route http://localhost:5000/api/typeLogement/getList :
+Permet de récupérer la liste de tous les types de logement.
+
+```json
+{
+	"data": [
+		{
+			"label": "Appartement",
+			"value": "appartement"
+		},
+		{
+			"label": "Maison",
+			"value": "maison"
+		}
+	],
+	"error": null
+}
+```
+
+## Bilan de projet
+
+### Ce qui a été fait
+
+Durant ce projet, nous avons pu pratiquer ce que nous avons appris en cours de bases de données et proposer une interface graphique, rendant ainsi l'application utilisable auprès du grand public sous la forme d'un site web. Cela a nécessité une solide coordination entre l'équipe front-end et l'équipe back-end afin de s'assurer de la cohérence des formats de données utilisées. Nous avons eu l'occasion de créer une API permettant au front-end d'aller récupérer les données de la base en spécifiant les paramètres lui permettant d'obtenir les informations dont il a besoin. Tout cela nous a permis de partager nos connaissances sur différents fronts (React, API, déploiement) et gagner en compétences. Nous sommes fiers du travail que nous avons pu réaliser ensemble.
+
+### Perspectives d'amélioration
+
+Avec plus de temps à notre disposition, nous aurions pu réaliser plus de fonctions portant notamment sur la gestion des garages et concevoir l'interface pour supprimer des transactions ou des visites. Nous aurions également pu créer une page dédiée aux statistiques afin d'obtenir, entre autres, le prix moyen des logements, le prix moyen des transactions, le total des commissions à l'aide des fonctions AVG et SUM de SQL.

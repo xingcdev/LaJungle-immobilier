@@ -1,17 +1,17 @@
 ## Fonctionnalités
 
-- [x] Faire une page d'erreur 404
-- [x] Consulter La liste de logements
-- [ ] Créer un nouvoeau logement
-- [x] Editer les informations d'un logement
-- [ ] Supprimer un logement
-- [ ] La liste de toutes les transactions
+- [✓] Faire une page d'erreur 404
+- [✓] Consulter La liste de logements
+- [✓] Créer un nouveau logement
+- [✓] Éditer les informations d'un logement
+- [✓] Supprimer un logement
+- [✓] La liste de toutes les transactions
 - [ ] La liste de tous les garages
 
 Laurie :
 
-- [x] La route visite/getAll qui renvoie TOUTES les visites. Les plus récentes en premier.
-- [ ] La liste de toutes les visites (le code de requête SQL inspiré de `HomePage.tsx`, et boucle inspiré de `Housings.tsx` ligne 20 avec `map()` )
+- [✓] La route visite/getAll qui renvoie TOUTES les visites. Les plus récentes en premier.
+- [✓] La liste de toutes les visites (le code de requête SQL inspiré de `HomePage.tsx`, et boucle inspiré de `Housings.tsx` ligne 20 avec `map()` )
 
 ## Ce qu'on a appris
 
