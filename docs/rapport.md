@@ -24,6 +24,9 @@ Interface d'administration d'une agence immobilière réalisée avec les technol
 - [Table Garage :](#table-garage--1)
 - [etatHabitation](#etathabitation)
 - [typeLogement](#typelogement)
+- [Bilan de projet](#bilan-de-projet)
+  - [Ce qui a été fait](#ce-qui-a-%C3%A9t%C3%A9-fait)
+  - [Perspectives d'amélioration](#perspectives-dam%C3%A9lioration)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -528,3 +531,15 @@ Permet de récupérer la liste de tous les types de logement.
     "error": null
 }
 ```
+
+## Bilan de projet
+
+### Ce qui a été fait
+
+Durant ce projet, nous avons pu pratiquer ce que nous avons appris en cours de bases de données et proposer une interface graphique, rendant ainsi l'application utilisable auprès du grand public sous la forme d'un site web. Cela a nécessité une solide coordination entre l'équipe front-end et l'équipe back-end afin de s'assurer de la cohérence des formats de données utilisées. Nous avons eu l'occasion de créer une API permettant au front-end d'aller récupérer les données de la base en spécifiant les paramètres lui permettant d'obtenir les informations dont il a besoin. Tout cela nous a permis de partager nos connaissances sur différents fronts (React, API, déploiement) et gagner en compétences. Nous sommes fiers du travail que nous avons pu réaliser ensemble.
+
+### Perspectives d'amélioration
+
+
+Avec plus de temps à notre disposition, nous aurions pu réaliser plus de fonctions portant notamment sur la gestion des garages et concevoir l'interface pour supprimer des transactions ou des visites. Nous aurions également pu créer une page dédiée aux statistiques afin d'obtenir, entre autres, le prix moyen des logements, le prix moyen des transactions, le total des commissions à l'aide des fonctions AVG et SUM de SQL.
+
