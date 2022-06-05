@@ -52,9 +52,9 @@ Copier le fichier `client/.env.example` et le coller en tant qu'un nouveau fichi
 REACT_APP_API_URL = "http://localhost:5000/api"
 ```
 
-L'url ci-dessus est l'api local en développement.
+L'URL ci-dessus est l'API locale utilisée lors de la phase de développement.
 
-Si vous voulez utilisez l'api déployé :
+Si vous voulez utilisez l'API déployée :
 
 ```
 REACT_APP_API_URL = "https://votre_domain.com/api"
