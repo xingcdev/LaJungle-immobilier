@@ -16,10 +16,6 @@ Chaque fichier JS correspond à une table de données. Un contrôleur fait appel
 
 - dbconnect.js : gère la connexion à la base de données mySQL et crée les tables au démarrage de l'API si elles n'existent pas. La configuration mySQL (identifiant, mot de passe) se trouve dans le fichier `src/config.json`.
 
-## Middlewares
-
-Le fichier auth.js gère l'authentification via JSON Web Token (JWT) et vérifie que l'utilisateur est autorisé à accéder aux pages du site.
-
 ## Models
 
 `DAO`: *Data Access Object*  

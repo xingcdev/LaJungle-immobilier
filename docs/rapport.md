@@ -44,6 +44,10 @@ CHEN Xing - développement Frontend
 Mélanie Dang - développement Backend  
 Antoine DESPRÉS - développement Backend
 
+## Accès au site
+
+Nous avons profité de ce projet pour prendre en main le déploiement d'un site web sur serveur. Ainsi, nous vous proposons d'accéder au site depuis l'adrese [http://lajungle.antoinedespres.fr/](http://lajungle.antoinedespres.fr/). En cas d'indisponibilité du site, nous vous invitons à suivre les étapes de configuration 
+
 ## Environnement technique
 
 **Frontend**
