@@ -29,10 +29,10 @@ function Transactions(props: TransactionsProps) {
 					<TableRow>
 						<TableCell align="center">idTransaction</TableCell>
 						<TableCell align="center">Prix de la vente</TableCell>
-						<TableCell align="center">Commission</TableCell>
+						<TableCell align="center">Commission (%)</TableCell>
+						<TableCell align="center">Commission (€)</TableCell>
 						<TableCell align="center">Logement</TableCell>
 						<TableCell align="center">Client</TableCell>
-						<TableCell align="center">Commission</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -48,11 +48,11 @@ function Transactions(props: TransactionsProps) {
 							<TableCell align="center">
 								{transaction.pourcentageCommission}
 							</TableCell>
-							<TableCell align="center">{transaction.adresse}</TableCell>
-							<TableCell align="center">{transaction.nomClient}</TableCell>
 							<TableCell align="center">
 								{transaction.montantCommission}
 							</TableCell>
+							<TableCell align="center">{transaction.adresse}</TableCell>
+							<TableCell align="center">{transaction.nomClient}</TableCell>
 						</TableRow>
 					))}
 				</TableBody>
