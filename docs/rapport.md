@@ -289,8 +289,6 @@ Permet de retourner la liste de toutes les transactions de la base de données.
     "error": null
 }
 ```
-### http://localhost:5000/api/visite/getAll : 
-Permet de retourner la liste de toutes les visites de la base de données. 
 ### http://localhost:5000/api/visite/update : 
 Permet de modifier les informations d'une visite, en fonction des paramètres envoyés.
 ### http://localhost:5000/api/visite/remove : 
@@ -299,3 +297,124 @@ Permet de supprimer une visite spécifique de la base de données.
 | Paramètres      |
 |-----------------|
 | IdVisite       |
+
+
+## Table Logement :
+### http://localhost:5000/api/logement/create : 
+Permet de créer un logement.
+
+| Paramètres      |
+|-----------------|
+| Adresse |
+| DescriptionLogement      |
+| NomProprietaire        |
+| IdType        |
+| NombrePieces |
+| Superficie      |
+| IdEtat        |
+| PrixMiseEnVente        |
+| DateDisponibilite |
+| CodePostal      |
+| Ville        |
+
+### http://localhost:5000/api/logement/get : 
+Permet de retourner les informations d'un logement spécifique (IdLogement, Adresse, DescriptionLogement, NomProprietaire, IdType, NombrePieces, Superficie, IdEtat, PrixMiseEnVente, DateDisponibilite, CodePostal, Ville).
+
+| Paramètres      |
+|-----------------|
+| IdLogement        |
+
+Exemple de réponse JSON : 
+```json
+{
+    "PrixVente": 135.000,
+    "PourcentageCommission": 4.2,
+    "IdClient": 1,
+    "IdLogement": 3 
+}
+```
+### http://localhost:5000/api/logement/getAll : 
+Permet de retourner la liste de touts les logements de la base de données. 
+### http://localhost:5000/api/logement/update : 
+Permet de modifier les informations d'un logement, en fonction des paramètres envoyés.
+### http://localhost:5000/api/logement/remove : 
+Permet de supprimer un logement spécifique de la base de données. 
+
+| Paramètres      |
+|-----------------|
+| IdLogement      |
+
+## Table Garage :
+### http://localhost:5000/api/garage/get : 
+Permet de retourner les informations d'un garage spécifique (IdGarage, Adresse, IdLogement).
+
+| Paramètres      |
+|-----------------|
+| IdGarage        |
+
+Exemple de réponse JSON : 
+```json
+
+```
+### http://localhost:5000/api/garage/getAll : 
+Permet de retourner la liste de tous les garages de la base de données.
+
+```json
+
+```
+
+### http://localhost:5000/api/garage/update : 
+Permet de modifier les informations d'un garage, en fonction des paramètres envoyés.
+### http://localhost:5000/api/garage/remove : 
+Permet de supprimer un garage spécifique de la base de données. 
+
+| Paramètres      |
+|-----------------|
+| IdGarage       |
+
+## Table Garage :
+### http://localhost:5000/api/garage/get : 
+Permet de retourner les informations d'un garage spécifique (IdGarage, Adresse, IdLogement).
+
+| Paramètres      |
+|-----------------|
+| IdGarage        |
+
+Exemple de réponse JSON : 
+```json
+
+```
+### http://localhost:5000/api/garage/getAll : 
+Permet de retourner la liste de tous les garages de la base de données.
+
+```json
+
+```
+
+### http://localhost:5000/api/garage/update : 
+Permet de modifier les informations d'un garage, en fonction des paramètres envoyés.
+### http://localhost:5000/api/garage/remove : 
+Permet de supprimer un garage spécifique de la base de données. 
+
+| Paramètres      |
+|-----------------|
+| IdGarage       |
+
+## etatHabitation
+### http://localhost:5000/api/etatHabitation/getList : 
+Permet de récupérer la liste de tous les états d'habitations.
+
+| Résultats      |
+|-----------------|
+| Très bon      |
+| Bon      |
+| Mauvais      |
+
+## typeLogement
+### http://localhost:5000/api/typeLogement/getList : 
+Permet de récupérer la liste de tous les états d'habitations.
+
+| Résultats      |
+|-----------------|
+| appartement      |
+| maison      |
