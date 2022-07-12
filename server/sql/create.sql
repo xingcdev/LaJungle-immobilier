@@ -1,5 +1,3 @@
-DROP SCHEMA IF EXISTS 'lajungle';
-CREATE SCHEMA 'lajungle';
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -18,9 +16,7 @@ CREATE TABLE Logement(
    DateDisponibilite DATE,
    CodePostal VARCHAR(5),
    Ville VARCHAR(50),
-   PRIMARY KEY(IdLogement),
-   FOREIGN KEY(IdType) REFERENCES TypeLogement(IdType),
-   FOREIGN KEY(IdEtat) REFERENCES EtatLogement(IdEtat)
+   PRIMARY KEY(IdLogement)
 );
 
 DROP TABLE IF EXISTS Garage;

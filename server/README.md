@@ -1,3 +1,13 @@
+# Lajungle immobilier
+
+## Usage
+
+Demarrer l'application en développement avec Docker :
+
+```bash
+docker-compose up
+```
+
 ## Structure de l'API serveur
 
 ### Fichier index.js
@@ -10,7 +20,7 @@ Ce fichier contient un exemple de configuration permettant d'utiliser l'API. Il 
 
 ### Controllers
 
-Chaque fichier JS correspond à une table de données. Un contrôleur fait appel au modèle qui lui est associé pour récupérer les résultats d'une requête en passant les paramètres voulus. Le contrôleur renvoie ensuite les résultats à la partie *front* au format JSON.
+Chaque fichier JS correspond à une table de données. Un contrôleur fait appel au modèle qui lui est associé pour récupérer les résultats d'une requête en passant les paramètres voulus. Le contrôleur renvoie ensuite les résultats à la partie _front_ au format JSON.
 
 ### Helpers
 
@@ -18,7 +28,7 @@ Chaque fichier JS correspond à une table de données. Un contrôleur fait appel
 
 ### Models
 
-`DAO`: *Data Access Object*  
+`DAO`: _Data Access Object_
 
 Chaque fichier JS correspond à une table de la base de données. Ils contiennent les différentes requêtes SQL possibles, reçoivent les paramètres envoyés par le contrôleur et lui renvoient le résultat de la requête.  
 Par exemple, on trouvera dans le fichier `logementDAO.js` les requêtes SQL permettant d'ajouter, de consulter, de mettre à jour ou encore de supprimer un logement.

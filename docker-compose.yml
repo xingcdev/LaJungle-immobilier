@@ -1,0 +1,39 @@
+version: '3.8'
+
+# List of containers
+services:
+  api:
+    image: node:16-alpine
+    working_dir: /api
+    ports:
+      - 4000:4000
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_DB: lajungle
+      PORT: 4000
+    volumes:
+      - ./server/:/api
+    command: sh -c "npm install && npm run dev"
+
+  mysql:
+    image: mysql
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: lajungle
+
+  client:
+    image: node:16-alpine
+    working_dir: /client
+    ports:
+      - 3000:3000
+    environment:
+      REACT_APP_API_URL: http://localhost:4000/api
+    volumes:
+      # Mount the current directory 'client' to /client inside the container
+      # This allows us to modify the code on the fly, without having to rebuild the image.
+      - ./client/:/client
+    command: sh -c "npm install && npm start"
